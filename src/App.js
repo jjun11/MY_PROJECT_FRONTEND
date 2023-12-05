@@ -1,22 +1,17 @@
-import { Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyle from './style/GlobalStyle';
-import Concert from './pages/concert/Concert';
-
+import Concert from './pages/performance/Performance';
 
 function App() {
     return (
         <>
-        <GlobalStyle>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Concert/>}></Route>
-                </Routes>
-            </Router>
-        </GlobalStyle>
+            <GlobalStyle />
+                <Router>        
+                    <Routes>    
+                        <Route path="/" element={<Concert />} />
+                    </Routes>
+                </Router>
         </>
     );
-}
-
-
-
+};
 export default App;
