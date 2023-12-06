@@ -16,3 +16,5 @@ const AxiosApi = {
     //     return axios.post(CHORD8_DOMAIN + `/performance/create`, performance);
     // },
 }
+
+export default AxiosApi;

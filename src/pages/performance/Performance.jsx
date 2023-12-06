@@ -33,7 +33,7 @@ const Concert = () => {
                 <KakaomapComponent />
             </Map>
             <ConcertList>
-                <div className="title">내 근처 공연</div>
+            <div className="title">내 근처 공연</div>    
             </ConcertList>
         </Container>
         </>
