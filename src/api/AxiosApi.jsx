@@ -11,6 +11,20 @@ const AxiosApi = {
         return axios.get(CHORD8_DOMAIN + `/performance/list`);
     },
 
+     // 공연 페이지 수 조회
+  getPerformancePage: async (page, size) => {
+    return await axios.get(
+      CHORD8_DOMAIN + `/performance/list/count?page=${page}&size=${size}`
+    );
+  },
+
+    // 공연 페이지네이션 조회
+    getPerformancePageList: async (page, size) => {
+      return await axios.get(
+        CHORD8_DOMAIN + `/performance/list/page?page=${page}&size=${size}`
+      );
+    },
+
     // 공연 등록
     // setPerformance: async (performance) => {
     //     return axios.post(CHORD8_DOMAIN + `/performance/create`, performance);
