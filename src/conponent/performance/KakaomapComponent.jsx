@@ -7,41 +7,6 @@ const { kakao } = window;
 const KakaomapComponent = () => {
 
   const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
-  const[currentPage, setCurrentPage] = useState(0); // 현재 페이지
-  const[totalPage, setTotalPage] = useState(0); // 전체 페이지
-
-  // 총 페이지 수 계산
-  useEffect(() => {
-    const totalPage = async () => {
-      try {
-        const res = await AxiosApi.getPerformancePage(0, 10);
-        setTotalPage(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    totalPage();
-  }, []);
-
-  // 페이지네이션 계산
-  useEffect(() => {
-    const performanceList = async () => {
-      try {
-        const res = await AxiosApi.getPerformancePageList(currentPage, 10);
-        console.log(res.data);
-        setPerformanceList(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    performanceList();
-  }, []);
-
-  // 페이지 이동
-  const handlePageChange = (number) => {
-    console.log(number);
-    setCurrentPage(number - 1);
-  };
 
   useEffect(() => {
   const Container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
