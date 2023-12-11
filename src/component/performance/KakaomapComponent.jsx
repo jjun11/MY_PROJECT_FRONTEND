@@ -13,7 +13,7 @@ const KakaomapComponent = ({ performanceList }) => {
     const Container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
   const options = { // 지도 기본값 설정
     center: new kakao.maps.LatLng(37.498712, 127.031904), //지도의 중심좌표.
-    level: 8 //지도의 레벨(확대, 축소 정도)
+    level: 5 //지도의 레벨(확대, 축소 정도)
   };
   const map = new kakao.maps.Map(Container, options); //지도 생성 및 객체 리턴
 

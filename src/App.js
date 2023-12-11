@@ -4,7 +4,7 @@ import Header from "./style/Header";
 import GlobalStyle from "./style/GlobalStyle";
 import Footer from "./style/Footer";
 import Performance from './pages/performance/Performance'
-
+import PerformanceDetail from './pages/performance/PerformanceDetail';
 function App() {
     return (
         <>
@@ -13,6 +13,7 @@ function App() {
               <Router>        
                   <Routes>    
                       <Route path="/" element={<Performance />} />
+                      <Route path="/PerformanceDetail" element={<PerformanceDetail />} />
                   </Routes>
               </Router>
             <Footer />

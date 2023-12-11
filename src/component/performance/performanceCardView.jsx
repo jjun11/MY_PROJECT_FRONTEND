@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const CardView = styled.div`
   display: flex;
@@ -74,12 +75,23 @@ const Button = styled.button`
 `
 
 const PerformanceCardView = ({
+  id,
   image,
   title,
   venue,
   performer,
   date,
 }) => {
+  const navigate = useNavigate();
+
+  const handleDetailClick = () => {
+    console.log(id);
+    navigate(`/performanceDetail/${id}`);
+  };
+
+  const handleBookingClick = () => {
+    navigate(`/booking/${id}`);
+  };
   
   return (
     <CardView>
@@ -89,8 +101,8 @@ const PerformanceCardView = ({
       <Performer>{performer}</Performer>
       <PerformanceDate>{date}</PerformanceDate>
       <ButtonContainer>
-        <Button>자세히</Button>
-        <Button>예매하기</Button>
+        <Button onClick={handleDetailClick}>자세히</Button>
+        <Button onClick={handleBookingClick}>예매하기</Button>
       </ButtonContainer>
     </CardView>
   );

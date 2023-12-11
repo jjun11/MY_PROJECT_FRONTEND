@@ -2,7 +2,7 @@
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
 import GlobalStyle from "../../style/GlobalStyle";
 import { Container, SearchBanner, Box, Map, ConcertList } from "../../style/performance/PerformanceStyle";
-import PerformanceList from "../../component/performance/performanceList";
+import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../api/AxiosApi";
 
@@ -15,13 +15,15 @@ const Performance = () => {
 
     useEffect(() => {
         // 컴포넌트가 마운트될 때 공연 데이터를 불러옵니다.
-        AxiosApi.getPerformanceList()
-            .then(response => {
+        const fetchPerformanceList = async () => {
+            try {
+                const response = await AxiosApi.getPerformanceList();
                 setPerformanceList(response.data);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching performance list', error);
-            });
+            }
+        };
+        fetchPerformanceList();
     }, []);
 
     // searchTerm 또는 performanceList 상태가 변경될 때마다 필터링된 데이터를 업데이트합니다.

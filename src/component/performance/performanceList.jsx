@@ -1,7 +1,7 @@
 import AxiosApi from "../../api/AxiosApi";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PerformanceCardView from "./performanceCardView";
+import PerformanceCardView from "./PerformanceCardView";
 
 const CardContainer = styled.div`
   display: flex;
@@ -53,6 +53,7 @@ const PerformanceList = ({ performanceList }) => {
     const totalPage = async () => {
       try {
         console.log("performanceList 총페이지수계산 시도")
+        console.log(performanceList);
         const res = await AxiosApi.getPerformancePage(0, 10);
         setTotalPage(res.data);
       } catch (error) {
@@ -103,7 +104,8 @@ const PerformanceList = ({ performanceList }) => {
     <CardContainer>
     {performanceList.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((performance) => (
         <PerformanceCardView
-          key={performance.id}
+          key={performance.performanceId}
+          id={performance.performanceId}
           image={performance.performanceImage}
           title={performance.performanceName}
           venue={performance.venue}
