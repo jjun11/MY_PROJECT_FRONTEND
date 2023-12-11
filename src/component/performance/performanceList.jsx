@@ -45,6 +45,7 @@ const PageButton = styled.button`
 const PerformanceList = ({ performanceList }) => {
   // const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
   const[currentPage, setCurrentPage] = useState(0); // 현재 페이지
+  const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
   const[totalPage, setTotalPage] = useState(0); // 전체 페이지
 
   // 총 페이지 수 계산
@@ -60,6 +61,8 @@ const PerformanceList = ({ performanceList }) => {
     };
     totalPage();
   }, []);
+
+  
 
   // // 공연 목록 조회
   // useEffect(() => {
@@ -83,6 +86,7 @@ const PerformanceList = ({ performanceList }) => {
 
   // 페이지네이션 렌더링
   const renderPagination = () => {
+    const  totalPage = Math.ceil(performanceList.length / itemsPerPage);
     return (
       <PaginationContainer>
         {Array.from({ length: totalPage }, (_, i) => i + 1).map((page) => (
@@ -97,7 +101,7 @@ const PerformanceList = ({ performanceList }) => {
   return (
     <>
     <CardContainer>
-      {performanceList.map((performance) => (
+    {performanceList.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((performance) => (
         <PerformanceCardView
           key={performance.id}
           image={performance.performanceImage}
