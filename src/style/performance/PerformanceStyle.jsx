@@ -8,6 +8,15 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%; // 또는 필요한 높이
+  .title {
+      width: 100vw;
+      height: 7rem;
+      background: linear-gradient(to right, var(--maingreen), var(--mainblue));
+      color: white;
+      font-size: 4rem;
+      font-weight: 600;
+      text-align: center;
+  }
 `;
 export const Box = styled.div`
     display: flex;
@@ -69,16 +78,5 @@ justify-content: center;
 align-items: center;
 `;
 
-export const ConcertList = styled.div`
-    
 
-    .title {
-      width: 100vw;
-      height: 7rem;
-      background: linear-gradient(to right, var(--maingreen), var(--mainblue));
-      color: white;
-      font-size: 4rem;
-      font-weight: 600;
-      text-align: center;
-}
-`;
+   

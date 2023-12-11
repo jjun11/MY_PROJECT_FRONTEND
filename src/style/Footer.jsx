@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import footerlogo from "../images/footerlogo.png";
+import footerlogo from "../images/LogoSymbol_white.png";
 
 const FooterBox = styled.div`
   /* 공통 스타일 정의 */

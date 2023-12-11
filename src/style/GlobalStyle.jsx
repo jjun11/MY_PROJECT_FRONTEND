@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
         --mainblue: #008bff;
         --mainsky: #82ccff;
         --mainolive: #97b0aa;
-        --maindarkgreen: #354b45
+        --maindarkgreen: #354b45;
         --darknavy: #0f222d;
     }
 `;

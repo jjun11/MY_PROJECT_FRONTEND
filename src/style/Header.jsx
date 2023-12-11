@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import headlogo from "../images/headlogo.png";
+import headlogo from "../images/Symbol_white.png";
 
 const NavContainer = styled.div`
   height: 8rem;

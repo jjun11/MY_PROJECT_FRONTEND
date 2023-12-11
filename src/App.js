@@ -3,7 +3,7 @@ import React from "react";
 import Header from "./style/Header";
 import GlobalStyle from "./style/GlobalStyle";
 import Footer from "./style/Footer";
-import Concert from './pages/performance/Performance'
+import Performance from './pages/performance/Performance'
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
             <Header />
               <Router>        
                   <Routes>    
-                      <Route path="/" element={<Concert />} />
+                      <Route path="/" element={<Performance />} />
                   </Routes>
               </Router>
             <Footer />
