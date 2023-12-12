@@ -13,7 +13,7 @@ function App() {
               <Router>        
                   <Routes>    
                       <Route path="/" element={<Performance />} />
-                      <Route path="/PerformanceDetail" element={<PerformanceDetail />} />
+                      <Route path="/PerformanceDetail/:id" element={<PerformanceDetail />} />
                   </Routes>
               </Router>
             <Footer />

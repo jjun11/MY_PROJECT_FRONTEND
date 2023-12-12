@@ -1,4 +1,4 @@
-import AxiosApi from "../../api/AxiosApi";
+import AxiosApi from "../../api/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PerformanceCardView from "./PerformanceCardView";
@@ -6,9 +6,9 @@ import PerformanceCardView from "./PerformanceCardView";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 210rem;
-  gap: 8px;
-  justify-content: start;
+  width: 220rem;
+  gap: 2rem;
+  justify-content: center;
   margin: 20px;
 `;
 
@@ -62,22 +62,6 @@ const PerformanceList = ({ performanceList }) => {
     };
     totalPage();
   }, []);
-
-  
-
-  // // 공연 목록 조회
-  // useEffect(() => {
-  //   const performanceList = async () => {
-  //     try {
-  //       const res = await AxiosApi.getPerformancePageList(currentPage, 10);
-  //       console.log(res.data);
-  //       setPerformanceList(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   performanceList();
-  // }, [currentPage]);
 
   // 페이지 이동
   const handlePageChange = (number) => {

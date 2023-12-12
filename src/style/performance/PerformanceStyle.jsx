@@ -60,12 +60,20 @@ export const SearchBanner = styled.div`
       min-width: 12.7rem;
       height: 5.8rem;
       border-radius: 4rem;
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(0, 0, 0, 0.3);
       border: 0.25rem solid white;
       color: white;
       font-size: 2.4rem;
       font-weight: 600;
       margin: 1rem;
+      &:hover {
+        cursor: pointer;
+          transform: scale(1.1); // 크기를 10% 증가
+          transition: transform 0.2s ease-in-out;
+      }
+      &:active {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
     }
 `;
 

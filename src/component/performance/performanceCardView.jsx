@@ -59,7 +59,7 @@ const PerformanceDate = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end !important;
+  justify-content: space-between;
   width: 100%;
   gap: 1rem; /* 버튼 사이의 간격 */
 `
@@ -72,6 +72,28 @@ const Button = styled.button`
   border-radius: 2rem;
   border: none;
   font-size: 1.6rem;
+  &:hover { // 마우스 호버링 효과
+    cursor: pointer;
+    background-color: var(--mainsky);
+    transform: scale(1.2); 
+    transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
+  }
+  &:active { // 클릭 효과
+    background-color: blue;
+  }
+`
+
+const Status = styled.div` // 공연상태창 - 공연날짜가 현재날짜를 지나면 공연종료로 표시, 티켓구매버튼 비활성화
+    background-color: ${props => props.isEnded ? 'var(--maindarkgreen)' : 'white'};
+    color: ${props => props.isEnded ? 'white' : 'var(--mainblue)'};
+    width: 10.8rem;
+    height: 3.9rem;
+    border-radius: 2rem;
+    border: 1px solid ${props => props.isEnded ? 'none' : 'var(--mainblue)'}; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
 `
 
 const PerformanceCardView = ({
@@ -84,9 +106,12 @@ const PerformanceCardView = ({
 }) => {
   const navigate = useNavigate();
 
+  // 현재 시간과 공연 시간을 비교합니다.
+  const isEnded = new Date() > new Date(date);
+
   const handleDetailClick = () => {
     console.log(id);
-    navigate(`/performanceDetail/${id}`);
+    navigate(`/PerformanceDetail/${id}`);
   };
 
   const handleBookingClick = () => {
@@ -101,8 +126,9 @@ const PerformanceCardView = ({
       <Performer>{performer}</Performer>
       <PerformanceDate>{date}</PerformanceDate>
       <ButtonContainer>
+      <Status isEnded={isEnded}>{isEnded ? '공연 종료' : '공연 예정'}</Status>
         <Button onClick={handleDetailClick}>자세히</Button>
-        <Button onClick={handleBookingClick}>예매하기</Button>
+        {!isEnded && <Button onClick={handleBookingClick}>예매하기</Button>}
       </ButtonContainer>
     </CardView>
   );
