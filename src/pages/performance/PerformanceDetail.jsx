@@ -31,19 +31,23 @@ const Information = styled.div`
         height: 5rem;
         font-size: 4rem;
         font-weight: 700;
+        border-bottom: 0.1rem solid gray;
+        padding-bottom: 2rem;
     }
     .info{
+        padding-top: 2rem;
         width: 50rem;
         height: 39rem;
     
     }
     .map{
+        margin-top: 2rem;
         width: 70rem;
         height: 40rem;
         background-color: green;
-        border-radius: 2rem;
+        border-radius: 1.5rem;
         overflow: hidden;
-    
+        box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.25);
     }
 `;
 
@@ -80,7 +84,6 @@ const PerformanceDetail = () => {
         <>
             <Container>
                 <Image src={performance && performance.performanceImage}/>
-                    
                 <Information>
                     <div className="title">{performance && performance.performanceName}</div>
                     <div className="info">
