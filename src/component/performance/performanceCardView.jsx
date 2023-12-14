@@ -14,7 +14,7 @@ const CardView = styled.div`
   border-radius: 3rem;
   background-color: white;
   box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
-  line-height: 1.1;
+  line-height: 1.1; 
   margin-bottom: 2rem;
 `;
 

@@ -4,7 +4,7 @@ import GlobalStyle from "../../style/GlobalStyle";
 import { Container, SearchBanner, Box, Map, ConcertList } from "../../style/performance/PerformanceStyle";
 import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
-import AxiosApi from "../../api/PerformanceAxios";
+import AxiosApi from "../../axios/PerformanceAxios";
 
 const Performance = () => {
 
@@ -19,6 +19,7 @@ const Performance = () => {
             try {
                 const response = await AxiosApi.getPerformanceList();
                 setPerformanceList(response.data);
+                console.log(performanceList);
             } catch (error) {
                 console.error('Error fetching performance list', error);
             }
@@ -33,6 +34,7 @@ const Performance = () => {
         )
         .sort((a, b) => new Date(b.performanceDate) - new Date(a.performanceDate)); // 최신 날짜 순으로 정렬
         setFilteredPerformanceList(filtered);
+        console.log(filteredPerformanceList);
     }, [searchTerm, performanceList]);
 
    // handleSearch 함수는 '공연 검색' 버튼을 클릭했을 때 호출됩니다.

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import backgroundImage from "../../images/Band.jpg";
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
@@ -16,6 +16,7 @@ export const Container = styled.div`
       font-size: 4rem;
       font-weight: 600;
       text-align: center;
+      margin: 0;
   }
 `;
 export const Box = styled.div`
@@ -47,7 +48,7 @@ export const SearchBanner = styled.div`
     
 
     input {
-      width: 75.6rem;
+      width: 33vw;
       height: 6rem;
       border-radius: 5rem;
       font-size: 2.4rem;

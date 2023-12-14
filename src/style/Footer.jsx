@@ -5,7 +5,7 @@ import footerlogo from "../images/LogoSymbol_white.png";
 const FooterBox = styled.div`
   /* 공통 스타일 정의 */
   height: 60rem;
-  width: 100vw;
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: row;

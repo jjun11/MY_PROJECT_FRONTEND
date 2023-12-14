@@ -1,4 +1,4 @@
-import AxiosApi from "../../api/PerformanceAxios";
+import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -13,9 +13,10 @@ const Container = styled.div`
 
 const Image = styled.img`
     width: 48rem;
-    height: 63rem;
+    height: 63.5rem;
     overflow: hidden;
     border-radius: 3rem;
+    box-shadow: 0rem 3rem 5rem -3rem rgba(0, 0, 0, 0.5);
 `;
 
 const Information = styled.div`
@@ -31,23 +32,25 @@ const Information = styled.div`
         height: 5rem;
         font-size: 4rem;
         font-weight: 700;
-        border-bottom: 0.1rem solid gray;
+        border-bottom: 0.1rem solid lightgray;
         padding-bottom: 2rem;
     }
     .info{
-        padding-top: 2rem;
         width: 50rem;
         height: 39rem;
-    
+        margin-top: 1rem;
+        .desc{
+            margin-top: 3rem;
+        }
     }
     .map{
         margin-top: 2rem;
-        width: 70rem;
+        width: 60rem;
         height: 40rem;
         background-color: green;
         border-radius: 1.5rem;
         overflow: hidden;
-        box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.25);
+        box-shadow: 0rem 3rem 3rem -3rem rgba(0, 0, 0, 0.4);
     }
 `;
 
@@ -87,10 +90,10 @@ const PerformanceDetail = () => {
                 <Information>
                     <div className="title">{performance && performance.performanceName}</div>
                     <div className="info">
-                        <div>공연 장소 : {performance && performance.venue}</div>
-                        <div>일시 : {performance && performance.performanceDate}</div>
-                        <div>좌석 수 : {performance && performance.seatCount}</div>
-                        <div>{performance && performance.description}</div>
+                        <div className="venue">공연 장소 : {performance && performance.venue}</div>
+                        <div className="date">일시 : {performance && performance.performanceDate}</div>
+                        <div className="seat">좌석 수 : {performance && performance.seatCount}</div>
+                        <div className="desc">{performance && performance.description}</div>
                         </div>
                     <div className="map">
                         {performance && <KakaomapComponent performanceList={[performance]}/>}

@@ -1,4 +1,4 @@
-import AxiosApi from "../../api/PerformanceAxios";
+import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PerformanceCardView from "./PerformanceCardView";
@@ -9,7 +9,7 @@ const CardContainer = styled.div`
   width: 220rem;
   gap: 2rem;
   justify-content: center;
-  margin: 20px;
+  /* margin: 20px; */
 `;
 
 const PaginationContainer = styled.div`

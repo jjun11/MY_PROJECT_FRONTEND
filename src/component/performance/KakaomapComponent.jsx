@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MapMarker from "../../images/MapMarker.png";
-import AxiosApi from "../../api/PerformanceAxios";
+import AxiosApi from "../../axios/PerformanceAxios";
 
 const { kakao } = window;
 
