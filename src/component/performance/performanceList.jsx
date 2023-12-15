@@ -89,7 +89,7 @@ const PerformanceList = ({ performanceList }) => {
     {performanceList.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((performance) => (
         <PerformanceCardView
           key={performance.performanceId}
-          id={performance.performanceId}
+          performanceId={performance.performanceId}
           image={performance.performanceImage}
           title={performance.performanceName}
           venue={performance.venue}

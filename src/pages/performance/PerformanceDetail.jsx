@@ -61,16 +61,16 @@ const LineUp = styled.div`
 
 
 const PerformanceDetail = () => {
-    const { id } = useParams();
+    const { performanceId } = useParams();
     const [performance, setPerformance] = useState(null); // performance 상태를 관리하는 useState 훅
 
     useEffect(() => {
-        console.log(id);
+        console.log(performanceId);
         const getPerformanceList = async () => {
             try {
-              const res = await AxiosApi.getPerformanceList(id);
+              const res = await AxiosApi.getPerformanceList(performanceId);
               console.log(res.data);
-              const matchingData = res.data.filter(item => item.performanceId === Number(id));
+              const matchingData = res.data.filter(item => item.performanceId === Number(performanceId));
               console.log(matchingData);  
               const performance = matchingData[0]; 
               console.log(performance);
@@ -81,7 +81,7 @@ const PerformanceDetail = () => {
             }
           };
         getPerformanceList();
-    }, [id]);
+    }, [performanceId]);
     
     return (
         <>

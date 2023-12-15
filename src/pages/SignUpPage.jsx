@@ -215,6 +215,7 @@ const SignupPage = () => {
       }
     } catch (error) {
       alert("닉네임 입력 정보를 확인하십시오.", error);
+      
     }
   };
 

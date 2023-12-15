@@ -9,6 +9,7 @@ import KakaoLogin from "./api/KakaoLoginApi";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignUpPage";
+import PerformanceUpdate from "./pages/performance/PerformanceUpdate";
 
 function App() {
   return (
@@ -18,10 +19,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/performance" element={<Performance />} />
-          <Route
-            path="/PerformanceDetail/:id"
-            element={<PerformanceDetail />}
-          />
+          <Route path="/PerformanceDetail/:performanceId" element={<PerformanceDetail />}/>
+          <Route path="/PerformanceUpdate" element={<PerformanceUpdate />}/>
           <Route path="/" element={<MainPage></MainPage>} />
           <Route path="/login" element={<LoginPage></LoginPage>} />
           <Route path="/signup" element={<SignupPage></SignupPage>} />

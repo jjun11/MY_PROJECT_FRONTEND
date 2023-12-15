@@ -5,6 +5,7 @@ import { Container, SearchBanner, Box, Map, ConcertList } from "../../style/perf
 import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../axios/PerformanceAxios";
+import { useNavigate } from "react-router-dom";
 
 const Performance = () => {
 
@@ -12,6 +13,8 @@ const Performance = () => {
     const [searchTerm, setSearchTerm] = useState(''); // 실제 검색을 수행할 검색어를 저장(검색버튼을 통해 검색할 데이터와 입력데이터를 분리)
     const [performanceList, setPerformanceList] = useState([]); // AxiosApi로 가져온 공연데이터를 저장
     const [filteredPerformanceList, setFilteredPerformanceList] = useState([]); // 필터링된 공연 데이터를 저장 .
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         // 컴포넌트가 마운트될 때 공연 데이터를 불러옵니다.
@@ -58,6 +61,7 @@ const Performance = () => {
 
     
     const handleRegister = () => {
+        navigate("/PerformanceUpdate");
         console.log("공연 등록 버튼 클릭");
     };
     

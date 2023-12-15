@@ -97,7 +97,7 @@ const Status = styled.div` // 공연상태창 - 공연날짜가 현재날짜를 
 `
 
 const PerformanceCardView = ({
-  id,
+  performanceId,
   image,
   title,
   venue,
@@ -110,12 +110,12 @@ const PerformanceCardView = ({
   const isEnded = new Date() > new Date(date);
 
   const handleDetailClick = () => {
-    console.log(id);
-    navigate(`/PerformanceDetail/${id}`);
+    console.log(performanceId);
+    navigate(`/PerformanceDetail/${performanceId}`);
   };
 
   const handleBookingClick = () => {
-    navigate(`/booking/${id}`);
+    navigate(`/booking/${performanceId}`);
   };
   
   return (
