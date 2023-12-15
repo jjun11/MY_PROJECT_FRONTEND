@@ -90,7 +90,7 @@ const PerformanceDetail = () => {
                 <Information>
                     <div className="title">{performance && performance.performanceName}</div>
                     <div className="info">
-                        <div className="venue">공연 장소 : {performance && performance.venue}</div>
+                        <div className="venue">공연 장소 : {performance && performance.venue +", "+ performance.detailVenue }</div>
                         <div className="date">일시 : {performance && performance.performanceDate}</div>
                         <div className="seat">좌석 수 : {performance && performance.seatCount}</div>
                         <div className="desc">{performance && performance.description}</div>
