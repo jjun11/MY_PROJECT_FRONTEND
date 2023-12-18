@@ -161,11 +161,9 @@ const KakaoAddr = (props) => {
                 value={address}
               />
               {isTrue && (
-                <Post>
-                  <PostContainer>
-                    <DaumPostcode onComplete={handleComplete} />
-                  </PostContainer>
-                </Post>
+                <PostContainer>
+                  <DaumPostcode onComplete={handleComplete} />
+                </PostContainer>
               )}
 
               <Button onClick={() => setIsTrue(true)}>주소 찾기</Button>

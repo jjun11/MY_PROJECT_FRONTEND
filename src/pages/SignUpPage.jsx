@@ -177,9 +177,11 @@ const SignupPage = () => {
       if (res.data === true) {
         // 입력 모달 등장
         setModal(true);
+      } else {
+        alert("이메일 정보를 확인하십시오.");
       }
     } catch (error) {
-      alert("이메일을 확인 하십시오!");
+      alert("서버의 연결이 불안정 합니다.");
       console.log("이메일 입력:", error);
     }
   };
@@ -215,7 +217,6 @@ const SignupPage = () => {
       }
     } catch (error) {
       alert("닉네임 입력 정보를 확인하십시오.", error);
-      
     }
   };
 
@@ -288,9 +289,9 @@ const SignupPage = () => {
         console.log("회원가입 결과 : ", res);
         if (res.status === 200) {
           alert("회원가입에 성공하셨습니다.");
-          //   navigate("/login");
+          navigate("/login");
           // 임시
-          navigate("/");
+          // navigate("/");
         } else {
           alert("회원 가입에 실패하셨습니다.");
         }

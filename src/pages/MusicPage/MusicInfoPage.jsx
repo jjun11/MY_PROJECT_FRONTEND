@@ -615,8 +615,8 @@ const CommentButton = styled.div`
   &:hover {
     transform: scale(1.1); /* 호버 시 크기를 1.1배로 확대 */
     cursor: pointer; /* 호버 시 마우스 커서 변경 */
-
-    /* 클릭 효과 스타일 */
+  }
+  /* 클릭 효과 스타일 */
   &:active {
     transform: scale(0.9); /* 클릭 시 크기를 0.9배로 축소 */
   }
@@ -713,14 +713,15 @@ const DeleteText = styled.div`
 `;
 
 const UpdateText = styled.div`
-position: relative
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 300;
-font-size: 1rem;
-line-height: 1.4rem;
+  position: relative;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.4rem;
 
-color: #000000;`;
+  color: #000000;
+`;
 
 const MusicInfo = () => {
   const [isPlaying, setIsPlaying] = useState(false);

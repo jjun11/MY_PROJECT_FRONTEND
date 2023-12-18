@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
-import Login_Bg from "../images/Login_Bg.png";
 
 const KakaoLogin = () => {
   const usenavigator = useNavigate();
@@ -24,16 +23,13 @@ const KakaoLogin = () => {
         const kakao = res.data;
         console.log("카카오 이메일 : ", kakao);
         const response = await SignUpAxios.checkEmail(kakao);
+        console.log("카카오 이메일 중복 체크", response);
         if (response.data === true) {
           // 아이디 존재 => main 페이지로 이동 및 토큰 발급
           // 카카오 로그인 토큰 발급
           const kakaoRes = await SignUpAxios.kakaoToken(kakao);
           console.log("카카오 토큰", kakaoRes);
-          // if (kakaoRes === 200) {
-
-          // }
-
-          usenavigator("/main");
+          usenavigator("/");
         } else {
           // 아이디 존재 x => 회원 가입
           alert("회원 가입이 필요합니다.");
