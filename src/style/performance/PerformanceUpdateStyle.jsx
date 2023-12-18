@@ -218,8 +218,9 @@ export const UpdateZone = styled.div`
   border-radius: 1rem;
   width: 80%;
   box-shadow: 0 1rem 3rem -0.5rem rgba(0, 0, 0, 0.25);
-  height: 36rem;
+  height: auto;
   display: flex;
+  padding: 3rem;
   flex-direction: column;
   flex-wrap: wrap;
   .inputContainer {
@@ -267,17 +268,55 @@ export const UpdateZone = styled.div`
 `;
 
 export const InputBox = styled.input`
+  padding: 0 1rem;
   margin-bottom: 1rem;
   width: 75%;
   height: 3.5rem;
   border: 0.03rem solid var(--mainolive);
+  resize: none; // 사용자가 크기를 변경하지 못하게 함
   
   &::placeholder {
     color: var(--mainolive);
-    padding-left: 1rem;
   
   }
 
+`;
+
+export const ImageInput = styled.input.attrs({ type: 'file', id: 'file'})`
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  width: 75%;
+  height: 3.5rem;
+  border: 0.03rem solid var(--mainolive);
+  resize: none; // 사용자가 크기를 변경하지 못하게 함
+  
+  &::placeholder {
+    color: var(--mainolive);
+  
+  }
+
+`;
+
+export const FileButton = styled.button`
+width: 5rem;
+height: 3.5rem;
+background-color: royalblue;
+color: white;
+`;
+
+export const DescriptionInput = styled.textarea`
+padding: 1rem;
+  margin-bottom: 1rem;
+  width: 75%;
+  height: 17rem;
+  border: 0.03rem solid var(--mainolive);
+  resize: none;
+  overflow: auto;
+  font-family: 'Noto Sans KR', sans-serif;
+
+  &::placeholder {
+    color: var(--mainolive);
+  }
 `;
 
 export const Button = styled.button`
@@ -289,7 +328,7 @@ export const Button = styled.button`
   color: var(--maindarkgreen);
   border: 0.3rem solid var(--maindarkgreen);
   background-color: white;
-  margin-right: 5rem;
+  margin-right: 5%;
   &:hover {
     cursor: pointer;
     transform: scale(1.1); // 크기를 10% 증가

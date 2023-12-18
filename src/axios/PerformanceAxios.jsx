@@ -24,10 +24,19 @@ const AxiosApi = {
       );
     },
 
-    // 공연 등록
-    // setPerformance: async (performance) => {
-    //     return axios.post(CHORD8_DOMAIN + `/performance/create`, performance);
-    // },
-};
+    //공연 등록
+    setPerformance: async (performance) => {
+        return axios.post(CHORD8_DOMAIN + `/performance/create`, performance);
+    },
+
+
+    //공연등록닉네임 조회
+    getPerformerNick: async () => {
+      console.log("공연등록닉네임조회 AxiosApi 작동")
+      return await axios.get(
+        CHORD8_DOMAIN + `/auth/`
+      );
+    },
+  };
 
 export default AxiosApi;

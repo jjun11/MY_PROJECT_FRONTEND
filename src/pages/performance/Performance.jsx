@@ -38,7 +38,7 @@ const Performance = () => {
         .sort((a, b) => new Date(b.performanceDate) - new Date(a.performanceDate)); // 최신 날짜 순으로 정렬
         setFilteredPerformanceList(filtered);
         console.log(filteredPerformanceList);
-    }, [searchTerm, performanceList]);
+    }, [searchTerm, performanceList]); 
 
    // handleSearch 함수는 '공연 검색' 버튼을 클릭했을 때 호출됩니다.
     // inputValue가 있을 경우, inputValue를 searchTerm 상태로 설정하고, inputValue를 초기화합니다.
