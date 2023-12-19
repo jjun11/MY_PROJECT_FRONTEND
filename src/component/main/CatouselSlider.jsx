@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import Img from "../../images/Artist.png";
-import Img2 from "../../images/Artist_2.png";
+
 import { useNavigate } from "react-router-dom";
+import MainAxios from "../../axios/MainAxios";
 
 const Container = styled.div`
   /* border: 3px solid black; */
@@ -32,6 +32,7 @@ const Content = styled.div`
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  color: gray;
 `;
 
 // 좌우 이동 arrow 스타일 지정
@@ -42,15 +43,27 @@ const Custom = styled.div`
 
 const CatouselSlider = () => {
   const usenavigate = useNavigate();
+  // 백엔드의 리스트 데이터 저장
+  const [list, setList] = useState([]); // 상태로 list 선언
 
   // 해당 링크로 이동
-  const onClick = () => {
+  const onClick = (id) => {
     // 임시
-    usenavigate("/login");
+    usenavigate(`/music-info/${id}`);
   };
 
   // 리스트 : 백엔드에서 가져올것.
-  const list = [Img, Img2, Img, Img2, Img, Img2];
+  useEffect(() => {
+    const getList = async () => {
+      const res = await MainAxios.notLoginList();
+      console.log("리스트 데이터", res);
+      if (res.status === 200) {
+        setList(res.data);
+        console.log("list = res.data", list);
+      }
+    };
+    getList();
+  }, []);
 
   const settings = {
     dots: true,
@@ -69,7 +82,13 @@ const CatouselSlider = () => {
       <Slider {...settings}>
         {list.map((data, index) => (
           <Contents key={index}>
-            <Content onClick={onClick} imagePath={data}></Content>
+            <Content
+              onClick={() => onClick(data.musicDTO.id)}
+              imagePath={data.musicDTO.thumbnailImage}
+            >
+              <p>제목 : {data.musicDTO.musicTitle}</p>
+              <p>가수 : {data.userResDto.userNickname}</p>
+            </Content>
           </Contents>
         ))}
       </Slider>

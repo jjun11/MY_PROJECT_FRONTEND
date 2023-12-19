@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import SearchBox from "../../component/MusicList/SearchBox";
 import postimg01 from "../../images/postimg01.jpg";
@@ -9,9 +10,10 @@ import postimg05 from "../../images/postimg05.jpg";
 import albumthuming from "../../images/albumthumimg01.jpg";
 import Waveform from "../../component/MusicList/MusicPlayer";
 import { Link } from "react-router-dom";
+import MusicAxiosApi from "../../axios/MusicAxios";
 
 const SingList = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100rem;
   display: flex;
   position: relative;
@@ -22,10 +24,10 @@ const SingList = styled.div`
 const SingerPost = styled.div`
   width: 100vw;
   height: 50rem;
-
+  justify-content: center;
   display: flex;
   position: relative;
-  box-shadow: 5rem;
+  box-shadow: 0 0.5rem rgba(0, 0, 0, 0.2);
   color: white;
 `;
 
@@ -34,6 +36,7 @@ const SingerPostImg = styled.img`
   height: 100%;
   display: flex;
   position: relative;
+  object-fit: cover;
   overflow: hidden;
   // bottom: 20rem;
 `;
@@ -296,14 +299,14 @@ const ListBox = styled.div`
   margin-bottom: 1rem;
   // padding-left: 3rem;
   background-color: #171717;
-  border: 0.2px solid white;
+   border: 0.2px solid white;
   display: flex;
   position: relative;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  gap: 4rem;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   border-radius: 1rem;
+   gap: 4rem;
 `;
 
 const MusicThumnail = styled.img`
@@ -441,35 +444,10 @@ const PaginationButton = styled.button`
 `;
 
 const MusicList = () => {
+  const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const postImages = [
-    {
-      id: 1,
-      src: postimg01,
-      alt: "홍보사진01",
-    },
-    {
-      id: 2,
-      src: postimg02,
-      alt: "홍보사진02",
-    },
-    {
-      id: 3,
-      src: postimg03,
-      alt: "홍보사진03",
-    },
-    {
-      id: 4,
-      src: postimg04,
-      alt: "홍보사진04",
-    },
-    {
-      id: 5,
-      src: postimg05,
-      alt: "홍보사진05",
-    },
-  ];
-  //홍보사진 배열.
+  const [musicinfolist, setMusicInfoList] = useState(null);
+  const [promoImages, setPromoImages] = useState([]);
 
   //음악 파일 배열.
   const musicFiles = [
@@ -487,16 +465,36 @@ const MusicList = () => {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === postImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4500); // 2초마다 슬라이드 변경 (원하는 시간으로 조정 가능)
+    console.log(id);
+    const getAllMusic = async () => {
+      try {
+        const response = await MusicAxiosApi.getAllMusic();
+        console.log("음악 리스트 조회 : ", response.data);
+        setMusicInfoList(response.data);
+        //api호출 성공시, musicinfolist상태 업데이트
 
-    return () => clearInterval(interval);
-  }, [postImages.length]);
+        const promoImageUrls = response.data.map(
+          (item) => item.musicDTO.promoImage
+        );
+        setPromoImages(promoImageUrls);
 
-  // 여기까지가 홍보사진 슬라이드
+        // 프로모션 이미지가 있을 경우 자동 슬라이드 적용
+        if (promoImageUrls.length > 0) {
+          const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) =>
+              prevIndex === promoImageUrls.length - 1 ? 0 : prevIndex + 1
+            );
+          }, 5000); // 5초마다 슬라이드 변경
+
+          return () => clearInterval(interval);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAllMusic();
+  }, []);
 
   //여기서부터 리스트 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
@@ -506,30 +504,31 @@ const MusicList = () => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const getItemsForPage = (page) => {
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-    const items = [];
-
-    for (let i = startIndex; i < endIndex; i++) {
-      items.push(
-        <ListBox key={i}>
-          <Link to="/music-info-page">
-            <MusicThumnail alt="앨범썸네일" src={albumthuming}></MusicThumnail>
-          </Link>
-          <MusicDet>
-            <SongName>노래제목</SongName>
-            <SingerName>by 가수이름</SingerName>
-          </MusicDet>
-          <MusicPlaySet>
-            <Waveform music={musicFiles[i % musicFiles.length]} />
-          </MusicPlaySet>
-          <MusicTag>#나른한 #뉴에이지 #피아노</MusicTag>
-          <PublishDay>발매일: 23.11.13</PublishDay>
-        </ListBox>
-      );
+    if (!musicinfolist || !Array.isArray(musicinfolist)) {
+      return []; // musicinfolist가 null이거나 배열이 아닌 경우 빈 배열 반환
     }
 
-    return items;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+    return musicinfolist.slice(startIndex, endIndex).map((item, index) => (
+      <ListBox key={startIndex + index}>
+        <Link to={`/music-info/${item.musicDTO.id}`}>
+          <MusicThumnail alt="앨범썸네일" src={item.musicDTO.thumbnailImage} />
+        </Link>
+        <MusicDet>
+          <SongName>{item.musicDTO.musicTitle}</SongName>
+          <SingerName>{`by : ${item.userResDto.userNickname}`}</SingerName>
+        </MusicDet>
+        <MusicPlaySet>
+          <Waveform
+            music={musicFiles[(startIndex + index) % musicFiles.length]}
+          />
+        </MusicPlaySet>
+        <MusicTag>{item.musicDTO.genre}</MusicTag>
+        <PublishDay>{`발매일 : ${item.musicDTO.releaseDate}`}</PublishDay>
+      </ListBox>
+    ));
   };
 
   const currentItems = getItemsForPage(currentPage);
@@ -568,15 +567,23 @@ const MusicList = () => {
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
-            {postImages.map((postImg, index) => (
+            {promoImages.map((promoImg, index) => (
               <div
-                key={postImg.id}
+                key={index}
                 style={{
                   flex: "0 0 auto",
                   maxWidth: "100%",
                 }}
               >
-                <SingerPostImg alt={postImg.alt} src={postImg.src} />
+                <SingerPostImg
+                  alt={`Promo Image ${index + 1}`}
+                  src={promoImg}
+                  style={{
+                    width: "100vw",
+                    height: "100vh",
+                    objectFit: "contain",
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -591,11 +598,11 @@ const MusicList = () => {
 
       <SingLIstBottom>
         <ListNavbar>
-          <MusicCategory01>음악종류</MusicCategory01>
-          <MusicCategory02>음악종류</MusicCategory02>
-          <MusicCategory03>음악종류</MusicCategory03>
-          <MusicCategory04>음악종류</MusicCategory04>
-          <MusicCategory05>음악종류</MusicCategory05>
+          <MusicCategory01>발라드</MusicCategory01>
+          <MusicCategory02>락/메탈</MusicCategory02>
+          <MusicCategory03>힙합/랩</MusicCategory03>
+          <MusicCategory04>R&B/soul</MusicCategory04>
+          <MusicCategory05>포크/블루스</MusicCategory05>
         </ListNavbar>
 
         <ListContainer>{currentItems}</ListContainer>

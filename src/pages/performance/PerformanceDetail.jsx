@@ -61,17 +61,17 @@ const LineUp = styled.div`
 
 
 const PerformanceDetail = () => {
-    const { performanceId } = useParams();
+    const { id } = useParams();
     const [performance, setPerformance] = useState(null); // performance 상태를 관리하는 useState 훅
 
     useEffect(() => {
-        console.log(performanceId);
+        console.log(id);
         const getPerformanceList = async () => {
             try {
-              const res = await AxiosApi.getPerformanceList(performanceId);
-              console.log(res.data);
-              const matchingData = res.data.filter(item => item.performanceId === Number(performanceId));
-              console.log(matchingData);  
+              const res = await AxiosApi.getPerformanceList(id);
+              console.log("공연리스트 조회 ",res.data);
+              const matchingData = res.data.filter(item => item.performanceId === Number(id));
+              console.log("id에 해당하는 공연정보 필터링: ", matchingData);  
               const performance = matchingData[0]; 
               console.log(performance);
               setPerformance(performance); // API 호출이 완료되면 performance 상태를 업데이트
@@ -81,7 +81,7 @@ const PerformanceDetail = () => {
             }
           };
         getPerformanceList();
-    }, [performanceId]);
+    }, [id]);
     
     return (
         <>

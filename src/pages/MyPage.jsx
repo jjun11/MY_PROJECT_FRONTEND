@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import MypageComponent from "../conponent/Mypage/MypageComponenet";
 import { ReactComponent as Heart } from "../images/HeartBox.svg";
 import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
@@ -9,14 +10,49 @@ import {
   InterBoxText,
   MainHead,
   MainHeadBox,
+  MainHeadDateText,
   MainHeadText,
   MainProfile,
   MoveButton,
+  MoveButtonBox,
   MyPageContainer,
   PointBox,
 } from "../style/MyPageStyle";
+import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 
 const MyPage = () => {
+  const [email, setEmail] = useState("asd123@naver.com");
+  const [userInfo, setUserInfo] = useState(null);
+  const [userMusic, setUserMusic] = useState(null);
+  const [userPerformance, setUserPerformance] = useState(null);
+
+  useEffect(() => {
+    const fetchUserInfoAndMusic = async () => {
+      try {
+        const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
+        setUserInfo(userInfoResponse.data);
+
+        if (userInfoResponse.data) {
+          const musicResponse = await MemberInfoAxiosApi.getUserMusic(
+            userInfoResponse.data.id
+          );
+          setUserMusic(musicResponse.data);
+          console.log(musicResponse.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const fetchData = async () => {
+      const response = await MemberInfoAxiosApi.getUserInfoByPerformanceEmail(
+        email
+      );
+      console.log(response.data);
+      setUserPerformance(response.data);
+    };
+    fetchData();
+    fetchUserInfoAndMusic();
+  }, [email]);
   return (
     <>
       <MyPageContainer>
@@ -24,8 +60,13 @@ const MyPage = () => {
           <MainProfile></MainProfile>
           <ArtistContainer>
             <MainHeadBox>
-              <MainHeadText>공연 횟수 : 1</MainHeadText>
-              <MainHeadText>등록한 곡 : 6</MainHeadText>
+              <MainHeadText>
+                공연 횟수 :{" "}
+                {userPerformance && userPerformance.performances.length}
+              </MainHeadText>
+              <MainHeadText>
+                등록된 음원 : {userMusic && userMusic.length}
+              </MainHeadText>
               <InterBox>
                 <InterBoxText>
                   <Heart />
@@ -41,20 +82,24 @@ const MyPage = () => {
             </MainHeadBox>
 
             <Artist>
-              <MainHeadText>가입일 : 2022-04-01</MainHeadText>
+              {/* <MainHeadDateText></MainHeadDateText> */}
               ARTIST
             </Artist>
           </ArtistContainer>
           <PointBox>
             <MainHeadText>MY 포인트</MainHeadText>
-            132,000 P
-            <div>
+            {userInfo && userInfo.userPoint}
+
+            <MoveButtonBox>
               <MoveButton>충전하기</MoveButton>
               <MoveButton>환전하기</MoveButton>
-            </div>
+            </MoveButtonBox>
           </PointBox>
         </MainHead>
-        <MypageComponent />
+        <MypageComponent
+          userMusic={userMusic}
+          userPerformance={userPerformance}
+        />
       </MyPageContainer>
     </>
   );

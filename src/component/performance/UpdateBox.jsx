@@ -4,6 +4,7 @@ import AxiosApi from '../../axios/PerformanceAxios';
 import DaumPostcode from 'react-daum-postcode';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { storage } from '../../api/firebase';
+import ModalComponent from '../ModalComponent';
 
 
 const UpdateBox = ({ performerNickList }) => {
@@ -13,6 +14,7 @@ const UpdateBox = ({ performerNickList }) => {
   const [ inputVenue, setInputVenue ] = useState(""); // 공연장소
   const [ inputDetailVenue, setInputDetailVenue ] = useState(""); // 상세공연장소
   const [ inputDate, setInputDate ] = useState(""); // 공연일시
+  const [ inputPrice, setInputPrice ] = useState(""); // 공연티켓가격
   const [ inputTitle, setInputTitle ] = useState(""); // 공연제목
   // 포스터 관련
   const [file, setFile] = useState(""); // 프로필이미지 입력값
@@ -38,8 +40,8 @@ const UpdateBox = ({ performerNickList }) => {
   const [showPostcode, setShowPostcode] = useState(false);
     
   // 아래 두 줄은 내가 post를 하기 위해 작성한 거라서, 두 줄은 상황에 맞춰 변경하면 되고 참고하지 않아도 된다.
-  const [calendarlocation, setCalendarLocation] = useState("")
-  const locations = { calendarLocation: calendarlocation }
+  // const [calendarlocation, setCalendarLocation] = useState("")
+  // const locations = { calendarLocation: calendarlocation }
   
   // 참여자 입력값이 변경될 때마다 회원 정보 조회
   useEffect(() => {
@@ -108,6 +110,7 @@ const UpdateBox = ({ performerNickList }) => {
         venue: inputVenue, // 주소
         detailVenue: inputDetailVenue, // 상세주소
         date: inputDate, // 공연일시
+        price: inputPrice, // 공연티켓가격
         title: inputTitle, // 공연제목
         poster: url, // 포스터
         seat: inputSeat, // 좌석수
@@ -152,9 +155,9 @@ const UpdateBox = ({ performerNickList }) => {
             일시
             <InputBox type="datetime-local"  value={inputDate} onChange={(e) => setInputDate(e.target.value)}/>
           </div>
-          <div className="time">
-            진행시간
-            <InputBox placeholder="진행시간" value={inputDetailVenue} onChange={(e) => setInputDetailVenue(e.target.value)}/>
+          <div className="price">
+            티켓 가격
+            <InputBox placeholder="가격" value={inputPrice} onChange={(e) => setInputDetailVenue(e.target.value)}/>
           </div>
           <div className="title">
             제목

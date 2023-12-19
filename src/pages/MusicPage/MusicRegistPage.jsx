@@ -1,246 +1,55 @@
-import React from "react";
-import styled from "styled-components";
-import registerimg from "../../images/musicplay.gif";
-
-const RegistContainer = styled.div`
-  width: 100vw;
-  height: 210rem;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-
-  border: 1px solid red;
-`;
-
-const RegisterInfoBox = styled.div`
-  position: relative;
-  display: flex;
-  width: 158rem;
-  height: 21.5rem;
-  top: 14.7rem;
-  gap: 8rem;
-  background: linear-gradient(269.47deg, #008bff 4.68%, #61e6ca 93.53%);
-  border-radius: 1rem;
-  align-items: center;
-`;
-
-const RegistMusicInfoBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 158rem;
-  height: 55rem;
-  top: 22rem;
-  background: #ffffff;
-  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
-`;
-
-const RegisterImg = styled.img`
-  position: relative;
-  display: flex;
-  width: 13.5rem;
-  height: 13.5rem;
-  left: 3rem;
-  border-radius: 10rem;
-  border: 8px solid #ffffff;
-`;
-
-const InfoBox = styled.div`
-  display: flex;
-  position: relative;
-  width: 27rem;
-  height: 20rem;
-
-  border: 1px solid white;
-`;
-
-const RegisterRankBox = styled.div`
-  display: flex;
-  position: relative;
-  width: 60rem;
-  height: 20rem;
-
-  border: 1px solid white;
-`;
-
-const PointZone = styled.div`
-  display: flex;
-  position: relative;
-  width: 28rem;
-  height: 20rem;
-
-  border: 1px solid white;
-`;
-
-const RegistTitle = styled.div`
-  display: flex;
-  position: relative;
-  border-bottom: 1px solid black;
-  width: 148rem;
-  height: 10rem;
-  align-items: center;
-`;
-
-const TitleWriete = styled.div`
-  display: flex;
-  position: relative;
-  color: #97b0aa;
-  font-size: 4rem;
-  font-weight: bold;
-`;
-
-const RegistInfoBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  width: 148rem;
-  height: 42rem;
-  border: 1px solid black;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-`;
-
-const InfoBox01 = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 46rem;
-  height: 40rem;
-  border: 1px solid black;
-  align-items: center;
-  gap: 2.5rem;
-`;
-
-const SongNameBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const SingerBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const ComposerBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const LyricsistBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const GenreBox = styled.div`
-  width: 42rem;
-  height: 10rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const InfoBox2 = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 46rem;
-  height: 40rem;
-  border: 1px solid black;
-  align-items: center;
-  gap: 2.5rem;
-`;
-
-const TitleImgBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const MusicIntroBox = styled.div`
-  width: 42rem;
-  height: 4rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const LyricsBox = styled.div`
-  width: 42rem;
-  height: 24rem;
-  display: flex;
-  position: relative;
-  border: 1px solid black;
-  top: 1.5rem;
-`;
-
-const InfoBox03 = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 46rem;
-  height: 40rem;
-  border: 1px solid black;
-  align-items: center;
-`;
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  UserInfo,
+  UpdateZone,
+  InputBox,
+  Button,
+} from "../../style/music/MusicUpdateStyle";
+import UpdateBox from "../../component/MusicList/UpdateBox";
+import UpdateUserInfo from "../../component/MusicList/UpdateUserInfo";
 
 const MusicRegistPage = () => {
+  // 입력값 정보 저장
+  const [performer, setPerformer] = useState([]); // 참여자
+  const [venue, setVenue] = useState(""); // 공연장소
+  const [detailVenue, setDetailVenue] = useState(""); // 상세공연장소
+  const [date, setDate] = useState(""); // 공연일시
+  const [title, setTitle] = useState(""); // 공연제목
+  const [poster, setPoster] = useState(""); // 포스터
+  const [seat, setSeat] = useState(""); // 좌석수
+  const [description, setDescription] = useState(""); // 공연소개
+
+  // 유효성 검사, 포스터이미지, 설명은 없어도 되는 값이므로 제외
+  const [isperformer, setIsPerformer] = useState(false); // 참여자 입력유무
+  const [isvenue, setIsVenue] = useState(false); // 공연장소 입력유무
+  const [isdetailVenue, setIsDetailVenue] = useState(false); // 상세공연장소 입력유무
+  const [isdate, setIsDate] = useState(false); // 공연일시 입력유무
+  const [istitle, setIsTitle] = useState(false); // 공연제목 입력유무
+  const [isseat, setIsSeat] = useState(false); // 좌석수 입력유무
+
+  // const navigate = useNavigate();
+
+  // const email = window.localStorage.getItem("email");
+  // console.log(email);
+
+  // useEffect(() => {
+  //   if (!email) {
+  //     alert("로그인이 필요합니다.");
+  //     navigate("/login");
+  //   }
+  // }, []);
+
+  // 입력값을 서버로 전송할 부분
+
   return (
-    <RegistContainer>
-      <RegisterInfoBox>
-        <RegisterImg alt="음원등록자이미지" src={registerimg} />
-        <InfoBox></InfoBox>
-        <RegisterRankBox></RegisterRankBox>
-        <PointZone></PointZone>
-      </RegisterInfoBox>
-
-      <RegistMusicInfoBox>
-        <RegistTitle>
-          <TitleWriete>음원 등록하기</TitleWriete>
-        </RegistTitle>
-        <RegistInfoBox>
-          <InfoBox01>
-            <SongNameBox></SongNameBox>
-            <SingerBox></SingerBox>
-            <ComposerBox></ComposerBox>
-            <LyricsistBox></LyricsistBox>
-            <GenreBox></GenreBox>
-          </InfoBox01>
-
-          <InfoBox2>
-            <TitleImgBox></TitleImgBox>
-            <MusicIntroBox></MusicIntroBox>
-            <LyricsBox></LyricsBox>
-          </InfoBox2>
-
-          <InfoBox03></InfoBox03>
-        </RegistInfoBox>
-      </RegistMusicInfoBox>
-    </RegistContainer>
+    <>
+      <Container>
+        <UpdateUserInfo />
+        <UpdateBox />
+      </Container>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import { UserInfo, Button } from "../../style/performance/PerformanceUpdateStyle
 
 const UpdateUserInfo = () => {
 
-  const point = 13201;
+  const point = 609428040;
   const pointComma = point.toLocaleString(); // point 값에 천단위마다 콤마를 추가
 
 return (

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, UserInfo, UpdateZone, InputBox, Button } from "../../style/performance/PerformanceUpdateStyle";
 import UpdateBox from "../../component/performance/UpdateBox";
 import UpdateUserInfo from "../../component/performance/UpdateUserInfo";
+import ModalComponent from "../../component/ModalComponent";
 
 
 
@@ -63,6 +64,7 @@ const PerformanceUpdate = () => {
     <Container>
       <UpdateUserInfo performerNickList={performerNickList}/>
       <UpdateBox performerNickList={performerNickList}/>
+      <ModalComponent open="열기" content="테스트테스트테스트테스트테스트테스트테스트테스트" close="닫기" customButton={null}/>
     </Container>
     </>
   );
