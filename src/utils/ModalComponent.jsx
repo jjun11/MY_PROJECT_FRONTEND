@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Modal from "./signup/SignUpModal";
+import Modal from "../component/signup/SignUpModal";
 
 // 모달 전체 틀
 export const ModalContainer = styled.div`

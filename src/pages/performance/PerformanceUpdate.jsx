@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, UserInfo, UpdateZone, InputBox, Button } from "../../style/performance/PerformanceUpdateStyle";
 import UpdateBox from "../../component/performance/UpdateBox";
 import UpdateUserInfo from "../../component/performance/UpdateUserInfo";
-import ModalComponent from "../../component/ModalComponent";
+import ModalComponent from "../../utils/ModalComponent";
 
 
 
@@ -28,7 +28,7 @@ const PerformanceUpdate = () => {
   // const [ istitle, setIsTitle ] = useState(false); // 공연제목 입력유무
   // const [ isseat, setIsSeat ] = useState(false); // 좌석수 입력유무
 
-  const [performerNickList, setPerformerNickList] = useState([]); // AxiosApi로 가져온 닉네임데이터를 저장
+  const [userList, setUserList] = useState([]); // AxiosApi로 가져온 유저정보를 저장
 
   const navigate = useNavigate();
 
@@ -43,28 +43,29 @@ const PerformanceUpdate = () => {
   }, []); 
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 모든 회원닉네임을 불러옵니다.
-    const fetchPerformerNick = async () => {
+    // 컴포넌트가 마운트될 때 모든 회원정보를 불러옵니다.
+    const fetchUserList = async () => {
         try {
-            const response = await AxiosApi.getPerformerNick();
-            setPerformerNickList(response.data);
-            console.log(performerNickList);
+            const response = await AxiosApi.getUserList();
+            setUserList(response.data);
         } catch (error) {
             console.error('Error fetching performance list', error);
         }
     };
-    fetchPerformerNick();
+    fetchUserList();
 }, []);
 
+useEffect(() => {
+  console.log(userList);
+}, [userList]); // userList가 변경될 때마다 로그를 출력합니다.
   // 입력값을 서버로 전송할 부분
 
 
   return (
     <>
     <Container>
-      <UpdateUserInfo performerNickList={performerNickList}/>
-      <UpdateBox performerNickList={performerNickList}/>
-      <ModalComponent open="열기" content="테스트테스트테스트테스트테스트테스트테스트테스트" close="닫기" customButton={null}/>
+      <UpdateUserInfo userList={userList}/>
+      <UpdateBox userList={userList}/>
     </Container>
     </>
   );

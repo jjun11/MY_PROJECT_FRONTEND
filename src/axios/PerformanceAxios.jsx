@@ -26,17 +26,31 @@ const AxiosApi = {
 
     //공연 등록
     setPerformance: async (performance) => {
-        return axios.post(CHORD8_DOMAIN + `/performance/create`, performance);
+        return axios.post(CHORD8_DOMAIN + `/performance/new`, performance);
     },
 
-
-    //공연등록닉네임 조회
-    getPerformerNick: async () => {
-      console.log("공연등록닉네임조회 AxiosApi 작동")
+    // 전체유저조회
+    getUserList: async () => {
+      console.log("전체유저조회 AxiosApi 작동")
       return await axios.get(
-        CHORD8_DOMAIN + `/auth/`
+        CHORD8_DOMAIN + `/auth/userList`
       );
     },
+
+    // 전체공연자조회
+    getPerformerList: async () => {
+      console.log("전체공연자조회 AxiosApi 작동")
+      return await axios.get(
+        CHORD8_DOMAIN + `/performer/list`);
+    },
+
+    // //공연등록닉네임 조회
+    // getPerformerNick: async () => {
+    //   console.log("공연등록닉네임조회 AxiosApi 작동")
+    //   return await axios.get(
+    //     CHORD8_DOMAIN + `/auth/`
+    //   );
+    // },
   };
 
 export default AxiosApi;
