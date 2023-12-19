@@ -4,7 +4,7 @@ import styled, { css, keyframes } from "styled-components";
 import likeheart from "../../images/Heart.png";
 import buyimg from "../../images/Basket.png";
 import artistImg from "../../images/Artist_2.png";
-// import FetchLyrics from "../../component/MusicList/FetchLyrics";
+
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import InfoPageComment from "../../style/music/InfoPageComment";
@@ -500,11 +500,13 @@ const LyricsBox = styled.div`
 
 const MusicInfo = () => {
   const { id } = useParams();
+  console.log("ID:", id); // id 값 확인
   const [isPlaying, setIsPlaying] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [audioSrc, setAudioSrc] = useState(
-    "../../conponent/MusicList/testmusic05.mp3"
+    require("../../component/MusicList/testmusic01.mp3")
   );
+
   const [volume, setVolume] = useState(1);
   const audioPlayerRef = useRef(null);
   const [musicInfo, setMusicInfo] = useState(null);
@@ -542,6 +544,7 @@ const MusicInfo = () => {
 
   useEffect(() => {
     let rotateInterval;
+    //const로 불가해서 let 사용.
 
     if (isPlaying) {
       rotateInterval = setInterval(() => {
@@ -653,7 +656,7 @@ const MusicInfo = () => {
 
             <CopoeraterBox>
               {Array.isArray(musicinfolist)
-                ? musicinfolist.map((item, index) => (
+                ? musicinfolist.slice(0, 5).map((item, index) => (
                     <CopertatorInfo key={index}>
                       <ProfileImg
                         alt="프로필사진"

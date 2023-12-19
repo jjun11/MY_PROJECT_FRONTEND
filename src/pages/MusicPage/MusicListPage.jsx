@@ -301,7 +301,7 @@ const ListBox = styled.div`
   background-color: #171717;
    border: 0.2px solid white;
   display: flex;
-  position: relative;
+  position: relative:
    flex-direction: row;
    align-items: center;
    justify-content: center;
@@ -474,7 +474,7 @@ const MusicList = () => {
         //api호출 성공시, musicinfolist상태 업데이트
 
         const promoImageUrls = response.data.map(
-          (item) => item.musicDTO.promoImage
+          (item) => item.musicDTO.thumbnailImage
         );
         setPromoImages(promoImageUrls);
 

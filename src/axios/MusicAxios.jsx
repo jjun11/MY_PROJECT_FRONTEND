@@ -14,10 +14,40 @@ const MusicAxiosApi = {
     return await axios.get(CHORD8_DOMAIN + `/music/detail/${id}`);
   },
 
-  //음악 등록
-  addMusic: async (music) => {
+  //음악 등록 엔드포인트(메모: post등록 방식 axios 까먹지말것..)
+  addMusic: async (
+    inputSingName,
+    inputSinger,
+    inputComposer,
+    inputLyricist,
+    selectedGenre,
+    inputSingInfo,
+    inputLyrics,
+    url
+  ) => {
     console.log("음악 등록 AxiosApi 작동");
-    return await axios.post(CHORD8_DOMAIN + `/music/add`, music);
+    const musicDTO = {
+      musicDTO: {
+        composer: inputComposer,
+        genre: selectedGenre,
+        lyricist: inputLyricist,
+        lyrics: inputLyrics,
+        musicInfo: inputSingInfo,
+        musicTitle: inputSingName,
+        promoImage: url,
+        purchaseCount: 100,
+        releaseDate: "2023-12-19",
+        thumbnailImage: url,
+      },
+      userReqDto: {
+        userNickname: inputSinger,
+      },
+      userResDto: {
+        userNickname: inputSinger,
+      },
+    };
+
+    return await axios.post(CHORD8_DOMAIN + `/music/new`, musicDTO);
   },
 
   //음악 페이지 수 조회

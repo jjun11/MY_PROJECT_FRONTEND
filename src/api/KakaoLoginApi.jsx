@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
+import Common from "../utils/Common";
 
 const KakaoLogin = () => {
   const usenavigator = useNavigate();
@@ -22,6 +23,7 @@ const KakaoLogin = () => {
         console.log("카카오 로그인 : ", res);
         const kakao = res.data;
         console.log("카카오 이메일 : ", kakao);
+        window.localStorage.setItem("email", kakao);
         const response = await SignUpAxios.checkEmail(kakao);
         console.log("카카오 이메일 중복 체크", response);
         if (response.data === true) {
@@ -29,6 +31,9 @@ const KakaoLogin = () => {
           // 카카오 로그인 토큰 발급
           const kakaoRes = await SignUpAxios.kakaoToken(kakao);
           console.log("카카오 토큰", kakaoRes);
+          Common.setAccessToken(kakaoRes.data.accessToken);
+          Common.setRefreshToken(kakaoRes.data.refreshToken);
+          alert("로그인 성공");
           usenavigator("/");
         } else {
           // 아이디 존재 x => 회원 가입

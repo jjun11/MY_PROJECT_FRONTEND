@@ -347,22 +347,19 @@ export const GenreButton = styled.button`
   border-radius: 4rem;
   font-size: 0.8rem;
   font-weight: 700;
+  border: 1px solid var(--mainblue);
+  background-color: ${({ active }) => (active ? "var(--mainblue)" : "white")};
+  color: ${({ active }) => (active ? "white" : "var(--mainblue)")};
 
-  border: 0.3rem solid var(--maindarkgreen);
-
-  color: ${({ active }) => (active ? "white" : "var(--maindarkgreen)")};
-  background-color: ${({ active }) =>
-    active ? "var(--maindarkgreen)" : "white"};
-  //   margin-right: 5rem;
   &:hover {
     cursor: pointer;
     transform: scale(1.1); // 크기를 10% 증가
     transition: transform 0.1s ease-in-out;
   }
-  &:active {
-    background-color: var(--maindarkgreen);
-    color: white;
-  }
+  // &:active {
+  //   background-color: var(--mainblue);
+  //   color: white;
+  // }
 `;
 
 export const PurposeButtonBox = styled.div`
@@ -384,37 +381,49 @@ export const PurposeButton = styled.button`
   font-weight: 700;
   color: var(--maindarkgreen);
   border: 0.3rem solid var(--mainblue);
-  background-color: white;
-  //   margin-right: 5rem;
+  background-color: ${({ active }) => (active ? "var(--mainblue)" : "white")};
+  color: ${({ active }) => (active ? "white" : "var(--mainblue)")};
   &:hover {
     cursor: pointer;
     transform: scale(1.1); // 크기를 10% 증가
     transition: transform 0.1s ease-in-out;
   }
-  &:active {
-    background-color: var(--maindarkgreen);
-    color: white;
-  }
+  // &:active {
+  //   background-color: var(--maindarkgreen);
+  //   color: white;
+  // }
 `;
 
-export const Titleimg = styled.div`
-  width: 30rem;
+export const Musicimg = styled.div`
+  width: 40rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 0.1rem;
+
+  align-items: center;
+`;
+
+export const Musicimg01 = styled.div`
+  width: 40rem;
   font-weight: 300;
   font-size: 1.4rem;
   display: flex;
   position: relative;
   flex-direction: row;
-  gap: 1rem;
 `;
 
 export const SingInfo = styled.div`
-  width: 36rem;
+  width: 44rem;
   font-weight: 300;
   font-size: 1.4rem;
   display: flex;
   position: relative;
   flex-direction: row;
   gap: 3.1rem;
+  padding-top: 1rem;
 `;
 
 export const Lyrics = styled.div`
@@ -540,7 +549,7 @@ export const Button = styled.button`
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--maindarkgreen);
-  border: 0.3rem solid var(--maindarkgreen);
+  border: 0.3rem solid var(--mainsky);
   background-color: white;
   margin-right: 5rem;
   &:hover {
@@ -549,7 +558,7 @@ export const Button = styled.button`
     transition: transform 0.1s ease-in-out;
   }
   &:active {
-    background-color: var(--maindarkgreen);
+    background-color: var(--mainsky);
     color: white;
   }
 `;
