@@ -43,7 +43,7 @@ const PageButton = styled.button`
   }
 `;
 
-const PerformanceList = ({ performanceList }) => {
+const PerformanceList = ({ performanceList, onCardMouseOver }) => {
   // const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
   const[currentPage, setCurrentPage] = useState(0); // 현재 페이지
   const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
@@ -94,8 +94,9 @@ const PerformanceList = ({ performanceList }) => {
           image={performance.performanceImage}
           title={performance.performanceName}
           venue={performance.venue}
-          performer={performance.performer}
+          performer={performance.nicknames}
           date={performance.performanceDate}
+          onMouseOver={onCardMouseOver}
           />
       ))}
     </CardContainer>

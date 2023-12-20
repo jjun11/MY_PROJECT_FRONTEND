@@ -4,7 +4,8 @@ import AxiosApi from "../../axios/PerformanceAxios";
 
 const { kakao } = window;
 
-const KakaomapComponent = ({ performanceList }) => {
+const KakaomapComponent = ({ performanceList, selectedVenue }) => {
+  const [map, setMap] = useState(null);
   useEffect(() => {
     const Container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     const options = { // 지도 기본값 설정
@@ -30,15 +31,6 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 확대 
   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
   const markerPosition = options.center;
 
-  // 마커를 생성합니다
-  // const marker = new kakao.maps.Marker({
-  //   position: markerPosition,
-  //   image: markerImage // Add this line to set the marker image
-  // });
-
-  // 마커가 지도 위에 표시되도록 설정합니다
-  // marker.setMap(map);
-
   // Geocoder 객체 생성, 주소 -> 좌표 변환 객체
   const geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -61,8 +53,22 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 확대 
         }
       });
     });
+    setMap(map); // map 상태를 업데이트합니다.
   }, [performanceList]); // performanceList가 변경될 때마다 useEffect를 실행합니다.
 
+  useEffect(() => {
+    // selectedVenue가 변경될 때마다 실행됩니다.
+    if (map && selectedVenue) { 
+      const geocoder = new window.kakao.maps.services.Geocoder();
+
+      geocoder.addressSearch(selectedVenue, function(result, status) {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+          map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        }
+      });
+    }
+  }, [map, selectedVenue]);
 
 return (
   <>

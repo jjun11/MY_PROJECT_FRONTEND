@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
+import MainAxios from "../../axios/MainAxios";
 
 const Container = styled.div`
     margin: 8rem; 
@@ -68,7 +69,7 @@ const PerformanceDetail = () => {
         console.log(id);
         const getPerformanceList = async () => {
             try {
-              const res = await AxiosApi.getPerformanceList(id);
+              const res = await MainAxios.notLoginPerformList();
               console.log("공연리스트 조회 ",res.data);
               const matchingData = res.data.filter(item => item.performanceId === Number(id));
               console.log("id에 해당하는 공연정보 필터링: ", matchingData);  

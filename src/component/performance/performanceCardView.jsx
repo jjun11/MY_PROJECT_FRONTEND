@@ -8,14 +8,18 @@ const CardView = styled.div`
   position: relative;
   align-items: flex-start;
   width: 40.6rem;
-  height: 68rem;
+  height: 70rem;
   padding: 2rem;
   box-sizing: border-box;
   border-radius: 3rem;
   background-color: white;
   box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
-  line-height: 1.1;
+  line-height: 1.1; 
   margin-bottom: 2rem;
+  &:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
+  }
 `;
 
 const Poster = styled.img`
@@ -27,10 +31,10 @@ const Poster = styled.img`
 `;
 
 const Title = styled.h3`
-  margin: 1.5rem 0 1rem 0;
+  margin: 1.2rem 0 0.4rem 0;
+  height: auto;
   font-size: 2.2rem;
   font-weight: 700;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 40rem; /* adjust this value to your liking */
@@ -58,6 +62,7 @@ const PerformanceDate = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -107,6 +112,7 @@ const PerformanceCardView = ({
   venue,
   performer,
   date,
+  onMouseOver,
 }) => {
   const navigate = useNavigate();
 
@@ -122,12 +128,17 @@ const PerformanceCardView = ({
     navigate(`/booking/${performanceId}`);
   };
 
+  // Performer 문자열 생성
+  const performerString = performer.length > 1 
+    ? `${performer[0]} 외 ${performer.length - 1}명`
+    : performer[0];
+  
   return (
-    <CardView>
+    <CardView onMouseEnter={()=> onMouseOver(venue)}>
       <Poster src={image} alt={`${title} 포스터`} />
       <Title>{title}</Title>
       <Venue>{venue}</Venue>
-      <Performer>{performer}</Performer>
+      <Performer>{performerString}</Performer>
       <PerformanceDate>{date}</PerformanceDate>
       <ButtonContainer>
         <Status isEnded={isEnded}>{isEnded ? "공연 종료" : "공연 예정"}</Status>
