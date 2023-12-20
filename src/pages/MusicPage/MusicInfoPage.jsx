@@ -9,22 +9,34 @@ import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import InfoPageComment from "../../style/music/InfoPageComment";
 
-const InfoContainer = styled.div`
+const BackgroundContainer = styled.div`
   width: 100%;
-  height: 250rem;
+  height: 270rem;
   display: flex;
   position: relative;
   flex-direction: column;
-  // border: 1px solid red;
+  background-color: white;
+  align-items: center;
+`;
+
+const InfoContainer = styled.div`
+  width: 110rem;
+  height: 270rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  align-items: center;
+  box-shadow: 0 1rem 3rem -0.5rem rgba(0, 0, 0, 0.25);
 `;
 
 const TopInfoBox = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 86rem;
   display: flex;
   position: relative;
   flex-direction: column;
-  // border: 2px solid black;
+
   align-items: center;
 `;
 
@@ -96,7 +108,7 @@ const MusicName = styled.div`
   font-size: 2.5rem;
   line-height: 43px;
   text-align: center;
-  border: 1px solid red;
+
   color: #000000;
 `;
 
@@ -195,7 +207,7 @@ const BoxCon = styled.div`
   align-items: center;
 `;
 
-const LikeBox = styled.div`
+const MusicLikeBox = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -204,6 +216,27 @@ const LikeBox = styled.div`
   background: #ffffff;
   box-shadow: 0px 5.1px 19.18px -3.2px rgba(0, 0, 0, 0.3);
   width: 10rem;
+  height: 5rem;
+  font-size: 2rem;
+  gap: 0.2rem;
+
+  /* 호버 효과 스타일 */
+  &:hover {
+    cursor: pointer; /* 호버 시 마우스 커서 변경 */
+    box-shadow: 0px 4px 8px white;
+    transform: scale(1.1);
+  }
+`;
+
+const LikeBox = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  background: #ffffff;
+  box-shadow: 0px 5.1px 19.18px -3.2px rgba(0, 0, 0, 0.3);
+  width: 16rem;
   height: 5rem;
   font-size: 2rem;
   gap: 0.2rem;
@@ -288,12 +321,11 @@ const VolumeInput = styled.div`
 `;
 
 const BottomInfoBox = styled.div`
-  height: auto;
-  width: 100%;
+  height: 180rem;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   position: relative;
-  // border: 1px solid blue;
 `;
 
 const BottomTitle = styled.div`
@@ -301,28 +333,27 @@ const BottomTitle = styled.div`
   display: flex;
   color: #97b0aa;
   font-size: 4rem;
-  width: 100%;
+  width: 100vw;
   height: 6rem;
   align-items: center;
   justify-content: center;
 `;
 
 const DetailInfoBox = styled.div`
-  width: 100%; /* 또는 %값으로 조정 */
+  width: 100vw;
   height: 128rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
 `;
 
 const CoperateInfo = styled.div`
-  width: 60rem;
+  width: 100vw;
+  height: 60rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  flex-direction: column;
   align-items: center;
-  gap: 6rem;
 `;
 
 const CopoerateTitle = styled.div`
@@ -335,37 +366,41 @@ const CopoerateTitle = styled.div`
 
 const CopoeraterBox = styled.div`
   position: relative;
-  width: 38rem;
-  height: 102.5rem;
-  display: flex;
-  flex-direction: column;
+  width: 100vw;
+  height: 40rem;
+  display: grid;
+  grid-template-rows: repeat(2, auto); /* 변경된 부분 */
+  grid-template-columns: repeat(2, auto); /* 변경된 부분 */
   align-items: center;
-  padding-top: 6rem;
+  justify-content: center;
+  gap: 1rem; /* 그리드 아이템 간격 조정 */
+
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 300;
   font-size: 1.6rem;
-  line-height: 2.3rem;
+  // line-height: 2.3rem;
 
   color: #000000;
 `;
 
 const CopertatorInfo = styled.div`
+  display: flex;
   position: relative;
   width: 40rem;
-  height: 20rem;
-
-  display: flex;
+  height: 10rem;
+  justify-content: center;
   flex-direction: row;
   align-items: center;
   padding: 1rem;
-  gap: 4.1rem;
+  // gap: 4.1rem;
 `;
 
 const ProfileImg = styled.img`
+  display: flex;
   position: relative;
-  width: 20rem;
-  height: 20rem;
+  width: 10rem;
+  height: 10rem;
 
   border-radius: 10rem;
   box-shadow: 0rem 0rem 0.4rem rgba(0, 0, 0, 0.25);
@@ -375,8 +410,9 @@ const CoperDetail = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 28.9rem;
+  width: 22rem;
   height: 10rem;
+  align-items: center;
 `;
 
 const CoperDetail01 = styled.div`
@@ -391,11 +427,10 @@ const CoperDetail01 = styled.div`
 `;
 
 const CoperName = styled.div`
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: bold;
   display: flex;
   position: relative;
-  // left: 3rem;
 `;
 
 const MusicianTag = styled.img`
@@ -409,64 +444,19 @@ const CoperDetail02 = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  width: 20rem;
+  width: 18rem;
   height: 5rem;
   top: 1rem;
   align-items: center;
   justify-content: center;
+
   gap: 2rem;
-`;
-
-const CoLikeBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: light;
-  font-size: 1.8rem;
-  gap: 1rem;
-  width: 13.5rem;
-  height: 5.2rem;
-  background: #ffffff;
-  box-shadow: 0px 5.114px 19.1775px -3.19625px rgba(0, 0, 0, 0.3);
-  border-radius: 31.9625px;
-`;
-
-const FollowerBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  width: 10rem;
-  height: 5rem;
-
-  background: #ffffff;
-  box-shadow: 0px 0.6rem 2rem -0.4rem rgba(0, 0, 0, 0.3);
-  border-radius: 3.2rem;
-
-  /* 호버 효과 스타일 */
-  &:hover {
-    cursor: pointer; /* 호버 시 마우스 커서 변경 */
-    box-shadow: 0rem 0.4rem 0.8rem white;
-    transform: scale(1.1);
-  }
-`;
-
-const Followimg = styled.img`
-  width: 3rem;
-  height: 3rem;
-`;
-
-const FollowerCount = styled.div`
-  font-size: 1.9rem;
-  font-weight: light;
+  left: 0.2rem;
 `;
 
 const LyricsInfo = styled.div`
-  width: 35rem;
+  width: 100vw;
+  height: 60rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -485,9 +475,10 @@ const LyricsTitle = styled.div`
 const LyricsBox = styled.div`
   position: relative;
   display: flex;
-  width: 30rem;
+  width: 80rem;
   height: 102.5rem;
-
+  border: 0.2px solid black;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 300;
@@ -587,114 +578,116 @@ const MusicInfo = () => {
   };
 
   return (
-    <InfoContainer>
-      <TopInfoBox>
-        {musicInfo && ( // musicInfo가 null이 아닌 경우에만 해당 내용을 렌더링합니다.
-          <>
-            <MusicImgBox isPlaying={isPlaying}>
-              <MusicImage
-                alt="앨범커버"
-                src={musicInfo.musicDTO.thumbnailImage}
-                style={{ transform: `rotate(${rotationAngle}deg)` }}
-              />
-              <MusicInnerCircle />
-            </MusicImgBox>
-            <MusicName>{musicInfo.musicDTO.musicTitle}</MusicName>
-            <MusicDefInfo>
-              <SingerName>{musicInfo.userResDto.userNickname}</SingerName>
+    <BackgroundContainer>
+      <InfoContainer>
+        <TopInfoBox>
+          {musicInfo && ( // musicInfo가 null이 아닌 경우에만 해당 내용을 렌더링합니다.
+            <>
+              <MusicImgBox isPlaying={isPlaying}>
+                <MusicImage
+                  alt="앨범커버"
+                  src={musicInfo.musicDTO.thumbnailImage}
+                  style={{ transform: `rotate(${rotationAngle}deg)` }}
+                />
+                <MusicInnerCircle />
+              </MusicImgBox>
+              <MusicName>{musicInfo.musicDTO.musicTitle}</MusicName>
+              <MusicDefInfo>
+                <SingerName>{musicInfo.userResDto.userNickname}</SingerName>
 
-              <WriteInfo>
-                <ComposerNamer>
-                  작곡 : {musicInfo.musicDTO.composer}
-                </ComposerNamer>
-                |
-                <LyricistName>
-                  작사 : {musicInfo.musicDTO.lyricist}
-                </LyricistName>
-              </WriteInfo>
+                <WriteInfo>
+                  <ComposerNamer>
+                    작곡 : {musicInfo.musicDTO.composer}
+                  </ComposerNamer>
+                  |
+                  <LyricistName>
+                    작사 : {musicInfo.musicDTO.lyricist}
+                  </LyricistName>
+                </WriteInfo>
 
-              <Genre>{musicInfo.musicDTO.genre}</Genre>
-            </MusicDefInfo>
-          </>
-        )}
+                <Genre>{musicInfo.musicDTO.genre}</Genre>
+              </MusicDefInfo>
+            </>
+          )}
 
-        <BoxCon>
-          <LikeBox>
-            <LikeHeart alt="좋아요하트" src={likeheart} />
-            <LikeCount>221</LikeCount>
-          </LikeBox>
-          <PlayBox onClick={handlePlayClick}>▶</PlayBox>
-          <BuyBox>
-            <BuyImg alt="장바구니아이콘" src={buyimg} />
-          </BuyBox>
-          <ReactAudioPlayer
-            ref={audioPlayerRef}
-            src={audioSrc}
-            autoPlay={isPlaying}
-            controls={false}
-            volume={volume}
-            onPlay={() => {}}
-          />
-        </BoxCon>
-        <VolumeInput>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-          />
-        </VolumeInput>
-      </TopInfoBox>
+          <BoxCon>
+            <MusicLikeBox>
+              <LikeHeart alt="좋아요하트" src={likeheart} />
+              <LikeCount>221</LikeCount>
+            </MusicLikeBox>
+            <PlayBox onClick={handlePlayClick}>▶</PlayBox>
+            <BuyBox>
+              <BuyImg alt="장바구니아이콘" src={buyimg} />
+            </BuyBox>
+            <ReactAudioPlayer
+              ref={audioPlayerRef}
+              src={audioSrc}
+              autoPlay={isPlaying}
+              controls={false}
+              volume={volume}
+              onPlay={() => {}}
+            />
+          </BoxCon>
+          <VolumeInput>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+            />
+          </VolumeInput>
+        </TopInfoBox>
 
-      <BottomTitle>곡정보</BottomTitle>
-      <BottomInfoBox>
-        <DetailInfoBox>
-          <CoperateInfo>
-            <CopoerateTitle>다른 추천 음악</CopoerateTitle>
+        <BottomTitle>곡정보</BottomTitle>
+        <BottomInfoBox>
+          <DetailInfoBox>
+            <CoperateInfo>
+              <CopoerateTitle>다른 추천 음악</CopoerateTitle>
 
-            <CopoeraterBox>
-              {Array.isArray(musicinfolist)
-                ? musicinfolist.slice(0, 5).map((item, index) => (
-                    <CopertatorInfo key={index}>
-                      <ProfileImg
-                        alt="프로필사진"
-                        src={item.musicDTO.thumbnailImage}
-                      />
-                      <CoperDetail>
-                        <CoperDetail01>
-                          <CoperName>{item.userResDto.userNickname}</CoperName>
-                          <MusicianTag alt="음악등록자" src={artistImg} />
-                        </CoperDetail01>
+              <CopoeraterBox>
+                {Array.isArray(musicinfolist)
+                  ? musicinfolist.slice(0, 4).map((item, index) => (
+                      <CopertatorInfo key={index}>
+                        <ProfileImg
+                          alt="프로필사진"
+                          src={item.musicDTO.thumbnailImage}
+                        />
+                        <CoperDetail>
+                          <CoperDetail01>
+                            <CoperName>{item.musicDTO.musicTitle}</CoperName>
+                            <MusicianTag alt="추천노래" src={artistImg} />
+                          </CoperDetail01>
 
-                        <CoperDetail02>
-                          <LikeBox>
-                            <LikeHeart alt="좋아요하트" src={likeheart} />
-                            <span>음악 좋아요</span>
-                          </LikeBox>
-                        </CoperDetail02>
-                      </CoperDetail>
-                    </CopertatorInfo>
-                  ))
-                : null}
-            </CopoeraterBox>
-          </CoperateInfo>
+                          <CoperDetail02>
+                            <LikeBox>
+                              <LikeHeart alt="좋아요하트" src={likeheart} />
+                              <span>음악 좋아요</span>
+                            </LikeBox>
+                          </CoperDetail02>
+                        </CoperDetail>
+                      </CopertatorInfo>
+                    ))
+                  : null}
+              </CopoeraterBox>
+            </CoperateInfo>
 
-          <LyricsInfo>
-            {musicInfo && ( // musicInfo가 null이 아닌 경우에만 해당 내용을 렌더링합니다.
-              <>
-                <LyricsTitle>가사</LyricsTitle>
-                <LyricsBox>{musicInfo.musicDTO.lyrics}</LyricsBox>
-              </>
-            )}
-          </LyricsInfo>
+            <LyricsInfo>
+              {musicInfo && ( // musicInfo가 null이 아닌 경우에만 해당 내용을 렌더링합니다.
+                <>
+                  <LyricsTitle>가사</LyricsTitle>
+                  <LyricsBox>{musicInfo.musicDTO.lyrics}</LyricsBox>
+                </>
+              )}
+            </LyricsInfo>
 
-          {/* 댓글 */}
-          <InfoPageComment />
-        </DetailInfoBox>
-      </BottomInfoBox>
-    </InfoContainer>
+            {/* 댓글 */}
+            <InfoPageComment />
+          </DetailInfoBox>
+        </BottomInfoBox>
+      </InfoContainer>
+    </BackgroundContainer>
   );
 };
 

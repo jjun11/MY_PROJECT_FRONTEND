@@ -59,7 +59,7 @@ const Common = {
       );
       console.log("401 핸들러 엑세스 토큰 : ", res.data);
       if (res.data) {
-        window.localStorage.setItem("새로운 accessToken 저장 : ", res.data);
+        window.localStorage.setItem("accessToken: ", res.data);
         // res.data(토큰값)을 가져와야 로컬스토리지에 넣을수 있음
         return res.data;
       } else {

@@ -20,8 +20,7 @@ const Contents = styled.div`
 `;
 
 const Content = styled.div`
-  border: 3px solid gray;
-  border-radius: 20px;
+  border: 2px solid #61e6ca;
   margin: 0 auto;
   width: 90%;
   height: 90%;
@@ -54,7 +53,9 @@ const Text = styled.div`
 
 // 좌우 이동 arrow 스타일 지정
 const Custom = styled.div`
-  background-color: greenyellow; /* 배경색 지정 */
+  border-radius: 5px;
+  height: 30vh;
+  background-color: rgba(0, 0, 0, 0.1); /* 배경색 지정 */
 `;
 
 const CatouselSlider = () => {
@@ -102,6 +103,7 @@ const CatouselSlider = () => {
         breakpoint: 768, // 화면 크기가 768px 이하일 때
         settings: {
           slidesToShow: 1,
+          arrows: false,
         },
       },
       {
@@ -128,9 +130,9 @@ const CatouselSlider = () => {
             >
               <Text>
                 {/* 역정렬이므로 가장 아래있을게 가장 먼저 등장 */}
-                <p className="text">판매량 : {data.musicDTO.purchaseCount}</p>
-                <p className="text">제목 : {data.musicDTO.musicTitle}</p>
-                <p className="text">가수 : {data.userResDto.userNickname}</p>
+                <p className="text">-{data.musicDTO.purchaseCount} 건</p>
+                <p className="text">-{data.musicDTO.musicTitle}</p>
+                <p className="text">{data.userResDto.userNickname}</p>
               </Text>
             </Content>
           </Contents>

@@ -5,25 +5,47 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
-import Img from "../../images/LogoSymbol_color.png";
 
 const Container = styled.div`
   /* border: 3px solid black; */
-  height: 80%;
+  height: 90%;
   width: 100%;
   margin-top: 3%;
 `;
 
-const Contents = styled.div`
+const Title = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 10%;
+  text-align: center;
+`;
+
+const H1 = styled.p`
+  line-height: 0;
+  font-size: 3rem;
+  font-weight: 900;
+`;
+
+const H2 = styled.p`
+  font-size: 1.3rem;
+  font-weight: 500;
+`;
+
+const Contents = styled.div`
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 40vh;
+
+  @media (max-width: 768px) {
+    height: 40vh;
+  }
 `;
 
 const Content = styled.div`
+  border: 1px solid gray;
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
-  height: 80%;
+  height: 60%;
   background-image: ${(props) => `url(${props.imagePath})`};
   background-repeat: no-repeat;
   background-size: cover;
@@ -62,9 +84,9 @@ const CatouselSlider = () => {
       console.log("리스트 데이터", res);
       if (res.status === 200) {
         // 내림차순으로 정렬
-
-        setList(res.data);
-        console.log("list = res.data", res.data);
+        const reversedList = res.data.slice().reverse();
+        setList(reversedList);
+        console.log("list = res.data", reversedList);
       }
     };
     getList();
@@ -99,6 +121,10 @@ const CatouselSlider = () => {
 
   return (
     <Container>
+      <Title>
+        <H2>매일 업로드 되는 </H2>
+        <H1>New Songs List</H1>
+      </Title>
       <Slider {...settings}>
         {list.map((data, index) => (
           <Contents key={index}>
@@ -106,11 +132,11 @@ const CatouselSlider = () => {
               onDoubleClick={() => onClick(data.musicDTO.id)}
               imagePath={data.musicDTO.thumbnailImage}
             ></Content>
-
             <Text>
               {/* <p className="text">{data.musicDTO.releaseDate}</p> */}
               <p className="text">{data.userResDto.userNickname}</p>
               <p className="text">{data.musicDTO.genre}</p>
+              <p className="text">{data.musicDTO.releaseDate}</p>
             </Text>
           </Contents>
         ))}

@@ -243,6 +243,8 @@ export const UpdateZone = styled.div`
     font-size: 4rem;
     width: 100%;
     height: 5rem;
+    display: flex;
+    position: relative;
     /* background-color: blue; */
     color: var(--mainolive);
   }
@@ -530,9 +532,11 @@ export const InputBox = styled.input`
   }
 `;
 
-export const LyricsInputBox = styled.input`
-  margin-bottom: 1rem;
-  width: 36rem;
+export const TextArea = styled.textarea`
+  width: 30rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
   height: 28rem;
   border: 0.03rem solid var(--mainolive);
 

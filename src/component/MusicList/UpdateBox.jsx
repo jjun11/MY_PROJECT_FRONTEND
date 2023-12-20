@@ -34,7 +34,7 @@ import {
   TitleUploadButton,
   SingInfo,
   Lyrics,
-  LyricsInputBox,
+  TextArea,
 } from "../../style/music/MusicUpdateStyle";
 
 const UploadButton = styled.button`
@@ -317,7 +317,7 @@ const UpdateBox = () => {
 
             <Lyrics>
               <CategoryText>가사</CategoryText>
-              <LyricsInputBox
+              <TextArea
                 placeholder="가사를 등록해주세요"
                 value={inputLyrics}
                 onChange={(e) => setinputLyrics(e.target.value)}

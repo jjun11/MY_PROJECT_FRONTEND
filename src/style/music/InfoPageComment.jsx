@@ -4,9 +4,9 @@ import commentimg from "../../images/postimg05.jpg";
 import commentimg01 from "../../images/postimg03.jpg";
 
 const CommnetZone = styled.div`
-  left: 5rem;
-  width: 50rem;
-  border: 1px solid green;
+  width: 100vw;
+  height: 72rem;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -27,9 +27,10 @@ const CommentBOx = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 48rem;
-  height: 110rem;
+  width: 80rem;
+  height: 60rem;
 
+  padding-top: 3rem;
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 300;
@@ -45,7 +46,7 @@ const InputArea = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 48rem;
+  width: 64rem;
   height: 8rem;
 
   background: #eeeeee;
@@ -86,7 +87,7 @@ const TextInput = styled.input`
 
   position: relative;
   display: flex;
-  width: 30rem;
+  width: 40rem;
   height: 7rem;
   background: #ffffff;
   border: 0.3px solid #000000;
@@ -130,7 +131,7 @@ const CommentButton = styled.div`
 const Distinctline = styled.div`
   position: relative;
   display: flex;
-  width: 46rem;
+  width: 54rem;
   height: 0px;
   top: 3.2rem;
 
@@ -144,7 +145,7 @@ const Comments = styled.div`
   align-items: center;
   top: 3.2rem;
   gap: 5rem;
-  width: 46rem;
+  width: 48rem;
   height: 9rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 `;
