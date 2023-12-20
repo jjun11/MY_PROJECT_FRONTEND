@@ -42,9 +42,9 @@ import {
 } from "../style/CommunityStyle";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import CommunityComponent from "../conponent/community/CommunityComponent";
-import WriteComponent from "../conponent/community/CommunityWriteComponent";
-import Post from "../conponent/community/PostRoomComponent";
+import CommunityComponent from "../component/community/CommunityComponent";
+import WriteComponent from "../component/community/CommunityWriteComponent";
+import Post from "../component/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
 import useWebSocket from "../context/useWebsocket";
 import Common from "../utils/Common";

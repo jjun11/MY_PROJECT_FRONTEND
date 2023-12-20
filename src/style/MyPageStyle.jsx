@@ -14,7 +14,6 @@ export const MainHead = styled.div`
   position: relative;
 
   display: flex;
-  width: 100%;
   height: 24em;
   flex-shrink: 0;
   background: linear-gradient(98deg, #008bff 3.66%, #61e6ca 97.99%);
@@ -36,18 +35,31 @@ export const MainHeadBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 6em;
-  width: 35em;
-  height: 10em;
-  flex-shrink: 0;
+  margin-left: 200px;
+  flex: 1;
   flex-direction: row;
+  margin: auto;
 `;
 export const MainHeadText = styled.div`
   display: flex;
-  position: relative;
-  padding-left: 1em;
-  width: 10em;
-  height: 1em;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  opacity: 1;
+  color: #fff;
+  font-family: Noto Sans KR;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+export const MainHeadDateText = styled.div`
+  display: flex;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   flex-shrink: 0;
   opacity: 1;
@@ -60,9 +72,9 @@ export const MainHeadText = styled.div`
 `;
 export const ArtistContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
-  height: 100%;
+  width: 500px;
 `;
 export const Artist = styled.div`
   display: flex;
@@ -115,11 +127,10 @@ export const InterBoxText = styled.div`
 `;
 export const PointBox = styled.div`
   position: absolute;
-  right: 0;
-  width: 10em;
-  height: 6em;
-  margin: 1em;
   display: flex;
+  right: 50px;
+  bottom: 50px;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -130,11 +141,17 @@ export const PointBox = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  opacity: var(--, 1);
+  opacity: 1;
+`;
+export const MoveButtonBox = styled.div`
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  padding: 10px;
 `;
 export const MoveButton = styled.button`
-  width: 124.85px;
-  height: 57.174px;
+  width: 120px;
+  height: 50px;
   flex-shrink: 0;
   border-radius: 58.341px;
   border: 2.334px solid #fff;
@@ -146,7 +163,7 @@ export const MoveButton = styled.button`
 
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 23.336px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

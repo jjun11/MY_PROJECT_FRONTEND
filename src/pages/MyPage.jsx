@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MypageComponent from "../conponent/Mypage/MypageComponenet";
+import MypageComponent from "../component/mypage/MypageComponenet";
 import { ReactComponent as Heart } from "../images/HeartBox.svg";
 import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
 

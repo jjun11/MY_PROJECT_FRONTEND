@@ -10,6 +10,10 @@ const MainAxios = {
   LoginList: async () => {
     return await axios.get(CHORD8_DOMAIN + "/main/mainTop");
   },
+
+  notLoginNewList: async () => {
+    return await axios.get(CHORD8_DOMAIN + "/main/newSong");
+  },
 };
 
 export default MainAxios;
