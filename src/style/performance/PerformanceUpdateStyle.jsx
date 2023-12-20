@@ -221,6 +221,7 @@ export const UpdateZone = styled.div`
   height: auto;
   display: flex;
   padding: 3rem;
+  align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
   .inputContainer {
@@ -264,7 +265,33 @@ export const UpdateZone = styled.div`
     /* background-color: skyblue; */
   
   }
-
+  .performer {
+    width: 90%;
+    height: 5rem;
+    padding: 1rem 0 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 85%;
+      height: 100%;
+      min-height: 3rem;
+      font-size: 1.4rem;
+      padding: 0.8rem;
+      margin: 1rem 0rem;
+    }
+    .title{
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--mainolive);
+    }
+  }
+  .uploading{
+    margin-left: 15rem !important;
+    width: auto !important;
+    height: auto;
+    align-items: center;
+  }
 `;
 
 export const InputBox = styled.input`
@@ -274,6 +301,7 @@ export const InputBox = styled.input`
   height: 3.5rem;
   border: 0.03rem solid var(--mainolive);
   resize: none; // 사용자가 크기를 변경하지 못하게 함
+  
   
   &::placeholder {
     color: var(--mainolive);

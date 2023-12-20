@@ -31,7 +31,6 @@ const MyPage = () => {
       try {
         const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
         setUserInfo(userInfoResponse.data);
-
         if (userInfoResponse.data) {
           const musicResponse = await MemberInfoAxiosApi.getUserMusic(
             userInfoResponse.data.id

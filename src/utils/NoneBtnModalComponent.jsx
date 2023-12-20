@@ -71,34 +71,42 @@ export const ModalView = styled.div.attrs((props) => ({ role: "dialog", }))`
       font-size: 1.8rem;
        }
 `;
-
-export const ModalComponent = ({ open, content, customButton , close, openButtonStyle, closeButtonStyle }) => {
-  const [ isOpen, setIsOpen ] = useState(false); // 모달창 열림 여부
-
-  const openModalHandler = () => {
-    // isOpen을 true로 설정, 모달창이 열림
-    setIsOpen(!isOpen);
+// 사용법
+/*
+사용하고자 하는 파일에서 아래와 같이 useState를 선언합니다.
+ex// const [isModalOpen, setIsModalOpen] = useState(false);
+모달컴포넌트를 선언할 때 
+<NoneBtnModalComponent 
+      isOpen={isModalOpen} // useState로 선언한 변수를 isOpen에 넣습니다.
+      setIsOpen={setIsModalOpen} // useState로 선언한 변수를 setIsOpen에 넣습니다.
+      content="공연 등록이 완료되었습니다." // 모달창에 표시할 내용을 content에 넣습니다.
+      close={{ func: closeModalAndNavigate, text: "닫기"}}  // 모달창을 닫을 때 실행할 함수와 버튼에 표시할 텍스트를 close에 넣습니다.
+      func 또는 text 하나씩 단독사용도 가능합니다.
+      customButton="확인" // 모달창에 표시할 버튼 텍스트를 customButton에 넣습니다. 안 써도 됩니다.
+      closeButtonStyle={{ bgColor: "blue", textColor: "white" }} // 모달창을 닫을 때 버튼의 배경색과 글자색을 설정합니다. 따로 사용하지 않으면
+      기본 스타일이 적용됩니다. 배경과 글자색만 쓸 수 있습니다.
+    />
+    아래와 같이 설정합니다.
+*/
+export const NoneBtnModalComponent = ({ isOpen, setIsOpen, content, customButton, close, closeButtonStyle }) => {
+  const closeModalHandler = () => {
+    setIsOpen(false);
+    if (close && close.func) {
+      close.func();
+    }
   };
 
   return (
     <>
-       <ModalContainer>
-        <ModalButton onClick={openModalHandler} {...openButtonStyle}>
-        {/* 클릭하면 Modal이 열린 상태(isOpen)를 boolean 타입으로 변경하는 메소드가 실행되어야 합니다. */}
-         {open}
-          {/* 조건부 렌더링을 활용해서 Modal이 열린 상태(isOpen이 true인 상태)일 때는 ModalBtn의 내부 텍스트가 'Opened!' 로 Modal이 닫힌 상태(isOpen이 false인 상태)일 때는 ModalBtn 의 내부 텍스트가 'Open Modal'이 되도록 구현 */}
-        </ModalButton>
-        {/* 조건부 렌더링을 활용해서 Modal이 열린 상태(isOpen이 true인 상태)일 때만 모달창과 배경이 뜰 수 있게 구현 */}
+      <ModalContainer>
         {isOpen ? 
-        <ModalBackground onClick={openModalHandler}> 
-          {/* event 버블링을 막는 메소드 */}
+          <ModalBackground onClick={closeModalHandler}> 
             <ModalView onClick={(e) => e.stopPropagation()}>
-              
               <div className='desc'>
                 {content}
               </div>
-              {customButton && <ExitButton onClick={openModalHandler}>{customButton}</ExitButton>}
-              <ExitButton onClick={openModalHandler} {...closeButtonStyle}>{close}</ExitButton>
+              {customButton && <ExitButton onClick={closeModalHandler}>{customButton}</ExitButton>}
+              <ExitButton onClick={closeModalHandler} {...closeButtonStyle}>{close && close.text}</ExitButton>
             </ModalView>
           </ModalBackground>
           : null
@@ -108,4 +116,4 @@ export const ModalComponent = ({ open, content, customButton , close, openButton
   )
 }
 
-export default ModalComponent;
+export default NoneBtnModalComponent;

@@ -8,6 +8,7 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   width: 220rem;
   gap: 2rem;
+  margin: 4rem 0;
   justify-content: center;
   /* margin: 20px; */
 `;
@@ -15,7 +16,7 @@ const CardContainer = styled.div`
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
   width: 100%;
   height: auto;
 `;

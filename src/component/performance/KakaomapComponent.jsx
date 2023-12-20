@@ -24,9 +24,10 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 확대 
 
   // 마커 이미지 및 표시위치 설정
   const imageSrc = MapMarker,
-        imageSize = new kakao.maps.Size(40);
+        imageSize = new kakao.maps.Size(40),
+        imageOption = { offset: new kakao.maps.Point(20, 48.94) };
 
-  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
   const markerPosition = options.center;
 
   // 마커를 생성합니다
