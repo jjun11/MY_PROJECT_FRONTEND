@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   width: 220rem;
   gap: 2rem;
-  margin: 4rem 0;
+  margin: 2rem 0;
   justify-content: center;
   /* margin: 20px; */
 `;
@@ -46,7 +46,7 @@ const PageButton = styled.button`
 const PerformanceList = ({ performanceList, onCardMouseOver }) => {
   // const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
   const[currentPage, setCurrentPage] = useState(0); // 현재 페이지
-  const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
+  const itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
   const[totalPage, setTotalPage] = useState(0); // 전체 페이지
 
   // 총 페이지 수 계산
@@ -55,7 +55,7 @@ const PerformanceList = ({ performanceList, onCardMouseOver }) => {
       try {
         console.log("performanceList 총페이지수계산 시도")
         console.log(performanceList);
-        const res = await AxiosApi.getPerformancePage(0, 10);
+        const res = await AxiosApi.getPerformancePage(0, 5); 
         setTotalPage(res.data);
       } catch (error) {
         console.log(error);

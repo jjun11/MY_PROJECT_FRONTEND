@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import headlogo from "../images/Symbol_white.png";
-import { Link as RouterLink } from "react-router-dom";
+import headlogo2 from "../images/Symbol_color.png";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 const NavContainer = styled.div`
   width: 100%;
@@ -38,6 +39,10 @@ const HeadLogo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  &:hover {
+    cursor: pointer;
+    background-image: url(${headlogo2});
+  }
 
 `;
 
@@ -45,6 +50,10 @@ const TextBox = styled.div`
   color: white;
   font-size: 1.5rem;
   font-weight: 300;
+  &:hover {
+    cursor: pointer;
+    color: var(--maingreen);
+  }
 `;
 
 const Link = styled(RouterLink)`
@@ -53,6 +62,11 @@ const Link = styled(RouterLink)`
 
 const Header = () => {
   const [isLogIn, setIsLogIn] = useState(false);
+
+  const navigate = useNavigate();
+  const handleLogoClick = () => {
+    navigate("/");
+  };
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -84,7 +98,7 @@ const Header = () => {
           <Link to="/music-list"><TextBox>음원</TextBox></Link>
           <Link to="/comunitypage"><TextBox>커뮤니티</TextBox></Link>
         </div>
-      <HeadLogo />
+      <HeadLogo onClick={handleLogoClick}/>
         <div className="leftzone">
           <div className="leftinleft">
           {isLogIn ? (

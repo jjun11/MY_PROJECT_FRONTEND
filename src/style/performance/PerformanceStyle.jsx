@@ -1,5 +1,17 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import backgroundImage from "../../images/Band.jpg";
+
+export const MediaStyle = createGlobalStyle`
+  @media screen and ( min-width : 1024px) { 
+    font-size: max(3px, min(0.8vw, 5px));
+  } 
+  @media screen and (max-width : 1023px) { 
+    font-size: max(6px, min(1.2vw, 15px));
+  }
+  @media screen and (max-width : 767px) {  
+    font-size: max(3px, min(2vw, 20px));
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -10,10 +22,10 @@ export const Container = styled.div`
   height: 100%; // 또는 필요한 높이
   .title {
       width: 100vw;
-      height: 7rem;
+      height: 4rem;
       background: linear-gradient(to right, var(--maingreen), var(--mainblue));
       color: white;
-      font-size: 4rem;
+      font-size: 2.5rem;
       font-weight: 600;
       text-align: center;
       margin: 0;
@@ -79,11 +91,13 @@ export const SearchBanner = styled.div`
 `;
 
 export const Map = styled.div`
-width: 100vw;
-height: 50rem;
-margin: 3rem;
+width: 80vw;
+height: 40rem;
+margin: 2rem;
 display: flex;
 justify-content: center;
+border-radius: 1rem;
+overflow: hidden;
 align-items: center;
 `;
 

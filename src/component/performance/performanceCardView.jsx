@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+
 const CardView = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: flex-start;
-  width: 40.6rem;
-  height: 70rem;
+  width: 34rem;
+  height: 62rem;
   padding: 2rem;
   box-sizing: border-box;
   border-radius: 3rem;
@@ -20,11 +21,12 @@ const CardView = styled.div`
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
   }
+ 
 `;
 
 const Poster = styled.img`
-  width: 36.5rem;
-  height: 48.3rem;
+  width: 30rem;
+  height: 40rem;
   align-self: center;
   object-fit: cover;
   border-radius: 2rem;
@@ -33,7 +35,7 @@ const Poster = styled.img`
 const Title = styled.h3`
   margin: 1.2rem 0 0.4rem 0;
   height: auto;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -128,14 +130,15 @@ const PerformanceCardView = ({
     navigate(`/booking/${performanceId}`);
   };
 
-  // Performer 문자열 생성
+  // Performer 문자열 생성, 공연참여자가 1명 이상일 경우 "외" 표시
   const performerString = performer.length > 1 
     ? `${performer[0]} 외 ${performer.length - 1}명`
     : performer[0];
   
   return (
+    <>
     <CardView onMouseEnter={()=> onMouseOver(venue)}>
-      <Poster src={image} alt={`${title} 포스터`} />
+      <Poster src={image} alt={`${title} 포스터`} /> 
       <Title>{title}</Title>
       <Venue>{venue}</Venue>
       <Performer>{performerString}</Performer>
@@ -146,6 +149,7 @@ const PerformanceCardView = ({
         {!isEnded && <Button onClick={handleBookingClick}>예매하기</Button>}
       </ButtonContainer>
     </CardView>
+    </>
   );
 };
 

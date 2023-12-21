@@ -492,6 +492,7 @@ const LyricsBox = styled.div`
 const MusicInfo = () => {
   const { id } = useParams();
   console.log("ID:", id); // id 값 확인
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [audioSrc, setAudioSrc] = useState(
@@ -503,6 +504,13 @@ const MusicInfo = () => {
   const [musicInfo, setMusicInfo] = useState(null);
   const [musicinfolist, setMusicInfoList] = useState(null);
 
+  const [musicId, setMusicId] = useState(id); // 음악 ID 상태
+  const [loggedInUserNickname, setLoggedInUserNickname] = useState(""); // 로그인한 사용자의 닉네임 상태
+  // 좋아요 수 설정 useState
+  const [musicCount, setMusicCount] = useState(0);
+  const heartChecker = window.localStorage.getItem("email");
+
+  //상세리스트 조회
   useEffect(() => {
     const getMusicById = async () => {
       try {
@@ -517,6 +525,7 @@ const MusicInfo = () => {
     getMusicById();
   }, [id]);
 
+  //음악 리스트 조회.
   useEffect(() => {
     console.log(id);
     const getAllMusic = async () => {
@@ -533,6 +542,26 @@ const MusicInfo = () => {
     getAllMusic();
   }, []);
 
+  //좋아요 기능
+  // 좋아요 컨트롤
+  const [isRender, setIsRender] = useState(true);
+  const [isLike, setIsLike] = useState(false);
+  const likeMusic = async () => {
+    setIsRender(false);
+    setIsLike(true);
+    setMusicId(id);
+    console.log("음악 좋아요 반영 AxiosApi 작동");
+    try {
+      const response = await MusicAxiosApi.musicHeart(id, heartChecker);
+      console.log("좋아요 응답 데이타 : ", response);
+      console.log("좋아요 수 : ", response.data);
+      setMusicCount(response.data);
+    } catch (error) {
+      console.error("음악 좋아요 반영에 실패했습니다:", error);
+    }
+  };
+
+  //회전기능
   useEffect(() => {
     let rotateInterval;
     //const로 불가해서 let 사용.
@@ -550,6 +579,7 @@ const MusicInfo = () => {
     };
   }, [isPlaying]);
 
+  //음원 실행 기능.
   const handlePlayClick = () => {
     console.log("handlePlayClick 함수 실행됨");
     setIsPlaying(!isPlaying);
@@ -607,37 +637,41 @@ const MusicInfo = () => {
 
                 <Genre>{musicInfo.musicDTO.genre}</Genre>
               </MusicDefInfo>
+
+              <BoxCon>
+                <MusicLikeBox onClick={likeMusic}>
+                  <LikeHeart alt="좋아요하트" src={likeheart} />
+                  <LikeCount>
+                    {isRender && musicInfo.musicDTO.heartCount + 11}
+                    {isLike && musicCount + 22}
+                  </LikeCount>
+                </MusicLikeBox>
+
+                <PlayBox onClick={handlePlayClick}>▶</PlayBox>
+                <BuyBox>
+                  <BuyImg alt="장바구니아이콘" src={buyimg} />
+                </BuyBox>
+                <ReactAudioPlayer
+                  ref={audioPlayerRef}
+                  src={audioSrc}
+                  autoPlay={isPlaying}
+                  controls={false}
+                  volume={volume}
+                  onPlay={() => {}}
+                />
+              </BoxCon>
+              <VolumeInput>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value={volume}
+                  onChange={(e) => setVolume(parseFloat(e.target.value))}
+                />
+              </VolumeInput>
             </>
           )}
-
-          <BoxCon>
-            <MusicLikeBox>
-              <LikeHeart alt="좋아요하트" src={likeheart} />
-              <LikeCount>221</LikeCount>
-            </MusicLikeBox>
-            <PlayBox onClick={handlePlayClick}>▶</PlayBox>
-            <BuyBox>
-              <BuyImg alt="장바구니아이콘" src={buyimg} />
-            </BuyBox>
-            <ReactAudioPlayer
-              ref={audioPlayerRef}
-              src={audioSrc}
-              autoPlay={isPlaying}
-              controls={false}
-              volume={volume}
-              onPlay={() => {}}
-            />
-          </BoxCon>
-          <VolumeInput>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={volume}
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
-            />
-          </VolumeInput>
         </TopInfoBox>
 
         <BottomTitle>곡정보</BottomTitle>

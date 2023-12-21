@@ -32,9 +32,9 @@ const MainPage = () => {
             <Carousel></Carousel>
           </Artist>
 
-          <Advertisement></Advertisement>
+          <Advertisement>사이트 소개</Advertisement>
           <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 100</MusicRankTitle>
-          <MusicRank>음악 순위</MusicRank>
+          <MusicRank>음악 좋아요 순 정렬 순위</MusicRank>
           <NewMusicList>
             <NewList></NewList>
           </NewMusicList>

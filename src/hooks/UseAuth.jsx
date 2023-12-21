@@ -25,7 +25,7 @@ const UseAuth = () => {
         }
       } catch (e) {
         alert("서버의 연결 불안정 혹은 토큰이 만료 되었습니다.", e);
-        navigator("/");
+        // navigator("/");
         setIsLoggedIn(false);
       }
     };

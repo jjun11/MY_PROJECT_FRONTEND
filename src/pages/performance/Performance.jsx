@@ -2,6 +2,7 @@
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
 import GlobalStyle from "../../style/GlobalStyle";
 import {
+  MediaStyle,
   Container,
   SearchBanner,
   Box,
@@ -13,6 +14,7 @@ import { useEffect, useState } from "react";
 import AxiosApi from "../../axios/PerformanceAxios";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
+import ModalComponent from "../../utils/ModalComponent";
 
 const Performance = () => {
   const [inputValue, setInputValue] = useState(""); // 입력필드에 입력값을 저장
@@ -84,6 +86,7 @@ const Performance = () => {
   return (
     <>
       <GlobalStyle />
+      <MediaStyle/>
       <Container>
         <SearchBanner>
           <Box>

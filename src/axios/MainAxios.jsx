@@ -21,6 +21,17 @@ const MainAxios = {
   LoginList: async () => {
     return await axios.get(CHORD8_DOMAIN + "/main/mainTop");
   },
+
+  // 토큰 테스트
+  testGet: async (token) => {
+    const accessToken = Common.getAccessToken();
+    return await Interceptor.get(CHORD8_DOMAIN + `/test/test/${token}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+  },
 };
 
 export default MainAxios;

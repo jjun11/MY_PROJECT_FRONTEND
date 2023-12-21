@@ -59,10 +59,11 @@ const Common = {
       );
       console.log("401 핸들러 엑세스 토큰 : ", res.data);
       if (res.data) {
-        window.localStorage.setItem("accessToken: ", res.data);
+        window.localStorage.setItem("accessToken", res.data);
         // res.data(토큰값)을 가져와야 로컬스토리지에 넣을수 있음
         return res.data;
       } else {
+        window.localStorage.clear();
         throw new Error("리프레쉬 토큰이 만료 되었습니다.");
       }
     } catch (err) {
@@ -87,8 +88,6 @@ Interceptor.interceptors.response.use(
       const refreshToken = localStorage.getItem("refreshToken");
       console.log("인터 셉터의 리프레쉬 토큰 :", refreshToken);
       if (refreshToken && refreshToken !== "") {
-        // 이 부분에 refresh 토큰 체크 하면 될 듯.
-
         const newAccessToken = await Common.handleUnauthorized();
         console.log("인터 셉터의 새로운 토큰", newAccessToken);
         // newAccessToken이 false를 반환하는지 확인 후 "/"로 이동

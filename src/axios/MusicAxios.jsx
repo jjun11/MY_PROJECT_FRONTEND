@@ -50,6 +50,16 @@ const MusicAxiosApi = {
     return await axios.post(CHORD8_DOMAIN + `/music/new`, musicDTO);
   },
 
+  //음악 좋아요 추가
+  musicHeart: async (musicId, heartChecker) => {
+    console.log("음악 좋아요 추가 AxiosApi 작동");
+    const musicHeartDto = {
+      musicId: musicId,
+      userEmail: heartChecker,
+    };
+    return await axios.post(CHORD8_DOMAIN + `/musiclike/like`, musicHeartDto);
+  },
+
   //음악 페이지 수 조회
 
   getMusicPage: async (page, size) => {

@@ -14,7 +14,7 @@ export const ModalContainer = styled.div`
 
 // Modal 표시시 뒷배경 처리
 export const ModalBackground = styled.div`
-  z-index: 1; //위치지정 요소
+  z-index: 5; //위치지정 요소
   position: fixed;
   display : flex;
   justify-content : center;
