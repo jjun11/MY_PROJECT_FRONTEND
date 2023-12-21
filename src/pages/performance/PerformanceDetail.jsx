@@ -22,8 +22,8 @@ const Image = styled.img`
 
 const Information = styled.div`
     width: 120rem;
-    height: 48rem;
-    margin-left: 5rem;
+    height: auto;
+    margin: 5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -34,7 +34,8 @@ const Information = styled.div`
         font-size: 4rem;
         font-weight: 700;
         border-bottom: 0.1rem solid lightgray;
-        padding-bottom: 2rem;
+        padding-bottom: 8rem;
+        margin-bottom: 2rem;
     }
     .info{
         width: 50rem;
@@ -47,7 +48,7 @@ const Information = styled.div`
     .map{
         margin-top: 2rem;
         width: 60rem;
-        height: 40rem;
+        height: 50rem;
         background-color: green;
         border-radius: 1.5rem;
         overflow: hidden;

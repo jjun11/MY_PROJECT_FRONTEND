@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import headlogo from "../images/Symbol_white.png";
+import { Link as RouterLink } from "react-router-dom";
 
 const NavContainer = styled.div`
   width: 100%;
-  background-color: black;
-  height: 8rem;
+  background-color: rgb(0, 0, 0);
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +33,7 @@ const NavContainer = styled.div`
 
 const HeadLogo = styled.div`
   width: 30%;
-  height: 5rem;
+  height: 4rem;
   background-image: url(${headlogo});
   background-size: contain;
   background-repeat: no-repeat;
@@ -42,26 +43,63 @@ const HeadLogo = styled.div`
 
 const TextBox = styled.div`
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
 `;
 
+const Link = styled(RouterLink)`
+  text-decoration: none;
+`;
+
 const Header = () => {
+  const [isLogIn, setIsLogIn] = useState(false);
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const email = localStorage.getItem('email');
+      setIsLogIn(!!email);
+    };
+
+    checkLoginStatus();
+
+    window.addEventListener('storage', checkLoginStatus);
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear(); // 로그아웃 시 로컬 스토리지의 모든 정보를 제거합니다.
+    // localStorage.removeItem('email'); // 로그아웃 시 로컬 스토리지의 이메일 정보를 제거합니다.
+    // localStorage.removeItem('accessToken'); // 로그아웃 시 로컬 스토리지의 액세스토큰 정보를 제거합니다.
+    // localStorage.removeItem('refreshToken'); // 로그아웃 시 로컬 스토리지의 리프레쉬토큰 정보를 제거합니다.
+    setIsLogIn(false);
+  };
   return (
     <NavContainer>
       <div className="rightzone">
-          <TextBox>공연</TextBox>
-          <TextBox>STORE</TextBox>
-          <TextBox>음원</TextBox>
-          <TextBox>커뮤니티</TextBox>
+          <Link to="/performance"><TextBox>공연</TextBox></Link>
+          <Link to=""><TextBox>STORE</TextBox></Link>
+          <Link to="/music-list"><TextBox>음원</TextBox></Link>
+          <Link to="/comunitypage"><TextBox>커뮤니티</TextBox></Link>
         </div>
       <HeadLogo />
         <div className="leftzone">
           <div className="leftinleft">
-            <TextBox>로그인</TextBox>
-            <TextBox>회원가입</TextBox>
-          </div>
+          {isLogIn ? (
+            <>
+              <TextBox onClick={handleLogout}>로그아웃</TextBox>
+              <Link to="/mypage"><TextBox>마이페이지</TextBox></Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login"><TextBox>로그인</TextBox></Link>
+              <Link to="/signup"><TextBox>회원가입</TextBox></Link>
+            </>
+          )}
         </div>
+      </div>
     </NavContainer>
   );
 };
