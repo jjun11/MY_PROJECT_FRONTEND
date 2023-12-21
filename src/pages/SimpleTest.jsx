@@ -17,6 +17,7 @@ const Test = () => {
     <>
       <p>test</p>
       <button onClick={test}>테스트 클릭</button>
+      {res.data}
     </>
   );
 };

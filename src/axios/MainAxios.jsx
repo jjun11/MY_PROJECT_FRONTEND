@@ -18,14 +18,20 @@ const MainAxios = {
   },
 
   // 로그인 상태
-  LoginList: async () => {
+  loginList: async () => {
     return await axios.get(CHORD8_DOMAIN + "/main/mainTop");
   },
 
+  // 좋아요 정렬
+  heartSong: async () => {
+    return await axios.get(CHORD8_DOMAIN + "/main/likeSong");
+  },
+
+  // 테스트
   // 토큰 테스트
   testGet: async (token) => {
     const accessToken = Common.getAccessToken();
-    return await Interceptor.get(CHORD8_DOMAIN + `/test/test/${token}`, {
+    return await Interceptor.get(CHORD8_DOMAIN + `/main/likeSong/${token}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + accessToken,

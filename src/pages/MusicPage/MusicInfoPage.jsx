@@ -642,8 +642,8 @@ const MusicInfo = () => {
                 <MusicLikeBox onClick={likeMusic}>
                   <LikeHeart alt="좋아요하트" src={likeheart} />
                   <LikeCount>
-                    {isRender && musicInfo.musicDTO.heartCount + 11}
-                    {isLike && musicCount + 22}
+                    {isRender && musicInfo.musicDTO.heartCount}
+                    {isLike && musicCount}
                   </LikeCount>
                 </MusicLikeBox>
 

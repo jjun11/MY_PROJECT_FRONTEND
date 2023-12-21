@@ -15,7 +15,7 @@ import {
 import Carousel from "../component/main/CatouselSlider";
 import NewList from "../component/main/NewList";
 import Comercial from "../component/main/Comercial";
-
+import HeartSong from "../component/main/HeartSong";
 const MainPage = () => {
   return (
     <>
@@ -34,7 +34,9 @@ const MainPage = () => {
 
           <Advertisement>사이트 소개</Advertisement>
           <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 100</MusicRankTitle>
-          <MusicRank>음악 좋아요 순 정렬 순위</MusicRank>
+          <MusicRank>
+            <HeartSong></HeartSong>
+          </MusicRank>
           <NewMusicList>
             <NewList></NewList>
           </NewMusicList>
