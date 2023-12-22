@@ -211,7 +211,7 @@ const PerformanceDetail = () => {
                         {memberInfo && memberInfo.map(user => (
                         <PerformerCardView
                             key={user.id}
-                            // profileImage={user.userImage}
+                            profileImage={user.profileImg}
                             nickname={user.userNickname}
                             />
                         ))}

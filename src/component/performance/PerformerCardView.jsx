@@ -9,7 +9,7 @@ const CardView = styled.div`
   margin-top: 3rem;
 `
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   width: 12.3rem;
   height: 12.3rem;
   border-radius: 50%;
@@ -32,15 +32,16 @@ const Nickname = styled.div`
 `
 
 const PerformerCardView = ({
-  // profileImage,
+  profileImage,
   nickname,
 }) => {
+  console.log("퍼포머 카드뷰 : ", "profileImage : ", profileImage, "nickname : ", nickname)
   const navigate = useNavigate();
 
 return (
   <>
     <CardView>
-      <ProfileImage /*src={profileImage}*/ alt={`${nickname} 프로필`}/>
+      <ProfileImage src={profileImage} alt={`${nickname} 프로필`}/>
       <Nickname>{nickname}</Nickname>
 
     </CardView>

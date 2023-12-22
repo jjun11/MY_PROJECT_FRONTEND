@@ -96,7 +96,7 @@ const Performance = () => {
             open="열기"
             content = "테스트"
             close="닫기"
-            openButtonStyle={{ width: "109rem", bgColor: "blue" }}
+            openButtonStyle={{ width: "109rem", bgColor: "blue"}}
             />
           </Box>
           <Box>
