@@ -15,6 +15,7 @@ import AxiosApi from "../../axios/PerformanceAxios";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 import ModalComponent from "../../utils/ModalComponent";
+import Modal from "../../component/signup/SignUpModal";
 
 const Performance = () => {
   const [inputValue, setInputValue] = useState(""); // 입력필드에 입력값을 저장
@@ -91,6 +92,12 @@ const Performance = () => {
         <SearchBanner>
           <Box>
             <div>공연 검색</div>
+            <ModalComponent 
+            open="열기"
+            content = "테스트"
+            close="닫기"
+            openButtonStyle={{ width: "109rem", bgColor: "blue" }}
+            />
           </Box>
           <Box>
             <input

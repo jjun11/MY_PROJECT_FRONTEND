@@ -43,7 +43,7 @@ const Common = {
 
   // 401 에러 처리 함수
   handleUnauthorized: async () => {
-    console.log("handleUnauthorized 실행");
+    console.log("handleUnauthorized");
     const refreshToken = Common.getRefreshToken();
     const accessToken = Common.getAccessToken();
     const config = {
@@ -53,17 +53,17 @@ const Common = {
     };
     try {
       const res = await axios.post(
-        `${CHORD8_DOMAIN}/auth/refresh`,
+        `${Common.KH_DOMAIN}/auth/refresh`,
         refreshToken,
         config
       );
-      console.log("401 핸들러 엑세스 토큰 : ", res.data);
+      console.log(res.data);
+      Common.setAccessToken(res.data);
       if (res.data) {
-        window.localStorage.setItem("accessToken", res.data);
+        Common.setAccessToken(res.data);
         // res.data(토큰값)을 가져와야 로컬스토리지에 넣을수 있음
         return res.data;
       } else {
-        window.localStorage.clear();
         throw new Error("리프레쉬 토큰이 만료 되었습니다.");
       }
     } catch (err) {
@@ -71,6 +71,36 @@ const Common = {
       return false;
     }
   },
+  // handleUnauthorized: async () => {
+  //   console.log("handleUnauthorized 실행");
+  //   const refreshToken = Common.getRefreshToken();
+  //   const accessToken = Common.getAccessToken();
+  //   const config = {
+  //     headers: {
+  //       // "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   };
+  //   try {
+  //     const res = await axios.post(
+  //       `${CHORD8_DOMAIN}/auth/refresh`,
+  //       refreshToken,
+  //       config
+  //     );
+  //     console.log("401 핸들러 엑세스 토큰 : ", res.data);
+  //     if (res.data) {
+  //       window.localStorage.setItem("accessToken", res.data);
+  //       // res.data(토큰값)을 가져와야 로컬스토리지에 넣을수 있음
+  //       return res.data;
+  //     } else {
+  //       window.localStorage.clear();
+  //       throw new Error("리프레쉬 토큰이 만료 되었습니다.");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     return false;
+  //   }
+  // },
 };
 
 // 인터 셉터
@@ -79,6 +109,37 @@ export const Interceptor = axios.create({
   baseURL: CHORD8_DOMAIN,
 });
 
+// Interceptor.interceptors.response.use(
+//   (response) => response,
+//   async (error) => {
+//     const originalRequest = error.config;
+//     if (error.response.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+//       const refreshToken = localStorage.getItem("refreshToken");
+//       // console.log("인터 셉터의 리프레쉬 토큰 :", refreshToken);
+//       if (refreshToken && refreshToken !== "") {
+//         const newAccessToken = await Common.handleUnauthorized();
+//         console.log("인터 셉터의 새로운 토큰", newAccessToken);
+//         // newAccessToken이 false를 반환하는지 확인 후 "/"로 이동
+//         if (newAccessToken) {
+//           // localStorage.setItem("accessToken", newAccessToken);
+//           Interceptor.defaults.headers.common["Authorization"] =
+//             "Bearer " + newAccessToken;
+//           return Interceptor(originalRequest);
+//         } else {
+//           // 리프레시 토큰이 만료되었을 경우
+//           // 로컬 스토리지 제거
+//           alert("로그인이 만료되었습니다.");
+//           console.log("인터셉터의 else");
+//           window.localStorage.clear();
+//           window.location.href = "/";
+//         }
+//       } else {
+//         alert("로그인이 필요합니다.");
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
 Interceptor.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -86,26 +147,19 @@ Interceptor.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refreshToken");
-      console.log("인터 셉터의 리프레쉬 토큰 :", refreshToken);
       if (refreshToken && refreshToken !== "") {
         const newAccessToken = await Common.handleUnauthorized();
-        console.log("인터 셉터의 새로운 토큰", newAccessToken);
         // newAccessToken이 false를 반환하는지 확인 후 "/"로 이동
         if (newAccessToken) {
-          // localStorage.setItem("accessToken", newAccessToken);
+          localStorage.setItem("accessToken", newAccessToken);
           Interceptor.defaults.headers.common["Authorization"] =
             "Bearer " + newAccessToken;
           return Interceptor(originalRequest);
         } else {
           // 리프레시 토큰이 만료되었을 경우
-          // 로컬 스토리지 제거
-          alert("로그인이 만료되었습니다.");
-          console.log("인터셉터의 else");
-          window.localStorage.clear();
+          alert("토큰이 만료되었습니다.");
           window.location.href = "/";
         }
-      } else {
-        alert("로그인이 필요합니다.");
       }
     }
     return Promise.reject(error);

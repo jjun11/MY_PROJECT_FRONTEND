@@ -33,7 +33,7 @@ export const ModalButton = styled.button`
   color: ${props => props.textColor || 'white'};
   text-decoration: none;
   border: none;
-  width: auto;
+  width: ${props => props.width || 'auto'};
   height: auto;
   padding: 1rem;
   border-radius: 30px;

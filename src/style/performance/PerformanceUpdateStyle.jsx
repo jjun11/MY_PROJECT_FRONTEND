@@ -314,13 +314,18 @@ export const ImageInput = styled.input.attrs({ type: 'file', id: 'file'})`
   padding: 0 1rem;
   margin-bottom: 1rem;
   width: 75%;
-  height: 3.5rem;
+  height: 2.5rem;
   border: 0.03rem solid var(--mainolive);
   resize: none; // 사용자가 크기를 변경하지 못하게 함
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   &::placeholder {
     color: var(--mainolive);
-  
+  }
+  button {
+    background-color: red;
   }
 
 `;

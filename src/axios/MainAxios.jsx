@@ -31,9 +31,9 @@ const MainAxios = {
   // 토큰 테스트
   testGet: async (token) => {
     const accessToken = Common.getAccessToken();
-    return await Interceptor.get(CHORD8_DOMAIN + `/main/likeSong/${token}`, {
+    return await Interceptor.get(CHORD8_DOMAIN + `/test/test/${accessToken}`, {
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         Authorization: "Bearer " + accessToken,
       },
     });

@@ -10,7 +10,7 @@ const UpdateUserInfo = ({ userList }) => {
   const userArray = userList.filter(user => user.userEmail === userEmail); // 이메일이 일치하는 회원 정보를 찾습니다.
   const user = userArray[0] || {}; // 일치하는 회원 정보를 저장합니다.
   console.log(user); // 일치하는 회원 정보를 출력합니다.
-  
+  console.log(user.profileImg);
   const [performerList, setPerformerList] = useState([]); // 퍼포머 정보를 저장할 상태를 선언합니다.
 
   useEffect(() => {
@@ -31,14 +31,16 @@ const UpdateUserInfo = ({ userList }) => {
 
 
 
-  const point = 609428040;
-  const pointComma = point.toLocaleString(); // point 값에 천단위마다 콤마를 추가
+  const point = user.userPoint;
+  const pointComma = point ? point.toLocaleString() : '0'; // point 값에 천단위마다 콤마를 추가
 
 return (
   <>
     <UserInfo>
       <div className="image">
-        {/* 프로필 이미지가 들어갈 부분 */}
+      <img
+            src={user.profileImg}
+          />
       </div>
       <div className="leftInfo">
         <div className="authtitle">{user.authority}</div>

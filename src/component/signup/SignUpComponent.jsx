@@ -256,4 +256,7 @@ export const Agree = styled.input`
   width: 15px;
   height: 15px;
   outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
 `;

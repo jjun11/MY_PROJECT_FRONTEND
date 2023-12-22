@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-
 const CardView = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,13 +14,12 @@ const CardView = styled.div`
   border-radius: 3rem;
   background-color: white;
   box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
-  line-height: 1.1; 
+  line-height: 1.1;
   margin-bottom: 2rem;
-  &:hover{
+  &:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
   }
- 
 `;
 
 const Poster = styled.img`
@@ -131,24 +129,27 @@ const PerformanceCardView = ({
   };
 
   // Performer 문자열 생성, 공연참여자가 1명 이상일 경우 "외" 표시
-  const performerString = performer.length > 1 
-    ? `${performer[0]} 외 ${performer.length - 1}명`
-    : performer[0];
-  
+  const performerString =
+    performer.length > 1
+      ? `${performer[0]} 외 ${performer.length - 1}명`
+      : performer[0];
+
   return (
     <>
-    <CardView onMouseEnter={()=> onMouseOver(venue)}>
-      <Poster src={image} alt={`${title} 포스터`} /> 
-      <Title>{title}</Title>
-      <Venue>{venue}</Venue>
-      <Performer>{performerString}</Performer>
-      <PerformanceDate>{date}</PerformanceDate>
-      <ButtonContainer>
-        <Status isEnded={isEnded}>{isEnded ? "공연 종료" : "공연 예정"}</Status>
-        <Button onClick={handleDetailClick}>자세히</Button>
-        {!isEnded && <Button onClick={handleBookingClick}>예매하기</Button>}
-      </ButtonContainer>
-    </CardView>
+      <CardView onMouseEnter={() => onMouseOver(venue)}>
+        <Poster src={image} alt={`${title} 포스터`} />
+        <Title>{title}</Title>
+        <Venue>{venue}</Venue>
+        <Performer>{performerString}</Performer>
+        <PerformanceDate>{date}</PerformanceDate>
+        <ButtonContainer>
+          <Status isEnded={isEnded}>
+            {isEnded ? "공연 종료" : "공연 예정"}
+          </Status>
+          <Button onClick={handleDetailClick}>자세히</Button>
+          {!isEnded && <Button onClick={handleBookingClick}>예매하기</Button>}
+        </ButtonContainer>
+      </CardView>
     </>
   );
 };

@@ -26,6 +26,8 @@ const SignUpAxios = {
       userPhone: tel,
       userGen: gender,
       userAge: age,
+      profileImg:
+        "https://firebasestorage.googleapis.com/v0/b/chord8-22e59.appspot.com/o/profileImg.png?alt=media&token=8f711968-bb1c-44b3-ae93-42b190befdeb",
     };
     return await axios.post(CHORD8_DOMAIN + "/auth/sign", member);
   },
@@ -87,7 +89,7 @@ const SignUpAxios = {
     const accessToken = Common.getAccessToken();
     console.log("로그인 상태 체크의 엑세스 토큰 : ", accessToken);
     // 인터셉터 자체로 리프레쉬 토큰 체크가 있으므로 로그인 체크는 axios를 활용
-    return await Interceptor.get(
+    return await axios.get(
       CHORD8_DOMAIN + `/user/isLogin?accessToken=${accessToken}`,
       {
         headers: {
