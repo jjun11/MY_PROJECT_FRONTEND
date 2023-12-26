@@ -11,11 +11,9 @@ import {
 } from "../../style/performance/PerformanceStyle";
 import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
-import AxiosApi from "../../axios/PerformanceAxios";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 import ModalComponent from "../../utils/ModalComponent";
-import Modal from "../../component/signup/SignUpModal";
 
 const Performance = () => {
   const [inputValue, setInputValue] = useState(""); // 입력필드에 입력값을 저장
@@ -49,8 +47,7 @@ const Performance = () => {
   useEffect(() => {
     const filtered = performanceList
       .filter(
-        (performance) =>
-          performance.performanceName.includes(searchTerm) 
+        (performance) => performance.performanceName.includes(searchTerm)
         //   ||
         //   performance.performer.includes(searchTerm) // 공연명 또는 공연자명에 검색어가 포함되어 있을 경우 필터링
       )
@@ -87,16 +84,16 @@ const Performance = () => {
   return (
     <>
       <GlobalStyle />
-      <MediaStyle/>
+      <MediaStyle />
       <Container>
         <SearchBanner>
           <Box>
             <div>공연 검색</div>
-            <ModalComponent 
-            open="열기"
-            content = "테스트"
-            close="닫기"
-            openButtonStyle={{ width: "109rem", bgColor: "blue"}}
+            <ModalComponent
+              open="열기"
+              content="테스트"
+              close="닫기"
+              openButtonStyle={{ width: "109rem", bgColor: "blue" }}
             />
           </Box>
           <Box>
@@ -112,10 +109,16 @@ const Performance = () => {
           </Box>
         </SearchBanner>
         <Map>
-          <KakaomapComponent performanceList={filteredPerformanceList} selectedVenue={selectedVenue} />
+          <KakaomapComponent
+            performanceList={filteredPerformanceList}
+            selectedVenue={selectedVenue}
+          />
         </Map>
         <div className="title">내 근처 공연</div>
-        <PerformanceList performanceList={filteredPerformanceList} onCardMouseOver={handleCardMouseOver} />
+        <PerformanceList
+          performanceList={filteredPerformanceList}
+          onCardMouseOver={handleCardMouseOver}
+        />
       </Container>
     </>
   );

@@ -67,6 +67,10 @@ const UpdateBox = ({ userList }) => {
       setInputPerformer([...inputPerformer, nickname]);
     }
   };
+  useEffect(() => {
+    // inputPerformer의 값이 변경될 때마다 이 로직이 실행됩니다.
+    // 여기에 닉네임의 색상을 변경하는 로직을 넣을 수 있습니다.
+  }, [inputPerformer]);
 
 // 모든 닉네임을 지우는 함수
 const clearAll = () => {
@@ -199,7 +203,14 @@ const clearAll = () => {
               <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
               <InputBox placeholder="선택된 닉네임" value={inputPerformer.join(', ')} readOnly />
               {searchResults.map(user => (
-                <div key={user.userNickname} onClick={() => handleSelect(user.userNickname)}>
+                <div key={user.userNickname} 
+                onClick={() => handleSelect(user.userNickname)}
+                style={{
+                  color: inputPerformer === user.userNickname ? 'blue' : 'black',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={(e) => e.target.style.color = 'gray'}
+                onMouseOut={(e) => e.target.style.color = inputPerformer === user.userNickname ? 'blue' : 'black'}>
                   {user.userNickname}
                 </div>
               ))}

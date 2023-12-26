@@ -31,6 +31,8 @@ import {
   PurposeButton,
   Musicimg,
   Musicimg01,
+  Musicfile,
+  Musicfile01,
   TitleUploadButton,
   SingInfo,
   Lyrics,
@@ -38,6 +40,19 @@ import {
 } from "../../style/music/MusicUpdateStyle";
 
 const UploadButton = styled.button`
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+const FileUploadButton = styled.button`
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
@@ -61,7 +76,7 @@ const UpdateBox = () => {
   const [selectedPurpose, setSelectedPurpose] = useState(""); // 목적선택
   const [inputSingInfo, setinputSingInfo] = useState(""); // 곡소개
   const [inputLyrics, setinputLyrics] = useState(""); // 가사
-
+  const userBusiness = window.localStorage.getItem("business_num");
   //앨범이미지 등록
   const [inputimgfile, setinputimgFile] = useState(""); //앨범 이미지 입력값
   const [imgfileName, setimgFileName] = useState(""); // 앨범 이미지 이름
@@ -70,6 +85,10 @@ const UpdateBox = () => {
   const [Titleimg, setTitleimg] = useState(""); // 앨범이미지
   const [previewImage, setPreviewImage] = useState(null); //미리보기
 
+  //앨범노래 등록
+  const [inputfile, setinputFile] = useState(""); //앨범 노래 입력값]
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
   //약관동의체크
   const [termsAgreed, setTermsAgreed] = useState(false);
 
@@ -89,10 +108,12 @@ const UpdateBox = () => {
 
   //목적 선택 기능
   const handlePurposeSelection = (purpose) => {
-    if (selectedPurpose === purpose) {
-      setSelectedPurpose(""); // 이미 선택된 목적을 다시 클릭하면 선택 취소
-    } else {
+    // 목적이 '영리'이면 모달 열기
+    if (purpose === "영리") {
       setSelectedPurpose(purpose);
+      alert("영리 목적은 사업자 등록이 필요합니다");
+    } else {
+      setSelectedPurpose(purpose); // 선택된 목적 업데이트
     }
   };
 
@@ -112,10 +133,34 @@ const UpdateBox = () => {
 
       // 다운로드 URL을 가져오고 기다립니다.
       const url = await fileRef.getDownloadURL();
+
       console.log("저장경로 확인 : " + url);
 
       // 상태를 업데이트합니다.
       setUrl(url);
+    } catch (error) {
+      // 에러를 처리합니다.
+      console.error("Upload failed", error);
+    }
+  };
+
+  const handlefileUploadClick = async () => {
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(selectedFile.name);
+
+      // 파일을 업로드하고 기다립니다.
+      await fileRef.put(selectedFile);
+      console.log("File uploaded successfully!");
+
+      // 다운로드 URL을 가져오고 기다립니다.
+
+      const inputfile = await fileRef.getDownloadURL();
+      console.log("저장경로 확인: " + inputfile);
+
+      // 상태를 업데이트합니다.
+
+      setinputFile(inputfile);
     } catch (error) {
       // 에러를 처리합니다.
       console.error("Upload failed", error);
@@ -151,7 +196,8 @@ const UpdateBox = () => {
           selectedGenre,
           inputSingInfo,
           inputLyrics,
-          url
+          url,
+          inputfile
         );
         console.log("음악 등록 결과:", MusicUploadData);
         const id = MusicUploadData.id;
@@ -283,6 +329,7 @@ const UpdateBox = () => {
                 >
                   영리
                 </PurposeButton>
+
                 <PurposeButton
                   onClick={() => handlePurposeSelection("비영리")}
                   active={selectedPurpose === "비영리" ? "selected" : ""}
@@ -304,6 +351,19 @@ const UpdateBox = () => {
                 업로드
               </TitleUploadButton> */}
             </Musicimg>
+
+            <Musicfile>
+              <Musicfile01>
+                <TitleText>음원등록</TitleText>
+                <InputBox type="file" onChange={handleFileInputChange} />
+              </Musicfile01>
+              <FileUploadButton onClick={handlefileUploadClick}>
+                Upload
+              </FileUploadButton>
+              {/* <TitleUploadButton onClick={handleUploadClick}>
+                업로드
+              </TitleUploadButton> */}
+            </Musicfile>
 
             <SingInfo>
               <CategoryText>곡소개</CategoryText>

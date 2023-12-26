@@ -14,7 +14,8 @@ const SignUpAxios = {
     addrDetale,
     tel,
     gender,
-    age
+    age,
+    bissNum
   ) => {
     const member = {
       userEmail: email,
@@ -28,6 +29,7 @@ const SignUpAxios = {
       userAge: age,
       profileImg:
         "https://firebasestorage.googleapis.com/v0/b/chord8-22e59.appspot.com/o/profileImg.png?alt=media&token=8f711968-bb1c-44b3-ae93-42b190befdeb",
+      BUSINESS_NUM: bissNum,
     };
     return await axios.post(CHORD8_DOMAIN + "/auth/sign", member);
   },

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CHORD8_DOMAIN } from "../utils/Common";
+import { CHORD8_DOMAIN, Interceptor } from "../utils/Common";
 
 const MusicAxiosApi = {
   //음악 목록 조회
@@ -14,6 +14,12 @@ const MusicAxiosApi = {
     return await axios.get(CHORD8_DOMAIN + `/music/detail/${id}`);
   },
 
+  //음악 검색 기능
+  searchMusic: async (keyword) => {
+    console.log("음악 검색 조회 AxiosApi 작동");
+    return await axios.get(CHORD8_DOMAIN + `/music/search/${keyword}`);
+  },
+
   //음악 등록 엔드포인트(메모: post등록 방식 axios 까먹지말것..)
   addMusic: async (
     inputSingName,
@@ -23,7 +29,8 @@ const MusicAxiosApi = {
     selectedGenre,
     inputSingInfo,
     inputLyrics,
-    url
+    url,
+    inputfile
   ) => {
     console.log("음악 등록 AxiosApi 작동");
     const musicDTO = {
@@ -38,6 +45,7 @@ const MusicAxiosApi = {
         purchaseCount: 100,
         releaseDate: "2023-12-19",
         thumbnailImage: url,
+        musicFile: inputfile,
       },
       userReqDto: {
         userNickname: inputSinger,
@@ -46,18 +54,74 @@ const MusicAxiosApi = {
         userNickname: inputSinger,
       },
     };
-
-    return await axios.post(CHORD8_DOMAIN + `/music/new`, musicDTO);
+    const accessToken = localStorage.getItem("accessToken");
+    return await Interceptor.post(CHORD8_DOMAIN + `/music/new`, musicDTO, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
 
-  //음악 좋아요 추가
+  //음악 좋아요 추가*제거
   musicHeart: async (musicId, heartChecker) => {
     console.log("음악 좋아요 추가 AxiosApi 작동");
     const musicHeartDto = {
       musicId: musicId,
       userEmail: heartChecker,
     };
-    return await axios.post(CHORD8_DOMAIN + `/musiclike/like`, musicHeartDto);
+    const accessToken = localStorage.getItem("accessToken");
+    return await Interceptor.post(
+      CHORD8_DOMAIN + `/musiclike/like`,
+      musicHeartDto,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
+
+  // 음악 댓글 등록.
+
+  musicCommentRegister: async (musicId, content, userEmail) => {
+    console.log("음악 댓글 등록 AxiosApi 작동");
+    const musiccomment = {
+      musicId: musicId,
+      content: content,
+      userEmail: userEmail,
+    };
+    const accessToken = localStorage.getItem("accessToken");
+    return await Interceptor.post(
+      CHORD8_DOMAIN + `/musiccomment/new`,
+      musiccomment,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
+
+  // 음악별 댓글 조회.
+  musicCommentList: async (musicId) => {
+    return await axios.get(CHORD8_DOMAIN + `/musiccomment/list/${musicId}`);
+  },
+
+  //댓글 삭제
+  musicCommentDelete: async (musicCommentId) => {
+    const accessToken = localStorage.getItem("accessToken");
+    return await Interceptor.delete(
+      CHORD8_DOMAIN + `/musiccomment/delete/${musicCommentId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
   },
 
   //음악 페이지 수 조회
@@ -76,8 +140,6 @@ const MusicAxiosApi = {
       CHORD8_DOMAIN + `/music/musiclist/page?page=${page}&size=${size}`
     );
   },
-
-  //음악 댓글 입력
 };
 
 export default MusicAxiosApi;

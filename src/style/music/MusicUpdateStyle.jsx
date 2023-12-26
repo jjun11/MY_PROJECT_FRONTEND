@@ -217,7 +217,7 @@ export const UpdateZone = styled.div`
   border-radius: 1rem;
   width: 80%;
   box-shadow: 0 1rem 3rem -0.5rem rgba(0, 0, 0, 0.25);
-  height: 60rem;
+  height: 68rem;
   display: flex;
   flex-direction: column;
 
@@ -409,6 +409,27 @@ export const Musicimg = styled.div`
 `;
 
 export const Musicimg01 = styled.div`
+  width: 40rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+`;
+
+export const Musicfile = styled.div`
+  width: 40rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-top: 1rem;
+  align-items: center;
+`;
+
+export const Musicfile01 = styled.div`
   width: 40rem;
   font-weight: 300;
   font-size: 1.4rem;

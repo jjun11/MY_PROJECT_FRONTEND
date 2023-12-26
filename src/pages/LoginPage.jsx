@@ -15,10 +15,16 @@ import {
 } from "../component/login/LoginComponent";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
+import kakao from "../images/kakao_login.png";
 import Common from "../utils/Common";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  // 이메일 찾기 이동
+  const onClickToEmail = () => {
+    navigate("/findemail");
+  };
 
   // 이메일 패스워드 입력
   const [inputEmail, setInputEmail] = useState("");
@@ -147,16 +153,23 @@ const LoginPage = () => {
 
                 <Bottom>
                   <div className="login-button">
-                    <img src="" alt="카카오" onClick={loginHandler} />
+                    <img
+                      src={kakao}
+                      alt="카카오"
+                      onClick={loginHandler}
+                      style={{
+                        width: "100%",
+                        height: "3.8rem",
+                        cursor: "pointer",
+                      }}
+                    />
                   </div>
-                  <div className="login-button">
-                    <img src="" alt="구글" />
-                  </div>
+
                   <div className="login-button">
                     <Button width="100%" height="40%" onClick={onClickLogin}>
                       로그인
                     </Button>
-                    <P>아이디 찾기</P>
+                    <P onClick={onClickToEmail}>아이디 찾기</P>
                     <P>비밀번호 찾기</P>
                   </div>
                 </Bottom>

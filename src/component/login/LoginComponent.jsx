@@ -3,7 +3,7 @@ import Login_bg from "../../images/Login_Bg.png";
 import Signup from "../../images/Signup.png";
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 
@@ -12,6 +12,7 @@ export const BACKGROUND = styled.div`
   height: 100%;
   background-repeat: no-repeat;
   background-image: url(${Login_bg});
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,6 +33,7 @@ export const LoginSginup = styled.div`
     /* min-width: 200px; */
     display: flex;
     flex-direction: column;
+    min-width: 400px;
 
     & .inline {
       width: 80%;
@@ -50,6 +52,7 @@ export const LoginSginup = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 300px;
 
     & .inline {
       height: 100%;
@@ -87,8 +90,8 @@ export const InputEmail = styled.input`
   box-sizing: border-box;
   z-index: 200;
   width: 100%;
-  height: 5%;
-  font-size: 1rem;
+  height: 7%;
+  font-size: 1.6rem;
   color: grey;
   margin-bottom: ${(props) => (props.emailmsg ? "0" : "10%")};
 `;
@@ -101,8 +104,8 @@ export const InputPassword = styled.input`
   box-sizing: border-box;
   z-index: 200;
   width: 100%;
-  height: 5%;
-  font-size: 1rem;
+  height: 7%;
+  font-size: 1.6rem;
   color: grey;
   margin-bottom: ${(props) => (props.passwordmsg ? "0" : "10%")};
 `;
@@ -111,9 +114,9 @@ export const Bottom = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   & .login-button {
-    width: 30%;
+    width: ${(props) => props.width || "40%"};
     height: 100%;
     background-color: none;
     outline: none;
@@ -122,7 +125,6 @@ export const Bottom = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    cursor: pointer;
   }
 `;
 
@@ -152,13 +154,12 @@ export const SignUpButton = styled.div`
   border: 2px solid green;
   border-radius: 10px;
   color: white;
-  margin-top: 180px;
+  margin-top: 80%;
   width: 100%;
   height: 10%;
   font-size: 1rem;
   display: flex;
   justify-content: space-around;
-  /* align-items: center; */
 
   & .signup-img {
     width: 30%;

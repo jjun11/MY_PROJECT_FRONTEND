@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { CHORD8_DOMAIN } from '../utils/Common';
+import Common from "../utils/Common";
+import { CHORD8_DOMAIN, Interceptor } from "../utils/Common";
 
-const AxiosApi = {
+const PerformanceAxios = {
     // 공연 목록 조회
     getPerformanceList: async () => {
       console.log("공연목록조회 AxiosApi 작동")
@@ -25,23 +26,73 @@ const AxiosApi = {
     },
 
     //공연 등록
-    setPerformance: async (performance) => {
-        return axios.post(CHORD8_DOMAIN + `/performance/new`, performance);
-    },
+setPerformance: async (performance) => {
+  const accessToken = Common.getAccessToken();
+  return axios.post(CHORD8_DOMAIN + `/performance/new`, performance, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+},
 
     // 전체유저조회
     getUserList: async () => {
+      const accessToken = Common.getAccessToken();
       console.log("전체유저조회 AxiosApi 작동")
-      return await axios.get(
-        CHORD8_DOMAIN + `/auth/userList`
+      return await Interceptor.get(
+        CHORD8_DOMAIN + `/performance/userList`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
       );
     },
 
     // 전체공연자조회
     getPerformerList: async () => {
+      const accessToken = Common.getAccessToken();
       console.log("전체공연자조회 AxiosApi 작동")
-      return await axios.get(
-        CHORD8_DOMAIN + `/performer/list`);
+      return await Interceptor.get(
+        CHORD8_DOMAIN + `/performer/list`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
+    // 공연 삭제
+    deletePerformance: async (performanceId) => {
+      const accessToken = Common.getAccessToken();
+      console.log("공연삭제 AxiosApi 작동")
+      return await Interceptor.delete(
+        CHORD8_DOMAIN + `/performance/delete/${performanceId}`, { 
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
+    //공연 구매
+    purchaseTicket: async (performanceId, userId, price) => {
+      const accessToken = Common.getAccessToken();
+      console.log("공연구매 AxiosApi 작동")
+      return await Interceptor.post(
+        CHORD8_DOMAIN + `/ticketer/new/${performanceId}`, {
+          performanceId,
+          userId,
+          price
+        },{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
     },
 
     // //공연등록닉네임 조회
@@ -53,4 +104,4 @@ const AxiosApi = {
     // },
   };
 
-export default AxiosApi;
+export default PerformanceAxios;

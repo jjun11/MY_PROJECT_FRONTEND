@@ -16,6 +16,7 @@ import MusicList from "./pages/musicPage/MusicListPage";
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
 import Test from "./pages/SimpleTest";
+import AdminPage from "./pages/AdminPage";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             element={<CommunityPage></CommunityPage>}
           />
           <Route path="/mypage" element={<MyPage></MyPage>} />
+          <Route path="/adminpage" element={<AdminPage/>} />
           <Route path="/test" element={<Test></Test>} />
         </Routes>
         <Footer />

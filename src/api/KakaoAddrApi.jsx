@@ -3,97 +3,31 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
 const KAKAO = styled.div`
-  position: absolute;
-  left: 0%;
-  top: 0%;
-  .close {
-    display: none;
-  }
-
-  .open {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-
-    .kakao {
-      width: 30vw;
-      height: 40vh;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      overflow: hidden;
-
-      .header {
-        position: relative;
-        width: 100%;
-        height: 20%;
-        background: linear-gradient(97.89deg, #008bff 3.66%, #61e6ca 97.99%);
-        color: white;
-        font-size: 3rem;
-        text-align: center;
-
-        .close-button {
-          border: none;
-          border-radius: 5px;
-          position: absolute;
-          right: 5%;
-          top: 10%;
-        }
-      }
-
-      .body {
-        width: 100%;
-        height: 60%;
-        display: flex;
-        flex-direction: column;
-
-        .body-section {
-          width: 100%;
-          height: 50%;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-        }
-      }
-
-      .footer {
-        width: 100%;
-        height: 20%;
-        background: linear-gradient(97.89deg, #008bff 3.66%, #61e6ca 97.99%);
-      }
-    }
-  }
-`;
-
-const PostContainer = styled.div`
-  position: absolute;
-  width: 40%;
-`;
-
-const Post = styled.div`
-  width: 100%;
-  height: 100%;
-  border: 3px solid red;
-  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  width: 300px;
+  /* height: 300px; */
+`;
+
+const Content = styled.div`
+  width: 100%;
+  height: 50%;
 `;
 
 const Input = styled.input`
-  border: none;
+  border: ${(props) => props.border || "none"};
   border-radius: 20px;
-  width: 50%;
-  height: 20%;
+  width: ${(props) => props.width || "50%"};
+  height: ${(props) => props.height || "30%"};
+  margin-right: 15%;
+  margin-bottom: ${(props) => props.marginBottom || "10%"};
 `;
 
 const Button = styled.button`
   border: none;
   border-radius: 10px;
-  width: 20%;
-  height: 20%;
+  width: 30%;
+  height: 3rem;
   cursor: pointer;
 `;
 
@@ -101,7 +35,7 @@ const Button = styled.button`
 const KakaoAddr = (props) => {
   const [isTrue, setIsTrue] = useState(false);
   // 카카오 props
-  const { kakao, close, onAddress, onDetailAddress } = props;
+  const { onAddress, onDetailAddress } = props;
 
   // 주소 입력
   const [address, setAddress] = useState("");
@@ -144,41 +78,33 @@ const KakaoAddr = (props) => {
   };
   return (
     <KAKAO>
-      <div className={kakao ? "open" : "close"}>
-        <div className="kakao">
-          <div className="header">
-            주소를 입력하세요
-            <button className="close-button" onClick={close}>
-              &times;
-            </button>
-          </div>
-          <div className="body">
-            <div className="body-section">
-              <Input
-                type="text"
-                onClick={() => setIsTrue(true)}
-                placeholder="주소를 입력합니다."
-                value={address}
-              />
-              {isTrue && (
-                <PostContainer>
-                  <DaumPostcode onComplete={handleComplete} />
-                </PostContainer>
-              )}
-
-              <Button onClick={() => setIsTrue(true)}>주소 찾기</Button>
-            </div>
-            <div className="body-section">
-              <Input
-                placeholder="상세 주소를 입력합니다."
-                onChange={onChangeDetailAddress}
-              />
-              <Button onClick={saveAddr}>주소 저장</Button>
-            </div>
-          </div>
-          <div className="footer"></div>
-        </div>
-      </div>
+      <Content>
+        <Input
+          type="text"
+          onClick={() => setIsTrue(true)}
+          placeholder="주소를 입력합니다."
+          value={address}
+          width="50%"
+          border="1px solid gray"
+          height="3rem"
+        />
+        <Button onClick={() => setIsTrue(true)}>주소 찾기</Button>
+        {isTrue && <DaumPostcode onComplete={handleComplete} />}
+      </Content>
+      <Content>
+        <Input
+          type="text"
+          onClick={() => setIsTrue(true)}
+          value={address}
+          width="50%"
+          height="3rem"
+          border="1px solid gray"
+          placeholder="상세 주소를 입력합니다."
+          onChange={onChangeDetailAddress}
+          marginBottom="0%"
+        />
+        <Button onClick={saveAddr}>주소 저장</Button>
+      </Content>
     </KAKAO>
   );
 };

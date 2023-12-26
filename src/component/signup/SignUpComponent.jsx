@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
+export const CONTAINER = styled.div`
+  width: 100%;
+  height: 130vh;
+`;
+
 export const SIGNUP = styled.div`
   width: 45vw;
-  height: 90vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
+  min-height: 680px;
+  min-width: 600px;
 `;
 
 export const TOP = styled.div`
@@ -24,11 +31,14 @@ export const Main = styled.div`
   height: 70%;
   display: flex;
   flex-direction: row;
+  min-height: 500px;
+  /* border: 3px solid red; */
 
   & .left {
     width: 50%;
     height: 100%;
     display: flex;
+    min-width: 300px;
 
     & .input-session {
       margin-left: 10%;
@@ -109,6 +119,8 @@ export const Main = styled.div`
   & .right {
     width: 50%;
     height: 100%;
+    min-height: 500px;
+    min-width: 300px;
 
     & .busyness {
       padding: 5%;
@@ -157,6 +169,9 @@ export const Main = styled.div`
     }
 
     & .agreement {
+      border: 1px solid #61e6ca;
+      border-radius: 20px;
+      margin-top: 3%;
       width: 80%;
       height: 30%;
       display: flex;
@@ -166,6 +181,7 @@ export const Main = styled.div`
         font-size: 2rem;
         margin-top: 5%;
         margin-left: 10%;
+        font-weight: 900;
       }
 
       & .agreement-main {
@@ -182,6 +198,7 @@ export const Main = styled.div`
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+          font-weight: 600;
         }
       }
     }
@@ -205,32 +222,38 @@ export const InputTitle = styled.p`
 export const Input = styled.input`
   background-color: rgba(0, 0, 0, 0.7);
   width: ${(props) => props.width || "60%"};
+  height: ${(props) => props.height || "54%"};
   border: 1px solid #61e6ca;
-  border-radius: 10px;
+  border-radius: 30px;
   color: white;
   margin-top: ${(props) => props.marginTop || "0px"};
+  min-height: 3rem;
 `;
 
 export const CheckButton = styled.button`
-  width: 30%;
-  height: 20px;
+  width: 20%;
+  height: 3rem;
   margin-left: 5%;
   background-color: #61e6ca;
   border: none;
-  border-radius: 10px;
+  border-radius: 30px;
   font-size: 1rem;
+  font-weight: 600;
   color: white;
   cursor: pointer;
+  min-width: 80px;
 `;
 
 export const BusynessButton = styled.button`
   background-color: #61e6ca;
   width: 30%;
+  min-width: 70px;
   border: none;
   border-radius: 10px;
   font-weight: 900;
   cursor: pointer;
   margin: 0 auto;
+  color: white;
 `;
 
 export const SignUpButton = styled.button`

@@ -1,4 +1,4 @@
-import AxiosApi from "../../axios/PerformanceAxios";
+import PerformanceAxios from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -57,6 +57,30 @@ const Information = styled.div`
         border-radius: 1.5rem;
         overflow: hidden;
         box-shadow: 0rem 3rem 3rem -3rem rgba(0, 0, 0, 0.4);
+    }
+    .delete{
+        margin-top: 2rem;
+        button{
+            width: 10rem;
+            height: 4rem;
+            background-color: #d10000;
+            border-radius: 9rem;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            &:hover {
+                cursor: pointer;
+                background-color: black;
+                transform: scale(1.1);
+                transition: transform 0.05s ease-in-out; // transform 속성에 대한 전환 효과 설정
+            }
+            &:active {
+                // 클릭 효과
+                background-color: red;
+            }
+        }
+    
     }
 `;
 
@@ -134,6 +158,8 @@ const PerformanceDetail = () => {
 
     const [showLoginModal, setShowLoginModal] = useState(false); // 로그인여부 확인 모달
     const [showPaymentModal, setShowPaymentModal] = useState(false); // 결제 모달
+    const [ isModalOpen, setIsModalOpen ] = useState(false); // 공연삭제알림 모달컴포넌트용
+    const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false); // 공연삭제 재확인 모달컴포넌트용
 
     useEffect(() => {
         console.log(id);
@@ -160,7 +186,7 @@ const PerformanceDetail = () => {
     useEffect(() => {
         const getMemberInfo = async () => {
           try {
-            const userRes = await AxiosApi.getUserList();
+            const userRes = await PerformanceAxios.getUserList();
             console.log("userRes", userRes);
             const matchingUser = userRes.data.filter(user => performance.nicknames.some(nickname => nickname === user.userNickname));
             // matchingUser 에 userRes.data 중에서 userNickname이 performance.nicknames에 포함되어 있는 요소만 필터링
@@ -177,8 +203,8 @@ const PerformanceDetail = () => {
         }
       }, [performance]);
 
+      const email = localStorage.getItem('email');
       const checkLocalStorage = () => { // 로컬스토리지상에서 이메일, accessToken, refreshToken이 있는지 확인
-        const email = localStorage.getItem('email');
         const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
 
@@ -188,6 +214,26 @@ const PerformanceDetail = () => {
             setShowPaymentModal(true);
         }
     };
+    
+    // 삭제하고 모달을 닫는 함수
+    const deleteAndClose = async () => {
+        await deletePerformance();
+        setShowDeleteConfirmModal(false);
+    }
+    // 공연을 삭제하는 함수
+    const deletePerformance = async () => {
+        try {
+            const res = await PerformanceAxios.deletePerformance(performance.performanceId);
+            console.log("공연삭제결과: ", res);
+            setIsModalOpen(true);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const closeModalAndNavigate = () => {
+        setIsModalOpen(false);
+        window.location.href = "/performance";
+    }
 
     return (
         <>
@@ -200,6 +246,11 @@ const PerformanceDetail = () => {
                         <div className="date">일시 : {performance && performance.performanceDate}</div>
                         <div className="seat">좌석 수 : {performance && performance.seatCount}</div>
                         <div className="desc">{performance && performance.description}</div>
+                        <div className="delete">
+                        {memberInfo && memberInfo.some(user => user.userEmail === email) && (
+                            <button onClick={() => setShowDeleteConfirmModal(true)}>공연 삭제</button>
+                        )}
+                        </div>
                         </div>
                     <div className="map">
                         {performance && <KakaomapComponent performanceList={[performance]}/>}
@@ -239,6 +290,20 @@ const PerformanceDetail = () => {
                 />
             {/* // {showLoginModal && <NoneBtnModalComponent title="로그인이 필요합니다." onClose={() => setShowLoginModal(false)} />}
             // {showPaymentModal && <NoneBtnModalComponent title="결제를 진행합니다." onClose={() => setShowPaymentModal(false)} />} */}
+        <NoneBtnModalComponent 
+      isOpen={isModalOpen}
+      setIsOpen={setIsModalOpen}
+      content="공연이 삭제되었습니다."
+      close={{ func: closeModalAndNavigate, text: "닫기"}} 
+    />
+    {/* 삭제 확인 모달 */}
+    <NoneBtnModalComponent
+    isOpen={showDeleteConfirmModal}
+    setIsOpen={setShowDeleteConfirmModal}
+    content="정말 삭제하시겠습니까? 삭제된 공연은 복구되지 않고 소멸되며, 해당 공연의 티켓을 구매한 회원이 있다면 티켓은 소멸되고, 구매에 이용된 포인트는 환불처리됩니다."
+    customButton={{ func: () => deleteAndClose(), text: "삭제"}}
+    close={{ func: () => setShowDeleteConfirmModal(false), text: "취소"}}
+/>
         </>
     )
 };
