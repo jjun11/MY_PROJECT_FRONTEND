@@ -19,11 +19,11 @@ const NavContainer = styled.div`
     justify-content: space-between;
   }
 
-  .leftzone{
+  .leftzone {
     display: flex;
     width: 35%;
     justify-content: flex-end;
-    .leftinleft{
+    .leftinleft {
       display: flex;
       justify-content: space-between;
       width: 40%;
@@ -43,7 +43,6 @@ const HeadLogo = styled.div`
     cursor: pointer;
     background-image: url(${headlogo2});
   }
-
 `;
 
 const TextBox = styled.div`
@@ -70,16 +69,16 @@ const Header = () => {
 
   useEffect(() => {
     const checkLoginStatus = () => {
-      const email = localStorage.getItem('email');
+      const email = localStorage.getItem("email");
       setIsLogIn(!!email);
     };
 
     checkLoginStatus();
 
-    window.addEventListener('storage', checkLoginStatus);
+    window.addEventListener("storage", checkLoginStatus);
 
     return () => {
-      window.removeEventListener('storage', checkLoginStatus);
+      window.removeEventListener("storage", checkLoginStatus);
     };
   }, []);
 
@@ -93,23 +92,37 @@ const Header = () => {
   return (
     <NavContainer>
       <div className="rightzone">
-          <Link to="/performance"><TextBox>공연</TextBox></Link>
-          <Link to=""><TextBox>STORE</TextBox></Link>
-          <Link to="/music-list"><TextBox>음원</TextBox></Link>
-          <Link to="/comunitypage"><TextBox>커뮤니티</TextBox></Link>
-        </div>
-      <HeadLogo onClick={handleLogoClick}/>
-        <div className="leftzone">
-          <div className="leftinleft">
+        <Link to="/performance">
+          <TextBox>공연</TextBox>
+        </Link>
+        <Link to="/product">
+          <TextBox>STORE</TextBox>
+        </Link>
+        <Link to="/music-list">
+          <TextBox>음원</TextBox>
+        </Link>
+        <Link to="/communitypage">
+          <TextBox>커뮤니티</TextBox>
+        </Link>
+      </div>
+      <HeadLogo onClick={handleLogoClick} />
+      <div className="leftzone">
+        <div className="leftinleft">
           {isLogIn ? (
             <>
               <TextBox onClick={handleLogout}>로그아웃</TextBox>
-              <Link to="/mypage"><TextBox>마이페이지</TextBox></Link>
+              <Link to="/mypage">
+                <TextBox>마이페이지</TextBox>
+              </Link>
             </>
           ) : (
             <>
-              <Link to="/login"><TextBox>로그인</TextBox></Link>
-              <Link to="/signup"><TextBox>회원가입</TextBox></Link>
+              <Link to="/login">
+                <TextBox>로그인</TextBox>
+              </Link>
+              <Link to="/signup">
+                <TextBox>회원가입</TextBox>
+              </Link>
             </>
           )}
         </div>

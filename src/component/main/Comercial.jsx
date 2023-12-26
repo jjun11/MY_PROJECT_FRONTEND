@@ -29,7 +29,7 @@ const Content = styled.div`
   background-position: center;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 `;
 
 const Text = styled.div`
@@ -47,6 +47,13 @@ const Text = styled.div`
     font-size: 2rem;
     font-weight: 900;
     line-height: 0;
+    margin-left: 5%;
+  }
+
+  .venue {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
     margin-left: 5%;
   }
 `;
@@ -90,7 +97,7 @@ const Comercial = () => {
                   <span key={index}>{nickname} </span>
                 ))}
               </p>
-              <p className="text">{data.venue}</p>
+              <p className="venue">{data.venue}</p>
             </Text>
           </Content>
         </Contents>

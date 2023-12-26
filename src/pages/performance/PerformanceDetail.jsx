@@ -7,6 +7,7 @@ import MainAxios from "../../axios/MainAxios";
 import PerformerCardView from "../../component/performance/PerformerCardView";
 import basket from "../../images/Basket.png";
 import NoneBtnModalComponent from "../../utils/NoneBtnModalComponent";
+import Ticket from "../../component/performance/Ticket";
 
 const Container = styled.div`
     margin: 8rem; 
@@ -153,13 +154,19 @@ const Bottom = styled.div`
 
 const PerformanceDetail = () => {
     const { id } = useParams();
-    const [performance, setPerformance] = useState(null); // performance 상태를 관리하는 useState 훅
-    const [memberInfo, setMemberInfo] = useState(null); // memberInfo 상태를 관리하는 useState 훅
+    const [ performance, setPerformance ] = useState(null); // performance 상태를 관리하는 useState 훅
+    const [ memberInfo, setMemberInfo ] = useState(null); // memberInfo 상태를 관리하는 useState 훅
 
-    const [showLoginModal, setShowLoginModal] = useState(false); // 로그인여부 확인 모달
-    const [showPaymentModal, setShowPaymentModal] = useState(false); // 결제 모달
+    const [ showLoginModal, setShowLoginModal ] = useState(false); // 로그인여부 확인 모달
+    const [ showPaymentModal, setShowPaymentModal ] = useState(false); // 결제 모달
     const [ isModalOpen, setIsModalOpen ] = useState(false); // 공연삭제알림 모달컴포넌트용
-    const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false); // 공연삭제 재확인 모달컴포넌트용
+    const [ showDeleteConfirmModal, setShowDeleteConfirmModal ] = useState(false); // 공연삭제 재확인 모달컴포넌트용
+
+     // 현재 시간과 공연 시간을 비교합니다.
+  const isEnded = new Date() > new Date(performance &&performance.performanceDate);
+    
+    const userToken = localStorage.getItem('accessToken'); // 로컬 스토리지에서 토큰을 가져옵니다.
+
 
     useEffect(() => {
         console.log(id);
@@ -194,7 +201,7 @@ const PerformanceDetail = () => {
             setMemberInfo(matchingUser);
             console.log("matchingUser", matchingUser);
           } catch (error) {
-            console.log(error);
+            console.log(error);                                                                                                                     
           }
         };
       
@@ -268,11 +275,17 @@ const PerformanceDetail = () => {
                         ))}
                         </div>
                     <div className="ticket">
-                        <div className="ticketing">티켓 구매</div>
-                        <div className="price">{performance && performance.price} P</div>
-                        <div className="button" onClick={checkLocalStorage}>
-                            <div className="icon"></div>
-                        </div>
+                        {!isEnded ? (
+                            <>
+                            <div className="ticketing">티켓 구매</div>
+                            <div className="price">{performance.price} P</div>
+                            <div className="button" onClick={checkLocalStorage}>
+                                <div className="icon"></div>
+                            </div>
+                            </>
+                        ) : (
+                            <div className="ticketing" style = {{fontSize: "2.2rem", fontWeight: "700"}}>판매가 종료된 공연입니다.</div>
+                        )}
                     </div>
                 </Bottom>
             </Container>
@@ -285,7 +298,13 @@ const PerformanceDetail = () => {
             <NoneBtnModalComponent
                 isOpen={showPaymentModal}
                 setIsOpen={setShowPaymentModal}
-                content="결제루삥뽕"
+                content={<Ticket
+                    title={performance && performance.performanceName}
+                    seatCount={performance && performance.seatCount}
+                    price={performance && performance.price}
+                    point={memberInfo && memberInfo.point}
+                    performanceId={performance && performance.performanceId}
+                    />}
                 close={{ text: "닫기"}}
                 />
             {/* // {showLoginModal && <NoneBtnModalComponent title="로그인이 필요합니다." onClose={() => setShowLoginModal(false)} />}

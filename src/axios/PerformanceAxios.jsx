@@ -27,10 +27,10 @@ const PerformanceAxios = {
 
     //공연 등록
 setPerformance: async (performance) => {
-  const accessToken = Common.getAccessToken();
-  return axios.post(CHORD8_DOMAIN + `/performance/new`, performance, {
+  const accessToken = Common.getAccessToken(); 
+  return axios.post(CHORD8_DOMAIN + `/performance/new`, performance, { 
     headers: {
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}` 
     }
   });
 },
@@ -87,6 +87,20 @@ setPerformance: async (performance) => {
           userId,
           price
         },{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
+    // 공연 구매자조회
+    getTicketList: async (performanceId) => {
+      const accessToken = Common.getAccessToken();
+      console.log("공연구매자조회 AxiosApi 작동")
+      return await Interceptor.get(
+        CHORD8_DOMAIN + `/ticketer/list/${performanceId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + accessToken,

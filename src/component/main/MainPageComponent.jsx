@@ -1,17 +1,29 @@
 import styled from "styled-components";
+import b from "../../images/Band.jpg";
 
 export const MainContainer = styled.div`
   width: 100%;
-  height: 400vh;
+  height: 500vh;
   @media (max-width: 768px) {
     min-width: 380px;
   }
 `;
 
+export const TopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${b});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
 export const Main = styled.div`
   margin: 0 auto;
   width: 60%;
-  height: 100%;
+  height: 84%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -31,13 +43,60 @@ export const TopText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .text-top {
+    color: #82ccff;
+    font-size: 7rem;
+    font-weight: 900;
+    text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
+    text-align: center;
+    width: 80%;
+    line-height: 1;
+    @media (max-width: 1200px) {
+      font-size: 4rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+
+  .text-main {
+    line-height: 0;
+    font-size: 5rem;
+    color: #61e6ca;
+    font-weight: 600;
+    text-align: center;
+
+    @media (max-width: 1200px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .text-bottom {
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+    line-height: 1;
+    margin: 0;
+
+    @media (max-width: 1200px) {
+      font-size: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
   @media (max-width: 768px) {
     width: 380px;
     height: 20%;
   }
 `;
 export const P1 = styled.p`
-  font-size: 4rem;
+  font-size: ${(props) => props.fontSize || "4rem"};
   width: 80%;
   text-align: center;
   color: #82ccff;
@@ -45,8 +104,9 @@ export const P1 = styled.p`
   text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
 `;
 export const P2 = styled.p`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: ${(props) => props.fontSize || "2rem"};
+  font-weight: ${(props) => props.fontWeight || "500"};
+  color: ${(props) => props.color || "black"};
   line-height: 0;
   @media (max-width: 768px) {
     font-size: 1.5rem;
@@ -61,16 +121,15 @@ export const Artist = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-evenly; */
 `;
+
 export const P3 = styled.p`
-  font-size: 2rem;
+  font-size: ${(props) => props.fontSize || "2rem"};
   line-height: 0;
   font-weight: 900;
 `;
 
 export const Advertisement = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 16%;
   @media (max-width: 768px) {
@@ -89,7 +148,6 @@ export const MusicRankTitle = styled.div`
 `;
 // 50
 export const MusicRank = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 20%;
 `;

@@ -95,7 +95,7 @@ const KakaoAddr = (props) => {
         <Input
           type="text"
           onClick={() => setIsTrue(true)}
-          value={address}
+          value={detailAddress}
           width="50%"
           height="3rem"
           border="1px solid gray"

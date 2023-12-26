@@ -24,6 +24,7 @@ const Common = {
   // 카카오 로그인
   KH_DOMAIN: "http://localhost:8111",
   SOCKET_URL: "ws://localhost:8111/ws/comment",
+  SOCKET_CHAT_URL: "ws://localhost:8111/ws/chat",
   API_KEY: "a42a4db55c114cff5770a883fc8607f9",
   REDIRECT_URL: "http://localhost:3000/kakao",
   SECRET_KEY: "Xs7FwH1FUNOkspaOszcuw2wZXTQGrEIs",
@@ -40,7 +41,12 @@ const Common = {
     const minute = ("0" + date.getMinutes()).slice(-2);
     return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
   },
-
+  truncateText: (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  },
   // 401 에러 처리 함수
   // handleUnauthorized: async () => {
   //   console.log("handleUnauthorized");
@@ -140,30 +146,30 @@ Interceptor.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-// Interceptor.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
-//     if (error.response.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
-//       const refreshToken = localStorage.getItem("refreshToken");
-//       if (refreshToken && refreshToken !== "") {
-//         const newAccessToken = await Common.handleUnauthorized();
-//         // newAccessToken이 false를 반환하는지 확인 후 "/"로 이동
-//         if (newAccessToken) {
-//           localStorage.setItem("accessToken", newAccessToken);
-//           Interceptor.defaults.headers.common["Authorization"] =
-//             "Bearer " + newAccessToken;
-//           return Interceptor(originalRequest);
-//         } else {
-//           // 리프레시 토큰이 만료되었을 경우
-//           alert("토큰이 만료되었습니다.");
-//           window.location.href = "/";
-//         }
-//       }
-//     }
-//     return Promise.reject(error);
-//   }
+  // Interceptor.interceptors.response.use(
+  //   (response) => response,
+  //   async (error) => {
+  //     const originalRequest = error.config;
+  //     if (error.response.status === 401 && !originalRequest._retry) {
+  //       originalRequest._retry = true;
+  //       const refreshToken = localStorage.getItem("refreshToken");
+  //       if (refreshToken && refreshToken !== "") {
+  //         const newAccessToken = await Common.handleUnauthorized();
+  //         // newAccessToken이 false를 반환하는지 확인 후 "/"로 이동
+  //         if (newAccessToken) {
+  //           localStorage.setItem("accessToken", newAccessToken);
+  //           Interceptor.defaults.headers.common["Authorization"] =
+  //             "Bearer " + newAccessToken;
+  //           return Interceptor(originalRequest);
+  //         } else {
+  //           // 리프레시 토큰이 만료되었을 경우
+  //           alert("토큰이 만료되었습니다.");
+  //           window.location.href = "/";
+  //         }
+  //       }
+  //     }
+  //     return Promise.reject(error);
+  //   }
 );
 
 export default Common;

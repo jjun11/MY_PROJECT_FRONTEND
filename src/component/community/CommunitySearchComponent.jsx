@@ -1,4 +1,3 @@
-import { ReactComponent as Write } from "../../images/Write.svg";
 import { ReactComponent as Prev } from "../../images/Prev.svg";
 import { ReactComponent as Next } from "../../images/Next.svg";
 import { ReactComponent as Text } from "../../images/write-svgrepo-com.svg";
@@ -6,17 +5,14 @@ import { ReactComponent as Image } from "../../images/image-svgrepo-com.svg";
 import { ReactComponent as Video } from "../../images/video-camera-svgrepo-com.svg";
 import {
   Pagination,
-  InputContainer,
   MiddlePage,
   PageContant,
-  PostBoarder,
   PostContainer,
   PostList,
   PostListTitle,
   PostPage,
   PostSection,
   PostTable,
-  SendButton,
   TableBody,
   TableNormalRow,
   TableRow,
@@ -28,23 +24,23 @@ import {
   Page,
   TableRowDataIcon,
 } from "../../style/CommunityPostStyle";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import CommunityAxiosApi from "../../axios/CommunityAxios";
+
 import Common from "../../utils/Common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import axios from "axios";
+import CommunityAxiosApi from "../../axios/CommunityAxios";
 import SearchComponent from "./SearchComponent";
 
-const CommunityComponent = () => {
+const CommunitySearchComponent = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const categoryId = Number(useParams().categoryId);
-  const validCategoryId = isNaN(categoryId) ? undefined : categoryId;
   const [totalComments, setTotalComments] = useState([]);
-
+  const location = useLocation();
+  const result = location.state.result;
   const pageSize = 10;
 
   const checkMediaContent = (html) => {
@@ -60,41 +56,24 @@ const CommunityComponent = () => {
     }; // 이미지 태그와 동영상 태그가 각각 있으면 true, 없으면 false를 반환
   };
   useEffect(() => {
-    // 서버에서 데이터를 가져오는 함수
     const postPage = async () => {
-      const responsePages =
-        validCategoryId === undefined
-          ? await CommunityAxiosApi.getCommunityTotalPages(pageSize)
-          : await CommunityAxiosApi.getCommunityTotalPagesByCategory(
-              validCategoryId,
-              pageSize
-            );
-      setTotalPages(responsePages.data);
+      setTotalPages();
     };
 
     postPage();
-  }, [validCategoryId, currentPage, pageSize]);
+  }, [currentPage, pageSize]);
   useEffect(() => {
-    // 제대로 랜더링 되는지 파악하는 axios 구문 별내용은 없음
-    let cancelTokenSource = axios.CancelToken.source();
     const postList = async () => {
       try {
-        const rsp =
-          validCategoryId === undefined
-            ? await CommunityAxiosApi.getCommunityList(currentPage, pageSize, {
-                cancelToken: cancelTokenSource.token,
-              })
-            : await CommunityAxiosApi.getCommunityListByCategory(
-                validCategoryId,
-                currentPage,
-                pageSize,
-                { cancelToken: cancelTokenSource.token }
-              );
-        setPosts(rsp.data);
-        console.log(rsp.data);
+        console.log(result);
+
+        setPosts(result.content);
+        setTotalPages(result.totalPages);
         // 전체 댓글 수 조회
         const totalCommentsResponses = await Promise.all(
-          rsp.data.map((post) => CommunityAxiosApi.getTotalComments(post.id))
+          result.content.map((post) =>
+            CommunityAxiosApi.getTotalComments(post.id)
+          )
         );
         const totalComments = totalCommentsResponses.map(
           (response) => response.data
@@ -107,32 +86,13 @@ const CommunityComponent = () => {
       }
     };
     postList();
-    return () => {
-      cancelTokenSource.cancel();
-    };
-  }, [validCategoryId, currentPage, pageSize, totalPages]);
+  }, [result, currentPage, pageSize, totalPages]);
 
   return (
     <>
       <PostContainer>
         <PostSection>
-          <CommunityRankComponent
-            categoryName={
-              validCategoryId !== undefined ? posts[0]?.categoryName : "전체"
-            }
-          />
-          <InputContainer>
-            <PostBoarder
-              placeholder="새 글을 작성하세요"
-              type="text"
-              onClick={() => {
-                navigate(`/community/write`);
-              }}
-            ></PostBoarder>
-            <SendButton>
-              <Write />
-            </SendButton>
-          </InputContainer>
+          <CommunityRankComponent categoryName={"검색된"} />
           <PostListTitle>
             <TitleContent>전체</TitleContent>
           </PostListTitle>
@@ -146,48 +106,58 @@ const CommunityComponent = () => {
                   <TableRowDataDate>작성시간</TableRowDataDate>
                   <TableRowDataViews>조회수</TableRowDataViews>
                 </TableRow>
-                {posts.map((post) => {
-                  // memberId가 있는지 확인하고, 있다면 memberId를 사용하고 없다면 기존의 로직 수행
-                  const segments = post.ipAddress
-                    ? post.ipAddress.split(".")
-                    : "";
-                  const ipAddress = segments
-                    ? `${segments[0]}.${segments[1]}`
-                    : "";
-                  const hasMediaContent = checkMediaContent(post.content);
-                  const writerInfo = post.email
-                    ? post.email
-                    : `${Common.truncateText(post.nickName, 10)}(${ipAddress})`;
+                {posts.length > 0 ? (
+                  posts.map((post) => {
+                    const segments = post.ipAddress
+                      ? post.ipAddress.split(".")
+                      : "";
+                    const ipAddress = segments
+                      ? `${segments[0]}.${segments[1]}`
+                      : "";
+                    const hasMediaContent = checkMediaContent(post.content);
+                    const writerInfo = post.email
+                      ? post.email
+                      : `${Common.truncateText(
+                          post.nickName,
+                          10
+                        )}(${ipAddress})`;
 
-                  return (
-                    <TableNormalRow
-                      key={post.id}
-                      onClick={() => {
-                        navigate(`/community/detail/${post.id}`);
-                      }}
-                    >
-                      <TableRowDataIcon>
-                        {hasMediaContent.video ? (
-                          <Video />
-                        ) : hasMediaContent.image ? (
-                          <Image />
-                        ) : (
-                          <Text />
-                        )}
-                      </TableRowDataIcon>
-                      <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
-                      <TableRowDataTitle>
-                        {Common.truncateText(post.title, 20)}{" "}
-                        {totalComments[posts.indexOf(post)] > 0 &&
-                          `(${totalComments[posts.indexOf(post)]})`}
-                      </TableRowDataTitle>
-                      <TableRowDataDate>
-                        {Common.timeFromNow(post.regDate)}
-                      </TableRowDataDate>
-                      <TableRowDataViews>{post.viewCount}</TableRowDataViews>
-                    </TableNormalRow>
-                  );
-                })}
+                    return (
+                      <TableNormalRow
+                        key={post.id}
+                        onClick={() => {
+                          navigate(`/community/detail/${post.id}`);
+                        }}
+                      >
+                        <TableRowDataIcon>
+                          {hasMediaContent.video ? (
+                            <Video />
+                          ) : hasMediaContent.image ? (
+                            <Image />
+                          ) : (
+                            <Text />
+                          )}
+                        </TableRowDataIcon>
+                        <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
+                        <TableRowDataTitle>
+                          {Common.truncateText(post.title, 20)}{" "}
+                          {totalComments[posts.indexOf(post)] > 0 &&
+                            `(${totalComments[posts.indexOf(post)]})`}
+                        </TableRowDataTitle>
+                        <TableRowDataDate>
+                          {Common.timeFromNow(post.regDate)}
+                        </TableRowDataDate>
+                        <TableRowDataViews>{post.viewCount}</TableRowDataViews>
+                      </TableNormalRow>
+                    );
+                  })
+                ) : (
+                  <TableNormalRow>
+                    <TableRowDataTitle>
+                      검색된 결과가 없습니다
+                    </TableRowDataTitle>
+                  </TableNormalRow>
+                )}
               </TableBody>
             </PostTable>
             <SearchComponent />
@@ -244,4 +214,4 @@ const CommunityComponent = () => {
   );
 };
 
-export default CommunityComponent;
+export default CommunitySearchComponent;

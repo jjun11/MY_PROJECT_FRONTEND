@@ -21,6 +21,7 @@ import {
 } from "../../style/CommunityPostStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
+import Common from "../../utils/Common";
 
 const CommunityRankComponent = ({ categoryName }) => {
   const [ranking, setRanking] = useState([]);
@@ -36,6 +37,7 @@ const CommunityRankComponent = ({ categoryName }) => {
 
     fetchRanking();
   }, [selectedRanking]);
+
   return (
     <>
       <Heading>
@@ -76,12 +78,19 @@ const CommunityRankComponent = ({ categoryName }) => {
                             navigate(`/community/detail/${post.communityId}`)
                           }
                         >
-                          <PostRankLink>{index + 1}</PostRankLink>
+                          <PostRankLink>
+                            <PostRankFrame>{index + 1}</PostRankFrame>
+                          </PostRankLink>
                           <PostRankCategory>
-                            {post.categoryName} 게시판
+                            <PostRankFrame>
+                              {Common.truncateText(post.categoryName, 20)}{" "}
+                              게시판
+                            </PostRankFrame>
                           </PostRankCategory>
                           <PostRankContent>
-                            <PostRankFrame>{post.title}</PostRankFrame>
+                            <PostRankFrame width={`${post.title.length}px`}>
+                              {Common.truncateText(post.title, 20)}
+                            </PostRankFrame>
                           </PostRankContent>
                         </PostRankListItem>
                       </PostRankList>

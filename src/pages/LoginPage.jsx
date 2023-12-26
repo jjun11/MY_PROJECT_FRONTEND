@@ -12,6 +12,10 @@ import {
   LoginTitle,
   SignUpButton,
   CheckInput,
+  P2,
+  LOGO,
+  P3,
+  TEXT,
 } from "../component/login/LoginComponent";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +28,11 @@ const LoginPage = () => {
   // 이메일 찾기 이동
   const onClickToEmail = () => {
     navigate("/findemail");
+  };
+
+  // 비밀번호 찾기
+  const onClickToPassword = () => {
+    navigate("/findpassword");
   };
 
   // 이메일 패스워드 입력
@@ -113,11 +122,36 @@ const LoginPage = () => {
     }
   };
 
+  const onClickAddminLogin = async () => {
+    // 로컬 스토리지 비우기
+    window.localStorage.clear();
+    try {
+      const res = await SignUpAxios.addminLogin(inputEmail, inputPw);
+      console.log("로그인 정보 : ", res.data);
+      if (res.data.grantType === "Bearer") {
+        const accessToken = res.data.accessToken;
+        window.localStorage.setItem("accessToken", accessToken);
+        const refreshToken = res.data.refreshToken;
+        window.localStorage.setItem("refreshToken", refreshToken);
+        window.localStorage.setItem("admin", "admin");
+        alert("관리자 로그인 성공");
+        // 로그인 성공 시 메인 페이지로 이동
+        navigate("/admin");
+      } else {
+        alert("입력 정보를 확인하시오.");
+      }
+    } catch (error) {
+      alert("네트 워크 연결이 불안정합니다.");
+    }
+  };
+
   return (
     <>
       <Container>
         <BACKGROUND>
           <LoginSginup>
+            <LOGO></LOGO>
+
             <div className="login">
               <div className="inline">
                 <LoginTitle>Login</LoginTitle>
@@ -166,32 +200,43 @@ const LoginPage = () => {
                   </div>
 
                   <div className="login-button">
-                    <Button width="100%" height="40%" onClick={onClickLogin}>
-                      로그인
-                    </Button>
+                    <Button onClick={onClickLogin}>로그인</Button>
                     <P onClick={onClickToEmail}>아이디 찾기</P>
-                    <P>비밀번호 찾기</P>
+                    <P onClick={onClickToPassword}>비밀번호 찾기</P>
                   </div>
                 </Bottom>
+                <TEXT>
+                  <P3 onClick={onClickToEmail}> 아이디 찾기 | </P3>
+                  <P3 onClick={onClickToPassword}>비밀번호 찾기</P3>
+                </TEXT>
               </div>
             </div>
             <div className="signup">
               <div className="inline">
                 <SignUpTitle>SignUp</SignUpTitle>
-                <p style={{ color: "white" }}>아직 회원이 아니시라면?</p>
+                <P>아직 회원이 아니시라면?</P>
+                <P3 style={{ color: "#005AA5", marginTop: "30px" }}>
+                  아직 회원이 아니시라면?
+                </P3>
                 <SignUpButton>
-                  <p
-                    style={{
-                      fontSize: "1.5rem",
-                      margin: "auto",
-                      padding: "0",
-                    }}
-                  >
-                    회원 가입
-                  </p>
+                  <P2 style={{ marginTop: "40px" }}>회원 가입</P2>
                   <div className="signup-img" onClick={onClickTosign}></div>
                 </SignUpButton>
               </div>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                opacity: "0.5",
+              }}
+            >
+              <button
+                onClick={onClickAddminLogin}
+                style={{ cursor: "pointer" }}
+              >
+                관리자
+              </button>
             </div>
           </LoginSginup>
         </BACKGROUND>

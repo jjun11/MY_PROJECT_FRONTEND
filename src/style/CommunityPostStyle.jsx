@@ -14,14 +14,12 @@ export const PostSection = styled.div`
 `;
 export const Heading = styled.div`
   display: flex;
-  width: 718.41px;
   padding-right: 614.04px;
   flex-direction: column;
   align-items: flex-start;
 `;
 export const HeadText = styled.p`
   width: 300px;
-  max-width: 718.41px;
   color: #000;
 
   font-family: Inter;
@@ -145,7 +143,8 @@ export const PostRankLink = styled.div`
 `;
 export const PostRankCategory = styled.div`
   display: flex;
-  height: 18.89px;
+  width: 100%;
+  height: 100%;
   padding-right: 5.2px;
   align-items: center;
   color: #999;
@@ -155,12 +154,14 @@ export const PostRankCategory = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 18.9px;
+  flex: 1;
 `;
 export const PostRankContent = styled.div`
   display: flex;
   padding-right: 5.2px;
   align-items: center;
   margin-left: 20px;
+  flex: 1;
 `;
 export const PostRankFrame = styled.div`
   display: flex;
@@ -173,6 +174,9 @@ export const PostRankFrame = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 18.9px;
+  flex: 1;
+  width: ${(props) => props.width || "100%"};
+  white-space: nowrap;
 `;
 
 export const InputContainer = styled.div`
@@ -212,8 +216,6 @@ export const PostBoarder = styled.input`
 `;
 export const PostListTitle = styled.div`
   display: flex;
-  width: 718.41px;
-  padding-right: 688.41px;
   align-items: flex-start;
 `;
 export const TitleContent = styled.div`
@@ -394,4 +396,47 @@ export const Page = styled.a`
   font-style: normal;
   font-weight: 700;
   line-height: 18px;
+`;
+export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+`;
+
+export const SearchInput = styled.input`
+  flex: 3;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+`;
+
+export const SearchButton = styled.button`
+  width: 150px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+`;
+
+export const Select = styled.select`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 `;

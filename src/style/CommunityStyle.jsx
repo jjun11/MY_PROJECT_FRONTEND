@@ -3,7 +3,6 @@ import img from "../images/ProFileimage.png";
 
 export const Page = styled.div`
   display: flex;
-  width: 100%;
   height: auto;
   flex-direction: column;
   align-items: flex-start;
@@ -17,7 +16,6 @@ export const Hidden = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  width: 100%;
   padding: 60px 170px;
   justify-content: center;
   align-items: center;
@@ -27,7 +25,6 @@ export const Container = styled.div`
 
 export const Section = styled.div`
   display: flex;
-  /* height: 220px; */
   flex-direction: column;
   align-items: center;
   gap: 24px;
@@ -42,7 +39,7 @@ export const Title = styled.a`
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
-  line-height: 48px; /* 120% */
+  /* line-height: 48px; */
 `;
 export const Note = styled.div`
   display: flex;
@@ -54,17 +51,17 @@ export const Note = styled.div`
   flex-shrink: 0;
 `;
 
-export const CommunityContainer = styled.div`
-  display: flex;
-  padding: 0px 348px;
-  flex-direction: column;
-  align-items: center;
-  align-self: stretch;
-`;
+// export const CommunityContainer = styled.div`
+//   display: flex;
+//   padding: 0px 348px;
+//   flex-direction: column;
+//   align-items: center;
+//   align-self: stretch;
+// `;
 export const CommunityList = styled.div`
   display: flex;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1600px;
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
 `;
@@ -78,6 +75,15 @@ export const Aside = styled.div`
   gap: 14.39px;
   flex-shrink: 0;
   align-self: stretch;
+  @media (max-width: 768px) {
+    flex: 1; // 화면 크기가 768px 이하일 때 유동적으로 확장
+    max-width: none; // max-width 해제
+    position: fixed; // 고정 위치 설정
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+  }
 `;
 
 export const CommunityDashboard = styled.div`
@@ -90,7 +96,7 @@ export const CommunityDashboard = styled.div`
 `;
 export const TextCenter = styled.div`
   display: flex;
-  width: 218.81px;
+  width: 200px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
@@ -160,7 +166,6 @@ export const CommunityProfilePart = styled.div`
   align-items: center;
 `;
 export const CommunityProfileImg = styled.div`
-  /* width: 218.81px; */
   height: 91px;
   min-width: 218.81px;
   max-width: 218.81px;

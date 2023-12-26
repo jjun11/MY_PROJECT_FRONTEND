@@ -1,12 +1,18 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PostContainer = styled.div`
-  display: flex;
+  /* display: flex; */
   width: 1000px;
   flex-direction: column;
   padding: 0px 21.6px 0px 36px;
   flex: 1;
   word-wrap: break-word;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+  border: 0;
+  background: transparent;
+  font-style: normal;
 `;
 export const PostHeader = styled.div`
   display: flex;
@@ -90,38 +96,42 @@ export const PostVotes = styled.div`
   border-bottom: 1px solid #ddd;
 `;
 
-export const PostUpvote = styled.button`
-  padding: 0.5em;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
+export const HeadText = styled.span`
   cursor: pointer;
-  margin-right: 0.5em;
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
 
-export const PostDownvote = styled.button`
-  padding: 0.5em;
-  border: none;
-  background-color: #dc3545;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: #c82333;
-  }
-`;
-export const CommentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid black;
-`;
 export const CommentContainer = styled.div`
   width: 100%;
   margin-top: 2em;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+`;
+
+export const CommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+
+  &:not(:first-child) {
+    margin-top: 2em;
+  }
+`;
+
+export const CommentContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1em;
+  color: #666;
+  padding: 1em;
+
+  &:first-child {
+    margin-top: 15px;
+  }
+
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
 `;
 
 export const CommentHeader = styled.div`
@@ -138,6 +148,9 @@ export const CommentHeader = styled.div`
 `;
 
 export const InformationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -149,10 +162,8 @@ export const InformationContainer = styled.div`
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
   font-style: normal;
 `;
-export const SmallInput = styled.input`
+export const InputCommonStyle = css`
   display: block;
-  width: 20%;
-  height: 30px;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -160,58 +171,23 @@ export const SmallInput = styled.input`
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
   font-style: normal;
+`;
+
+export const SmallInput = styled.input`
+  ${InputCommonStyle}
+  width: 100%;
+  height: 30px;
 `;
 
 export const LargeInput = styled.textarea`
-  display: block;
+  ${InputCommonStyle}
   width: 100%;
   height: 100px;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
-  font-style: normal;
-`;
-export const CommentContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  font-size: 1em;
-  color: #666;
-  padding: 1em;
-`;
-export const FormContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 1em;
-`;
-export const CommentForm = styled.form`
-  display: block;
-  padding: 12px;
-  background: #fafafa;
-  border-top: 2px solid #b566ff;
-  border-bottom: 2px solid #b566ff;
-  font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
 `;
 
 export const CommentButton = styled.button`
-  display: block;
+  ${InputCommonStyle}
   width: 300px;
-
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
-  font-style: normal;
   &:after {
     clear: both;
     display: block;
@@ -219,6 +195,24 @@ export const CommentButton = styled.button`
     content: "";
   }
 `;
+
+export const FormContainer = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 1em;
+`;
+
+export const CommentForm = styled.form`
+  display: block;
+  padding: 12px;
+  background: #fafafa;
+  border-top: 2px solid #3f82e7;
+  border-bottom: 2px solid #3f82e7;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+`;
+
 export const Dropdown = styled.select`
   width: 200px;
   height: 40px;
@@ -233,44 +227,220 @@ export const Dropdown = styled.select`
     border-color: #4a90e2;
   }
 `;
+
 export const ReplyFormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-left: 20px;
-`;
-
-export const ReplyInput = styled.input`
-  width: 70%;
-  padding: 1em;
-  margin-right: 1em;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-`;
-
-export const ReplyButton = styled.button`
-  padding: 1em;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-export const ReplyContent = styled.div`
-  display: flex;
-  font-size: 0.9em;
-  overflow: hidden;
-  width: 100%;
-  height: 38px;
-  margin-top: 15px;
-  margin-left: 30px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, 굴림, Gulim, sans-serif;
   font-size: 13px;
   color: #333;
+  list-style: none;
+  margin: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-style: normal;
+  padding: 9px 12px 7px;
+  border-top: 1px solid #ddd;
+  margin-top: 0px;
+`;
+
+export const ReplyContent = styled.div`
+  ${CommentContent}
+  margin-left: 30px;
+`;
+
+export const PaginationButton = styled.button`
+  margin-top: 15px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: #007bff;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const CommentFormFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+export const CommentFormWrapper = styled.div`
+  ${CommentForm}
+  margin-top: 15px;
+`;
+export const PostUpvote = styled.button`
+  background: none;
+  border: none;
+  height: 60px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.3s, opacity 0.3s;
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  }
+
+  &::before {
+    border: 2px solid #37474f;
+    opacity: 0;
+    transform: scale3d(1.2, 1.2, 1);
+  }
+
+  &::after {
+    background: #fff;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+
+    &::after {
+      opacity: 0;
+      transform: scale3d(0.8, 0.8, 1);
+    }
+  }
+
+  ${(props) =>
+    props.inverted &&
+    css`
+      transition: color 0.3s;
+      transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+
+      &::before {
+        border-color: #7986cb;
+      }
+
+      &::after {
+        background: #7986cb;
+      }
+
+      &:hover {
+        color: #7986cb;
+      }
+    `}
+
+  ${(props) =>
+    props.invertedAlt &&
+    css`
+      transition: color 0.3s;
+      transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+
+      &::before {
+        border-color: #3f51b5;
+      }
+
+      &::after {
+        background: #3f51b5;
+      }
+
+      &:hover {
+        color: #3f51b5;
+      }
+    `}
+`;
+export const PostDownvote = styled.button`
+  background: none;
+  border: none;
+  height: 60px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.3s, opacity 0.3s;
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  }
+
+  &::before {
+    border: 2px solid #37474f;
+    opacity: 0;
+    transform: scale3d(1.2, 1.2, 1);
+  }
+
+  &::after {
+    background: #fff;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+
+    &::after {
+      opacity: 0;
+      transform: scale3d(0.8, 0.8, 1);
+    }
+  }
+
+  ${(props) =>
+    props.inverted &&
+    css`
+      transition: color 0.3s;
+      transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+
+      &::before {
+        border-color: #7986cb;
+      }
+
+      &::after {
+        background: #7986cb;
+      }
+
+      &:hover {
+        color: #7986cb;
+      }
+    `}
+
+  ${(props) =>
+    props.invertedAlt &&
+    css`
+      transition: color 0.3s;
+      transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+
+      &::before {
+        border-color: #3f51b5;
+      }
+
+      &::after {
+        background: #3f51b5;
+      }
+
+      &:hover {
+        color: #3f51b5;
+      }
+    `}
+`;
+
+export const ButtonText = styled.span`
+  padding-left: 0.35em;
 `;
