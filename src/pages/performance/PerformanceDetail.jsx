@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const Image = styled.img`
     width: 42rem;
-    height: 55rem;
+    height: 56rem;
     overflow: hidden;
     border-radius: 3rem;
     margin-right: 5rem;
@@ -73,7 +73,7 @@ const Information = styled.div`
             &:hover {
                 cursor: pointer;
                 background-color: black;
-                transform: scale(1.1);
+                transform: scale(1.05);
                 transition: transform 0.05s ease-in-out; // transform 속성에 대한 전환 효과 설정
             }
             &:active {
@@ -131,7 +131,7 @@ const Bottom = styled.div`
             // 마우스 호버링 효과
             cursor: pointer;
             background-color: var(--mainsky);
-            transform: scale(1.1);
+            transform: scale(1.05);
             transition: transform 0.05s ease-in-out; // transform 속성에 대한 전환 효과 설정
             }
             &:active {

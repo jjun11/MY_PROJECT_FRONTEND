@@ -59,11 +59,11 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 확대 
   useEffect(() => {
     // selectedVenue가 변경될 때마다 실행됩니다.
     if (map && selectedVenue) { 
-      const geocoder = new window.kakao.maps.services.Geocoder();
+      const geocoder = new window.kakao.maps.services.Geocoder(); 
 
-      geocoder.addressSearch(selectedVenue, function(result, status) {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+      geocoder.addressSearch(selectedVenue, function(result, status) { // 선택된 공연장의 주소를 좌표로 변환합니다.
+        if (status === window.kakao.maps.services.Status.OK) { // 정상적으로 변환되었을 경우
+          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x); // 좌표를 생성합니다.
           map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         }
       });

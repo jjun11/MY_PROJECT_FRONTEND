@@ -89,12 +89,6 @@ const Performance = () => {
         <SearchBanner>
           <Box>
             <div>공연 검색</div>
-            <ModalComponent
-              open="열기"
-              content="테스트"
-              close="닫기"
-              openButtonStyle={{ width: "109rem", bgColor: "blue" }}
-            />
           </Box>
           <Box>
             <input

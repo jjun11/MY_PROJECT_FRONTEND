@@ -13,12 +13,13 @@ const CardView = styled.div`
   box-sizing: border-box;
   border-radius: 3rem;
   background-color: white;
-  box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.25);
   line-height: 1.1;
   margin-bottom: 2rem;
   &:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
+    cursor: pointer;
   }
 `;
 
@@ -81,7 +82,7 @@ const Button = styled.button`
     // 마우스 호버링 효과
     cursor: pointer;
     background-color: var(--mainsky);
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
   }
   &:active {
@@ -136,7 +137,7 @@ const PerformanceCardView = ({
 
   return (
     <>
-      <CardView onMouseEnter={() => onMouseOver(venue)}>
+      <CardView onClick={() => onMouseOver(venue)}> {/* 휴대폰 사용 시 호버링 효과 불가하니, 터치(클릭) 시에도 좌표 변하도록 onclick 적용*/}
         <Poster src={image} alt={`${title} 포스터`} />
         <Title>{title}</Title>
         <Venue>{venue}</Venue>

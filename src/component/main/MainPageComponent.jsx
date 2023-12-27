@@ -18,6 +18,7 @@ export const TopContainer = styled.div`
   background-image: url(${b});
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
 `;
 
 export const Main = styled.div`
@@ -26,7 +27,7 @@ export const Main = styled.div`
   height: 84%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   box-shadow: 0px 5.75949px 28.7975px rgba(0, 0, 0, 0.12);
 
   @media (max-width: 768px) {
@@ -121,6 +122,7 @@ export const Artist = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10%;
 `;
 
 export const P3 = styled.p`
@@ -150,6 +152,7 @@ export const MusicRankTitle = styled.div`
 export const MusicRank = styled.div`
   width: 100%;
   height: 20%;
+  margin-top: 10%;
 `;
 // 70
 

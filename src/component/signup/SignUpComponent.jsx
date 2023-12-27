@@ -8,7 +8,12 @@ export const CONTAINER = styled.div`
 export const SIGNUP = styled.div`
   width: 45vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(9, 41, 44, 0.8) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   min-height: 680px;
   min-width: 600px;
@@ -18,7 +23,6 @@ export const TOP = styled.div`
   width: 100%;
   height: 10%;
   text-align: center;
-
   & .top-title {
     font-size: 2rem;
     color: white;

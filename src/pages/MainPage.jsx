@@ -9,6 +9,7 @@ import {
   MusicRank,
   News,
   TopContainer,
+  P3,
 } from "../component/main/MainPageComponent";
 import Carousel from "../component/main/CatouselSlider";
 import NewList from "../component/main/NewList";
@@ -43,14 +44,24 @@ const MainPage = () => {
 
         <Main>
           <Artist>
+            <P3
+              fontSize="4rem"
+              style={{
+                color: "#82ccff",
+                textShadow: "0px 8px 4px rgba(97, 230, 202, 0.25)",
+              }}
+            >
+              SNS HOT! SONG
+            </P3>
             <Carousel></Carousel>
           </Artist>
 
           <Advertisement>
             <Gender useAuth={useAuth}></Gender>
           </Advertisement>
-          <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 10</MusicRankTitle>
+
           <MusicRank>
+            <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 10</MusicRankTitle>
             <HeartSong></HeartSong>
           </MusicRank>
           <NewMusicList>

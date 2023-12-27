@@ -22,7 +22,7 @@ import {
 } from "../style/MyPageStyle";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
-import PayComponent from "../component/Mypage/PayComponent.tsx";
+import PayComponent from "../component/mypage/PayComponent.tsx";
 
 const MyPage = () => {
   const [email, setEmail] = useState("asd123@naver.com");

@@ -4,15 +4,16 @@ import styled, { css, keyframes } from "styled-components";
 import likeheart from "../../images/Heart.png";
 import buyimg from "../../images/Basket.png";
 import artistImg from "../../images/Artist_2.png";
-import commentimg from "../../images/postimg05.jpg";
-import commentimg01 from "../../images/postimg03.jpg";
+import commentsend from "../../images/commentsend.png";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { Link } from "react-router-dom";
+import ModalComponent from "../../component/MusicList/MusicPurchaseModal";
 
 const BackgroundContainer = styled.div`
   width: 100%;
-  height: 270rem;
+  top: 2rem;
+  height: 284rem;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -21,24 +22,41 @@ const BackgroundContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  width: 110rem;
-  height: 270rem;
+  width: 120rem;
+  height: 280rem;
   display: flex;
   position: relative;
   flex-direction: column;
-
+  border-radius: 10rem;
   align-items: center;
   box-shadow: 0 1rem 3rem -0.5rem rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const TopInfoBox = styled.div`
-  width: 100vw;
+  width: 110rem;
+  max-width: 100%;
   height: 86rem;
   display: flex;
   position: relative;
   flex-direction: column;
 
   align-items: center;
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const rotateAnimation = keyframes`
@@ -56,7 +74,7 @@ const MusicImgBox = styled.div`
   position: relative;
   // left: 78.4rem;
   top: 14rem;
-  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 20px 20px 20px rgba(0, 0, 1, 0.8);
   border-radius: 50%;
   overflow: hidden;
   clip-path: circle(50% at 50% 50%);
@@ -72,6 +90,7 @@ const MusicImage = styled.img`
   width: 40rem;
   height: 40rem;
   border-radius: 50%;
+
   object-fit: cover;
   position: relative;
   left: -10%; /* 이미지 위치 조정 */
@@ -82,8 +101,8 @@ const MusicImage = styled.img`
 
 const MusicInnerCircle = styled.div`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 10rem;
+  height: 10rem;
   background: rgba(22, 19, 19, 0.1);
   border: 1px solid black;
   border-radius: 50%;
@@ -99,15 +118,15 @@ const MusicName = styled.div`
   display: flex;
   width: 32rem;
   height: 4.3rem;
-  // left: 904.9px;
+
   top: 15rem;
   align-items: center;
   justify-content: center;
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 800;
-  font-size: 2.5rem;
-  line-height: 43px;
+  font-size: 4rem;
+  line-height: 4.3rem;
   text-align: center;
 
   color: #000000;
@@ -117,12 +136,13 @@ const MusicDefInfo = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: 0.1rem;
   justify-content: center;
   align-items: center;
   width: 32rem;
   height: 7rem;
   // left: 803px;
-  top: 18rem;
+  top: 20rem;
 `;
 
 const SingerName = styled.div`
@@ -194,11 +214,25 @@ const Genre = styled.div`
   color: black;
 `;
 
+const Infomation = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1.8rem;
+  line-height: 32px;
+  text-align: center;
+
+  color: black;
+`;
+
 const BoxCon = styled.div`
   width: 44.6rem;
   height: 9.2rem;
 
-  // left: 74rem;
   top: 24rem;
   display: flex;
   flex-direction: row;
@@ -296,7 +330,10 @@ const PlayBox = styled.button`
   border: none;
   height: 5rem;
   color: white;
-  font-size: 3rem;
+  font-size: 4rem;
+  line-height: 5rem; /* font-size와 동일하게 설정 */
+  padding-left: 1.4rem; /* 필요에 따라 조정 */
+  margin: 0; /* 필요에 따라 조정 */
   cursor: pointer;
 
   /* 호버 효과 스타일 */
@@ -317,44 +354,80 @@ const VolumeInput = styled.div`
   // bottom: 20px; /* 바닥과의 거리를 조정 */
 
   justify-content: center;
-  left: 0rem;
+
   top: 24rem;
 `;
 
 const BottomInfoBox = styled.div`
-  height: 180rem;
-  width: 100vw;
+  height: 250rem;
+  width: 110rem;
   display: flex;
+  top: 22rem;
   flex-direction: column;
   position: relative;
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const BottomTitle = styled.div`
   position: relative;
   display: flex;
+  top: 18rem;
   color: #97b0aa;
   font-size: 4rem;
-  width: 100vw;
+  width: 110rem;
   height: 6rem;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const DetailInfoBox = styled.div`
-  width: 100vw;
+  width: 110rem;
   height: 128rem;
   display: flex;
   flex-direction: column;
   position: relative;
+  align-items: center;
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const CoperateInfo = styled.div`
-  width: 100vw;
+  width: 80rem;
+
   height: 60rem;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 1280px) {
+    width: 60rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const CopoerateTitle = styled.div`
@@ -363,11 +436,12 @@ const CopoerateTitle = styled.div`
   top: 3rem;
   display: flex;
   position: relative;
+  color: #008bff;
 `;
 
 const CopoeraterBox = styled.div`
   position: relative;
-  width: 100vw;
+  width: 80rem;
   height: 40rem;
   display: grid;
   grid-template-rows: repeat(2, auto); /* 변경된 부분 */
@@ -395,32 +469,61 @@ const CopertatorInfo = styled.div`
   align-items: center;
   padding: 1rem;
   // gap: 4.1rem;
+
+  @media (max-width: 1280px) {
+    width: 30rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 20rem;
+  }
 `;
 
 const ProfileImg = styled.img`
   display: flex;
   position: relative;
-  width: 10rem;
-  height: 10rem;
+  width: 6rem;
+  height: 6rem;
 
   border-radius: 10rem;
   box-shadow: 0rem 0rem 0.4rem rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 1280px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 const CoperDetail = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 22rem;
+  width: 20rem;
   height: 10rem;
   align-items: center;
+
+  @media (max-width: 1280px) {
+    width: 18rem;
+    height: 9rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 16rem;
+    height: 8rem;
+  }
 `;
 
 const CoperDetail01 = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  width: 20rem;
+
+  width: 14rem;
   height: 5rem;
   align-items: center;
   justify-content: center;
@@ -435,7 +538,7 @@ const CoperMusicName = styled.div`
 `;
 
 const CoperName = styled.div`
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   display: flex;
   position: relative;
@@ -452,7 +555,7 @@ const CoperDetail02 = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  width: 18rem;
+  width: 10rem;
   height: 5rem;
   top: 1rem;
   align-items: center;
@@ -460,10 +563,20 @@ const CoperDetail02 = styled.div`
 
   gap: 2rem;
   left: 0.2rem;
+
+  @media (max-width: 1280px) {
+    width: 9rem;
+    height: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 8rem;
+    height: 4rem;
+  }
 `;
 
 const LyricsInfo = styled.div`
-  width: 100vw;
+  width: 110rem;
   height: 60rem;
   position: relative;
   display: flex;
@@ -478,27 +591,34 @@ const LyricsTitle = styled.div`
   top: 3rem;
   display: flex;
   position: relative;
+  color: #008bff;
 `;
 
 const LyricsBox = styled.div`
   position: relative;
   display: flex;
-  width: 80rem;
+  width: 50rem;
+
   height: 102.5rem;
-  border: 0.2px solid black;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 300;
   font-size: 1.5rem;
   line-height: 2.3rem;
   justify-content: center;
-
   color: #000000;
+
+  @media (max-width: 1280px) {
+    width: 40rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 30rem;
+  }
 `;
 
 const CommnetZone = styled.div`
-  width: 100vw;
+  width: 110rem;
   height: 72rem;
 
   position: relative;
@@ -514,6 +634,7 @@ const CommentTitle = styled.div`
   top: 3rem;
   display: flex;
   position: relative;
+  color: #008bff;
 `;
 
 const CommentBOx = styled.div`
@@ -532,6 +653,14 @@ const CommentBOx = styled.div`
   line-height: 2.3rem;
 
   color: #000000;
+
+  @media (max-width: 1280px) {
+    width: 80rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const CommentForm = styled.form`
@@ -540,12 +669,26 @@ const CommentForm = styled.form`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 64rem;
+  width: 68rem;
   height: 8rem;
-
-  background: #eeeeee;
+  gap: 4rem;
+  box-shadow: 0px 5.1px 19.18px -3.2px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(
+    180deg,
+    rgb(0, 139.09, 255) 0%,
+    rgb(97, 230, 202) 100%
+  );
   border-radius: 1.5rem;
-  gap: 1.5rem;
+
+  @media (max-width: 1280px) {
+    width: 70rem;
+    gap: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 38rem;
+    gap: 2rem;
+  }
 `;
 
 const CommenterInfo = styled.div`
@@ -578,15 +721,15 @@ const CommentImg = styled.img`
 
 const TextInput = styled.input`
   box-sizing: border-box;
-
+  box-shadow: 0px 5.1px 19.18px -3.2px rgba(0, 0, 0, 0.3);
   position: relative;
   display: flex;
-  width: 40rem;
-  height: 7rem;
+  width: 50rem;
+  height: 4rem;
   background: #ffffff;
-  border: 0.3px solid #000000;
-  border-radius: 10px;
-  box-shadow: inset 1px 1px rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 2rem;
+
   /* 호버 효과 스타일 */
   &:hover {
     transform: scale(1.005);
@@ -597,18 +740,24 @@ const TextInput = styled.input`
       outline: none;
     }
   }
+
+  @media (max-width: 1280px) {
+    width: 40rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 30rem;
+  }
 `;
-const CommentButton = styled.div`
+const CommentButton = styled.img`
   position: relative;
   display: flex;
-  width: 8rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px rgba(0, 0, 0, 0.4);
 
-  background: #4296dc;
-  border-radius: 1rem;
+  border-radius: 2rem;
   transition: transform 0.3s ease;
 
   /* 호버 효과 스타일 */
@@ -619,6 +768,16 @@ const CommentButton = styled.div`
   /* 클릭 효과 스타일 */
   &:active {
     transform: scale(0.9); /* 클릭 시 크기를 0.9배로 축소 */
+  }
+
+  @media (max-width: 1280px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 4rem;
+    height: 4rem;
   }
 `;
 
@@ -637,8 +796,6 @@ const Distinctline = styled.div`
   width: 54rem;
   height: 0px;
   top: 4rem;
-
-  border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const CommentList = styled.div`
@@ -653,6 +810,14 @@ const CommentList = styled.div`
   // justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 1280px) {
+    width: 50rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;
 
 const CommentItem01 = styled.div`
@@ -660,10 +825,19 @@ const CommentItem01 = styled.div`
   position: relative;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   width: 58rem;
-  height: 4rem;
-
+  height: 5rem;
+  margin-top: 1rem;
   border-bottom: 1px solid green;
+
+  @media (max-width: 1280px) {
+    width: 46rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 36rem;
+  }
 `;
 
 const CommentlistImg = styled.img`
@@ -676,15 +850,19 @@ const CommentlistImg = styled.img`
 
 const Commenter = styled.div`
   box-sizing: border-box;
+  border-radius: 2rem;
+  background-color: #4caf50;
+  box-shadow: 0px 5.1px 19.18px -3.2px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 10rem;
-  height: 3.8rem;
-  font-size: 0.8rem;
-  font-weight: bold;
+  width: 6rem;
+  height: 3rem;
+  font-size: 1.6rem;
+  font-weight: 500;
 `;
 
 const Commenttext = styled.div`
@@ -698,16 +876,16 @@ const Commenttext = styled.div`
   width: 40rem;
   height: 3rem;
   background: #ffffff;
-  border: 0.3px solid #000000;
+  // border: 0.3px solid #000000;
   border-radius: 10px;
-  box-shadow: inset 1px 1px rgba(0, 0, 0, 0.7);
+  // box-shadow: inset 1px 1px rgba(0, 0, 0, 0.7);
 `;
 
 const CommentDeleteButton = styled.div`
   position: relative;
   display: flex;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   left: 0.2rem;
   color: black;
   /* 호버 효과 스타일 */
@@ -860,7 +1038,7 @@ const MusicInfo = () => {
     musicCommentList();
   }, [id, inputComment]);
 
-  const loggedInUserId = window.localStorage.getItem("userId");
+  const loggedInUserId = window.localStorage.getItem("email");
   //음악 댓글 삭제
   const handleDeleteComment = async (musicCommentId) => {
     try {
@@ -879,7 +1057,7 @@ const MusicInfo = () => {
   // 음악 댓글 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
   const [currentComments, setCurrentComments] = useState([]);
-  const commentsPerPage = 8;
+  const commentsPerPage = 6;
   const totalComments = musicCommentList.length;
 
   const totalPages = Math.ceil(totalComments / commentsPerPage);
@@ -958,6 +1136,34 @@ const MusicInfo = () => {
     setVolume(newVolume);
   };
 
+  //음악 구매 기능
+  const musicPurchaser = window.localStorage.getItem("email");
+  const [modalOpen, setModalopen] = useState(false);
+
+  const handlePurchaseClick = () => {
+    setModalopen(true);
+  };
+
+  const handleConfirm = async () => {
+    try {
+      console.log("", id);
+      const response = await MusicAxiosApi.purchaseMusic(id);
+      console.log("음악 구매 성공 여부 : ", response.data);
+      if (response.data === true) {
+        alert("구매를 완료했습니다");
+        setModalopen(false); // 모달 닫기}
+      } else {
+        alert("구매를 실패했습니다");
+      }
+    } catch (error) {
+      console.log("음악 구매 실패", error);
+    }
+  };
+
+  const handleCancel = () => {
+    setModalopen(false); // 모달 닫기
+  };
+
   return (
     <BackgroundContainer>
       <InfoContainer>
@@ -987,21 +1193,36 @@ const MusicInfo = () => {
                 </WriteInfo>
 
                 <Genre>{musicInfo.musicDTO.genre}</Genre>
+                <Infomation>{musicInfo.musicDTO.musicInfo}</Infomation>
               </MusicDefInfo>
 
               <BoxCon>
                 <MusicLikeBox onClick={likeMusic}>
                   <LikeHeart alt="좋아요하트" src={likeheart} />
                   <LikeCount>
-                    {isRender && musicInfo.musicDTO.heartCount + 11}
-                    {isLike && musicCount + 22}
+                    {isRender && musicInfo.musicDTO.heartCount}
+                    {isLike && musicCount}
                   </LikeCount>
                 </MusicLikeBox>
 
                 <PlayBox onClick={handlePlayClick}>▶</PlayBox>
-                <BuyBox>
+
+                {/* 음원구매버튼 */}
+
+                <BuyBox onClick={handlePurchaseClick}>
                   <BuyImg alt="장바구니아이콘" src={buyimg} />
                 </BuyBox>
+                {modalOpen && (
+                  <ModalComponent>
+                    <h2 style={{ textAlign: "center" }}>음악 구매</h2>
+                    <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                      해당 음악 구매시 <br /> 100포인트가 차감됩니다.
+                    </p>
+                    <button onClick={handleConfirm}>확인</button>
+                    <button onClick={handleCancel}>취소</button>
+                  </ModalComponent>
+                )}
+
                 <ReactAudioPlayer
                   ref={audioPlayerRef}
                   src={audioSrc}
@@ -1029,7 +1250,7 @@ const MusicInfo = () => {
         <BottomInfoBox>
           <DetailInfoBox>
             <CoperateInfo>
-              <CopoerateTitle>다른 추천 음악</CopoerateTitle>
+              <CopoerateTitle>이 노래도 들어보세요</CopoerateTitle>
 
               <CopoeraterBox>
                 {Array.isArray(musicinfolist)
@@ -1073,14 +1294,14 @@ const MusicInfo = () => {
             </LyricsInfo>
 
             <CommnetZone>
-              <CommentTitle>댓글</CommentTitle>
+              <CommentTitle>음악 토론</CommentTitle>
 
               <CommentBOx>
                 <CommentForm>
-                  <CommenterInfo>
-                    <CommentImg alt="작성자사진" src={commentimg} />
-                    <CommenterName>작성자이름</CommenterName>
-                  </CommenterInfo>
+                  {/* <CommenterInfo>
+                    <CommentImg alt="작성자사진" src={commentimg} /> 
+                    <CommenterName>{userEmail.userNickname}</CommenterName> 
+                  </CommenterInfo>  */}
 
                   <TextInput
                     type="text"
@@ -1089,35 +1310,35 @@ const MusicInfo = () => {
                     onChange={handleCommentChange}
                   ></TextInput>
 
-                  <CommentButton onClick={handleSubmitComment}>
-                    등록
-                  </CommentButton>
+                  <CommentButton
+                    onClick={handleSubmitComment}
+                    alt="댓글등록이미지"
+                    src={commentsend}
+                  ></CommentButton>
                 </CommentForm>
-
-                <Distinctline />
+                {/* 
+                <Distinctline /> */}
 
                 <CommentList>
                   {currentComments.map((comment) => (
                     <CommentItem01 key={comment.musiccommentId}>
-                      <CommentlistImg alt="작성자사진" src={commentimg} />
-                      <Commenter>
-                        작성자 <br />:{comment.userNickname}
-                      </Commenter>
+                      {/* <CommentlistImg alt="작성자사진" src={commentimg} /> */}
+                      <Commenter>{comment.userNickname}</Commenter>
                       <Commenttext> "{comment.content}"</Commenttext>
 
                       {/* 댓글 작성자의 ID와 현재 로그인한 사용자의 ID 비교하여 삭제 버튼을 표시하거나 숨김.
-   삭제 버튼은 댓글 작성자와 현재 로그인한 사용자의 ID가 일치할 때만. */}
+                      삭제 버튼은 댓글 작성자와 현재 로그인한 사용자의 ID가 일치할 때만. */}
                       <CommentDeleteButton
                         style={{
                           display:
-                            comment.userId === loggedInUserId
+                            comment.userEmail === loggedInUserId
                               ? "block"
                               : "none",
                         }}
                         onClick={() =>
                           handleDeleteComment(
                             comment.musiccommentId,
-                            comment.userId
+                            comment.userEmail
                           )
                         }
                       >
