@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import footerlogo from "../images/LogoSymbol_white.png";
+import FooterContext from "../component/FooterContext";
 
 const FooterBox = styled.div`
   width: 100%;
@@ -49,6 +50,8 @@ const TextWrapper = styled.div`
 
 
 const Footer = () => {
+  const { footerData } = useContext(FooterContext);
+
   return (
     <>
       <FooterBox>
@@ -76,12 +79,8 @@ const Footer = () => {
           </Content>
           <Content>
             <TextWrapper>
-            <h1>CONTENT GROUP</h1>
-              <p>CONTENT</p>
-              <p>CONTENT</p>
-              <p>CONTENT</p>
-              <p>CONTENT</p>
-              <p>CONTENT</p>
+            <h1>저작자표시</h1>
+              {footerData}
             </TextWrapper>
           </Content>
         </ContentGroup>

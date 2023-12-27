@@ -1,5 +1,5 @@
 import PerformanceAxios from "../../axios/PerformanceAxios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
@@ -8,6 +8,7 @@ import PerformerCardView from "../../component/performance/PerformerCardView";
 import basket from "../../images/Basket.png";
 import NoneBtnModalComponent from "../../utils/NoneBtnModalComponent";
 import Ticket from "../../component/performance/Ticket";
+import FooterContext from "../../component/FooterContext";
 
 const Container = styled.div`
     margin: 8rem; 
@@ -162,6 +163,12 @@ const PerformanceDetail = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false); // 공연삭제알림 모달컴포넌트용
     const [ showDeleteConfirmModal, setShowDeleteConfirmModal ] = useState(false); // 공연삭제 재확인 모달컴포넌트용
 
+    const { setFooterData } = useContext(FooterContext); // FooterContext에서 setFooterData를 가져옵니다.
+
+    useEffect(() => {
+        setFooterData(<a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 아이콘  제작자: Pixel perfect - Flaticon</a>);
+    }, []);
+
      // 현재 시간과 공연 시간을 비교합니다.
   const isEnded = new Date() > new Date(performance &&performance.performanceDate);
     
@@ -241,6 +248,8 @@ const PerformanceDetail = () => {
         setIsModalOpen(false);
         window.location.href = "/performance";
     }
+
+
 
     return (
         <>

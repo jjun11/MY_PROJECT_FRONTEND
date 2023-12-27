@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Header from "./style/Header";
 import GlobalStyle from "./style/GlobalStyle";
 import Footer from "./style/Footer";
@@ -17,13 +17,17 @@ import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
 import Test from "./pages/SimpleTest";
 import AdminPage from "./pages/AdminPage";
+import FooterContext from "./component/FooterContext";
 
 
 function App() {
+  const [ footerData, setFooterData ] = useState([])
+
   return (
     <>
       <GlobalStyle />
       <Router>
+        <FooterContext.Provider value={{  footerData, setFooterData }}>
         <Header />
 
         <Routes>
@@ -52,6 +56,7 @@ function App() {
           <Route path="/test" element={<Test></Test>} />
         </Routes>
         <Footer />
+        </FooterContext.Provider>
       </Router>
     </>
   );

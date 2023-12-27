@@ -10,10 +10,11 @@ import {
   ConcertList,
 } from "../../style/performance/PerformanceStyle";
 import PerformanceList from "../../component/performance/PerformanceList";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 import ModalComponent from "../../utils/ModalComponent";
+import FooterContext from "../../component/FooterContext";
 
 const Performance = () => {
   const [inputValue, setInputValue] = useState(""); // 입력필드에 입력값을 저장
@@ -21,6 +22,12 @@ const Performance = () => {
   const [performanceList, setPerformanceList] = useState([]); // AxiosApi로 가져온 공연데이터를 저장
   const [filteredPerformanceList, setFilteredPerformanceList] = useState([]); // 필터링된 공연 데이터를 저장 .
   const [selectedVenue, setSelectedVenue] = useState(null); // 선택된 공연장을 저장
+
+  const { setFooterData } = useContext(FooterContext);
+
+  useEffect(() => {
+    setFooterData("Data from SomePage");
+  }, []);
 
   const handleCardMouseOver = (venue) => {
     setSelectedVenue(venue);
