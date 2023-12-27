@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import PerformanceAxios from "../../axios/PerformanceAxios";
+import NoneBtnModalComponent from "../../utils/NoneBtnModalComponent";
 
 export const Container = styled.div`
   width: 40rem;
@@ -78,13 +79,17 @@ export const Container = styled.div`
 
 
 
-const Ticket = ({ title, seatCount, price, performanceId }) => {
+const Ticket = ({ title, seatCount, price, performanceId, email, closePaymentModal }) => {
   const [ getseatCount, setSeatCount ] = useState(0);
   const [ count, setCount ] = useState(0);
+  const [ getEmail, setEmail] = useState();
+  const [ showTicketModal, setShowTicketModal ] = useState(false); // 구매완료 모달 창
   const increaseInterval = useRef(null);
   const decreaseInterval = useRef(null);
-
   
+  const closeModal = () => {
+    closePaymentModal(false);
+  };
 
   const handleCount = (e) => {
     setCount(prevCount => Math.min(prevCount + 1, seatCount - getseatCount));
@@ -126,7 +131,30 @@ const Ticket = ({ title, seatCount, price, performanceId }) => {
   getSeatCount();
   }, [performanceId]);
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try{
+        const res = await PerformanceAxios.getUser(email);
+        console.log("getUserInfo : ", res.data);
+        setEmail(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserInfo();
+  }, [email]);
 
+  console.log(performanceId, email, count*price)
+  const handlePurchase = async () => {
+    try {
+      await PerformanceAxios.purchaseTicket(performanceId, email, count, price, count*price);
+      setShowTicketModal(true); // 구매 완료 모달 창 띄우기
+    } catch (error) {
+      console.log(error);
+      alert("구매에 실패했습니다.");
+    }
+    }
+  
 
   return (
     <>
@@ -134,7 +162,7 @@ const Ticket = ({ title, seatCount, price, performanceId }) => {
         <div className="title">{title}</div>
         <div className="seat">잔여좌석 수: {getseatCount}/{seatCount}  </div>
         <div className="price">티켓가: {price} P</div>
-        <div className="wallet">보유포인트 : {} P</div>
+        <div className="wallet">보유포인트 : {getEmail && getEmail.userPoint} P</div>
         <div className="count">
           <button onMouseDown={handleDecreaseMouseDown} 
             onMouseUp={handleDecreaseMouseUp} 
@@ -147,9 +175,14 @@ const Ticket = ({ title, seatCount, price, performanceId }) => {
             onClick={handleCount}>▲</button>
           </div>
         <div className="totalprice"> {count * price} P 
-        <div className="button">구매</div>
+        <div className="button" onClick={handlePurchase}>구매</div>
         </div>
       </Container>
+      <NoneBtnModalComponent
+        isOpen={showTicketModal}
+        setIsOpen={setShowTicketModal}
+        content="구매가 완료되었습니다."
+        close={{ func: closeModal, text: "확인" } }/>
     </>
   )
 };

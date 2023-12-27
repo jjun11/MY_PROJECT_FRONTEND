@@ -49,6 +49,20 @@ setPerformance: async (performance) => {
       );
     },
 
+    // 이메일로 유저정보 조회
+    getUser: async (email) => {
+      const accessToken = Common.getAccessToken();
+      console.log("이메일로 유저정보조회 AxiosApi 작동")
+      return await Interceptor.get(
+        CHORD8_DOMAIN + `/performance/userByEmail?email=${email}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
     // 전체공연자조회
     getPerformerList: async () => {
       const accessToken = Common.getAccessToken();
@@ -78,14 +92,16 @@ setPerformance: async (performance) => {
     },
 
     //공연 구매
-    purchaseTicket: async (performanceId, userId, price) => {
+    purchaseTicket: async (performanceId, email, count, price, totalPrice) => {
       const accessToken = Common.getAccessToken();
       console.log("공연구매 AxiosApi 작동")
       return await Interceptor.post(
-        CHORD8_DOMAIN + `/ticketer/new/${performanceId}`, {
+        CHORD8_DOMAIN + `/ticketer/new`, {
           performanceId,
-          userId,
-          price
+          email,
+          count,
+          price,
+          totalPrice
         },{
           headers: {
             "Content-Type": "application/json",

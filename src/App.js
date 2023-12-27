@@ -17,7 +17,7 @@ import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
 import Test from "./pages/SimpleTest";
 import AdminPage from "./pages/AdminPage";
-import FooterContext from "./component/FooterContext";
+import FooterContext from "./context/FooterContext";
 
 
 function App() {

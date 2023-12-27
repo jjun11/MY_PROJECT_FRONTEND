@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import footerlogo from "../images/LogoSymbol_white.png";
-import FooterContext from "../component/FooterContext";
+import FooterContext from "../context/FooterContext";
 
 const FooterBox = styled.div`
   width: 100%;

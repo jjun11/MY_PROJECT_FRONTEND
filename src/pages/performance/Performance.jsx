@@ -14,7 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 import ModalComponent from "../../utils/ModalComponent";
-import FooterContext from "../../component/FooterContext";
+import FooterContext from "../../context/FooterContext";
 
 const Performance = () => {
   const [inputValue, setInputValue] = useState(""); // 입력필드에 입력값을 저장

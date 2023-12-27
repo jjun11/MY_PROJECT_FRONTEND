@@ -8,7 +8,9 @@ import PerformerCardView from "../../component/performance/PerformerCardView";
 import basket from "../../images/Basket.png";
 import NoneBtnModalComponent from "../../utils/NoneBtnModalComponent";
 import Ticket from "../../component/performance/Ticket";
-import FooterContext from "../../component/FooterContext";
+import FooterContext from "../../context/FooterContext";
+import SignUpAxios from "../../axios/SignUpAxios";
+import UseAuth from "../../hooks/UseAuth";
 
 const Container = styled.div`
     margin: 8rem; 
@@ -165,15 +167,15 @@ const PerformanceDetail = () => {
 
     const { setFooterData } = useContext(FooterContext); // FooterContext에서 setFooterData를 가져옵니다.
 
+    
+
     useEffect(() => {
-        setFooterData(<a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 아이콘  제작자: Pixel perfect - Flaticon</a>);
+        setFooterData([<a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 아이콘  제작자: Pixel perfect - Flaticon </a>
+        , <br/>, <a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 zz아이콘  제작자: Pixel perfect - Flaticon</a>]);
     }, []);
 
      // 현재 시간과 공연 시간을 비교합니다.
   const isEnded = new Date() > new Date(performance &&performance.performanceDate);
-    
-    const userToken = localStorage.getItem('accessToken'); // 로컬 스토리지에서 토큰을 가져옵니다.
-
 
     useEffect(() => {
         console.log(id);
@@ -197,6 +199,8 @@ const PerformanceDetail = () => {
     /* performance.nicknames = [{}, {}, {}] 은 특정 공연의 공연자 닉네임 닉네임 key는 nicknames /
        userRes.data = [{}, {}, {}] 은 전체 유저의 정보 닉네임 key는 userNickname
     */
+
+
     useEffect(() => {
         const getMemberInfo = async () => {
           try {
@@ -217,17 +221,15 @@ const PerformanceDetail = () => {
         }
       }, [performance]);
 
-      const email = localStorage.getItem('email');
-      const checkLocalStorage = () => { // 로컬스토리지상에서 이메일, accessToken, refreshToken이 있는지 확인
-        const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
-
-        if (!email || !accessToken || !refreshToken) {
-            setShowLoginModal(true);
-        } else {
-            setShowPaymentModal(true);
-        }
-    };
+      // 로그인 확인, 및 이메일 추출
+      const email = UseAuth();
+      const checkLogin = () => { // 로컬스토리지상에서 이메일, accessToken, refreshToken이 있는지 확인
+        if (!email) { 
+            setShowLoginModal(true); // email 이 없으면 로그인 필요 모달 호출
+            } else {
+            setShowPaymentModal(true); // email 있으면 티켓구매모달 호출
+            }
+        };
     
     // 삭제하고 모달을 닫는 함수
     const deleteAndClose = async () => {
@@ -263,7 +265,7 @@ const PerformanceDetail = () => {
                         <div className="seat">좌석 수 : {performance && performance.seatCount}</div>
                         <div className="desc">{performance && performance.description}</div>
                         <div className="delete">
-                        {memberInfo && memberInfo.some(user => user.userEmail === email) && (
+                        {memberInfo && memberInfo.some(user => user.userEmail === email) && ( 
                             <button onClick={() => setShowDeleteConfirmModal(true)}>공연 삭제</button>
                         )}
                         </div>
@@ -288,7 +290,7 @@ const PerformanceDetail = () => {
                             <>
                             <div className="ticketing">티켓 구매</div>
                             <div className="price">{performance.price} P</div>
-                            <div className="button" onClick={checkLocalStorage}>
+                            <div className="button" onClick={checkLogin}>
                                 <div className="icon"></div>
                             </div>
                             </>
@@ -313,6 +315,8 @@ const PerformanceDetail = () => {
                     price={performance && performance.price}
                     point={memberInfo && memberInfo.point}
                     performanceId={performance && performance.performanceId}
+                    email={email}
+                    closePaymentModal={setShowPaymentModal}
                     />}
                 close={{ text: "닫기"}}
                 />
