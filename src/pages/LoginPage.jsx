@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Container,
   BACKGROUND,
@@ -21,8 +21,20 @@ import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
 import kakao from "../images/kakao_login.png";
 import Common from "../utils/Common";
+import FooterContext from "../context/FooterContext";
 
 const LoginPage = () => {
+  // 저작권
+  const { setFooterData } = useContext(FooterContext);
+
+  useEffect(() => {
+    setFooterData(
+      <a href="https://www.flaticon.com/free-icons/add" title="add icons">
+        Add icons created by Freepik - Flaticon
+      </a>
+    );
+  }, []);
+
   const navigate = useNavigate();
 
   // 이메일 찾기 이동

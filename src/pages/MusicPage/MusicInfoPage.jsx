@@ -8,7 +8,9 @@ import commentsend from "../../images/commentsend.png";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { Link } from "react-router-dom";
-import ModalComponent from "../../component/MusicList/MusicPurchaseModal";
+import ModalComponent from "../../component/musicList/MusicPurchaseModal";
+import FooterContext from "../../context/FooterContext";
+import { useContext } from "react";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -938,6 +940,24 @@ const MusicInfo = () => {
 
   const [musicId, setMusicId] = useState(id); // 음악 ID 상태
   const [loggedInUserNickname, setLoggedInUserNickname] = useState(""); // 로그인한 사용자의 닉네임 상태
+
+  //아이콘 저작권 링크.
+  const { setFooterData } = useContext(FooterContext);
+
+  useEffect(() => {
+    setFooterData(
+      <a
+        href="https://www.flaticon.com/free-icons/send-comment"
+        title="send comment icons"
+      >
+        Send comment icons created by Rooman12 - Flaticon
+      </a>,
+      <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">
+        심장 아이콘 제작자: Kiranshastry - Flaticon
+      </a>
+    );
+  }, []);
+
   // 좋아요 수 설정 useState
   const [musicCount, setMusicCount] = useState(0);
   const heartChecker = window.localStorage.getItem("email");

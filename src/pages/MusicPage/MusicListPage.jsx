@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import SearchBox from "../../component/MusicList/SearchBox";
-import postimg01 from "../../images/postimg01.jpg";
-import postimg02 from "../../images/postimg02.jpg";
-import postimg03 from "../../images/postimg03.jpg";
-import postimg04 from "../../images/postimg04.jpg";
-import postimg05 from "../../images/postimg05.jpg";
-import albumthuming from "../../images/albumthumimg01.jpg";
+import FooterContext from "../../context/FooterContext";
 import Searchicon from "../../images/SearchIcon.png";
-import Waveform from "../../component/MusicList/MusicPlayer";
+import Waveform from "../../component/musicList/MusicPlayer";
 import { Link } from "react-router-dom";
 import MusicAxiosApi from "../../axios/MusicAxios";
 
@@ -64,7 +58,7 @@ const SearchBar = styled.div`
   display: flex;
   background-color: #eeeeee;
   align-items: center;
-  justify-contents: center;
+  justify-content: center;
   box-shadow: 0px 4px 4px #00000040;
 `;
 
@@ -300,14 +294,14 @@ const ListBox = styled.div`
   margin-bottom: 1rem;
   // padding-left: 3rem;
   background-color: #171717;
-   border: 0.2px solid white;
+  border: 0.2px solid white;
   display: flex;
   position: relative;
-   flex-direction: row;
-   align-items: center;
-   justify-content: center;
-   border-radius: 1rem;
-   gap: 4rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  gap: 4rem;
 `;
 
 const MusicThumnail = styled.img`
@@ -460,7 +454,7 @@ const SearchInput = styled.input`
   height: 5rem;
   left: 2rem;
   position: relative;
-  display:flex;
+  display: flex;
   top: 14px;
   width: 72rem;
   padding: 0 2rem;
@@ -468,7 +462,7 @@ const SearchInput = styled.input`
 
   /* 호버 효과 스타일 */
   &:hover {
-    transform: scale(1.005); 
+    transform: scale(1.005);
     cursor: pointer; /* 호버 시 마우스 커서 변경 */
 
     /* 클릭 시 테두리 없애기 */
@@ -483,11 +477,11 @@ const SearchButton = styled.button`
   border-radius: 2rem;
   color: white;
   height: 4rem;
-   display: flex;
+  display: flex;
   position: relative;
   align-items: center;
-   top: 2rem;
-   right:4rem;
+  top: 2rem;
+  right: 4rem;
   width: 4rem;
   border: none;
   transition: transform 0.3s ease; /* 호버 시 변화를 부드럽게 만들기 위한 transition 속성 */
@@ -497,7 +491,7 @@ const SearchButton = styled.button`
     transform: scale(1.1); /* 호버 시 크기를 1.1배로 확대 */
     cursor: pointer; /* 호버 시 마우스 커서 변경 */
   }
-    /* 클릭 효과 스타일 */
+  /* 클릭 효과 스타일 */
   &:active {
     transform: scale(0.9); /* 클릭 시 크기를 0.9배로 축소 */
   }
@@ -518,20 +512,31 @@ const MusicList = () => {
   const [promoImages, setPromoImages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
-  //음악 파일 배열.
-  // const musicFiles = [
-  //   require("../../component/MusicList/testmusic01.mp3"),
-  //   require("../../component/MusicList/testmusic02.mp3"),
-  //   require("../../component/MusicList/testmusic03.mp3"),
-  //   require("../../component/MusicList/testmusic04.mp3"),
-  //   require("../../component/MusicList/testmusic05.mp3"),
-  //   require("../../component/MusicList/testmusic06.mp3"),
-  //   require("../../component/MusicList/testmusic07.mp3"),
-  //   require("../../component/MusicList/testmusic08.mp3"),
-  //   require("../../component/MusicList/testmusic09.mp3"),
-  //   require("../../component/MusicList/testmusic10.mp3"),
-  //   require("../../component/MusicList/testmusic.mp3"),
-  // ];
+  //아이콘 저작권 링크.
+  const { setFooterData } = useContext(FooterContext);
+
+  useEffect(() => {
+    setFooterData(
+      <a
+        href="https://www.flaticon.com/free-animated-icons/pause"
+        title="pause animated icons"
+      >
+        Pause animated icons created by Freepik - Flaticon
+      </a>,
+      <a
+        href="https://www.flaticon.com/free-animated-icons/music"
+        title="music animated icons"
+      >
+        Music animated icons created by Freepik - Flaticon
+      </a>,
+      <a
+        href="https://www.flaticon.com/free-icons/magnifying-glass"
+        title="magnifying glass icons"
+      >
+        Magnifying glass icons created by Smashicons - Flaticon
+      </a>
+    );
+  }, []);
 
   //카테고리별 검색
   // 기존 음악 카테고리 클릭 이벤트 핸들러에서 선택된 장르를 설정하는 함수

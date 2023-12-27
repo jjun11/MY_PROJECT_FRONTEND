@@ -5,7 +5,7 @@ export const MyPageContainer = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   opacity: 1;
 
   background: #fff;

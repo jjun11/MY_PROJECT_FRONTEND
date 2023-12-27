@@ -8,8 +8,8 @@ import {
   InputBox,
   Button,
 } from "../../style/music/MusicUpdateStyle";
-import UpdateBox from "../../component/MusicList/UpdateBox";
-import UpdateUserInfo from "../../component/MusicList/UpdateUserInfo";
+import UpdateBox from "../../component/musicList/UpdateBox";
+import UpdateUserInfo from "../../component/musicList/UpdateUserInfo";
 
 const MusicRegistPage = () => {
   const navigate = useNavigate();
