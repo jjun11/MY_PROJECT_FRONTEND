@@ -5,6 +5,7 @@ import { Container, UserInfo, UpdateZone, InputBox, Button } from "../../style/p
 import UpdateBox from "../../component/performance/UpdateBox";
 import UpdateUserInfo from "../../component/performance/UpdateUserInfo";
 import ModalComponent from "../../utils/ModalComponent";
+import UseAuth from "../../hooks/UseAuth";
 
 
 
@@ -32,7 +33,7 @@ const PerformanceUpdate = () => {
 
   const navigate = useNavigate();
 
-  const email = (window.localStorage.getItem("email"));
+  const email = UseAuth();
   console.log(email);
 
   useEffect(() => {

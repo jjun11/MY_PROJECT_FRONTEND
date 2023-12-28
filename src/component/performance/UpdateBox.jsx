@@ -15,8 +15,8 @@ const UpdateBox = ({ userList }) => {
   // 입력값 정보 저장
   const [ inputPerformer, setInputPerformer ] = useState([]); // 참여자
   // 닉네임 조회 정보 저장용
-  const [searchResults, setSearchResults] = useState([]); // 조회된 회원 정보 저장
-  const [inputValue, setInputValue] = useState(''); // 입력필드에 입력값을 저장
+  const [ searchResults, setSearchResults ] = useState([]); // 조회된 회원 정보 저장
+  const [ inputValue, setInputValue ] = useState(''); // 입력필드에 입력값을 저장
   const [ inputVenue, setInputVenue ] = useState(""); // 공연장소
   const [ inputDetailVenue, setInputDetailVenue ] = useState(""); // 상세공연장소
   const [ inputDate, setInputDate ] = useState(""); // 공연일시
@@ -30,20 +30,13 @@ const UpdateBox = ({ userList }) => {
 
   const [ inputSeat, setInputSeat ] = useState(""); // 좌석수
   const [ inputDescription, setInputDescription ] = useState(""); // 공연소개
-
-  // 유효성 검사, 포스터이미지, 설명은 없어도 되는 값이므로 제외
-  const [ isperformer, setIsPerformer ] = useState(false); // 참여자 입력유무
-  const [ isvenue, setIsVenue ] = useState(false); // 공연장소 입력유무
-  const [ isdetailVenue, setIsDetailVenue ] = useState(false); // 상세공연장소 입력유무
-  const [ isdate, setIsDate ] = useState(false); // 공연일시 입력유무
-  const [ istitle, setIsTitle ] = useState(false); // 공연제목 입력유무
-  const [ isseat, setIsSeat ] = useState(false); // 좌석수 입력유무
   
   // 카카오 주소 API 관련
   const [showPostcode, setShowPostcode] = useState(false);
 
   // 모달 오픈 관련
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(''); // 모달 내용 저장
 
     
   // 아래 두 줄은 내가 post를 하기 위해 작성한 거라서, 두 줄은 상황에 맞춰 변경하면 되고 참고하지 않아도 된다.
@@ -155,13 +148,32 @@ const clearAll = () => {
   //   });
   // };
 
-  
+  // 공연 등록 시 필수 입력값 유효성 검사
+  const requiredFields = [
+    { name: '참여자', value: inputPerformer},
+    { name: '공연주소', value: inputVenue },
+    { name: '공연일시', value: inputDate },
+    { name: '티켓가격', value: inputPrice },
+    { name: '공연제목', value: inputTitle },
+    { name: '좌석 수', value: inputSeat }
+  ];
    // 공연 등록버튼 클릭 시 실행되는 함수
   const onClickSetPerformance = async () => {
-    const formattedDate = inputDate.replace('T', ' ');
+    for (const field of requiredFields) {
+      if (Array.isArray(field.value)) {
+        if (field.value.length === 0) { // 배열이 비어 있는지 확인
+          setModalContent(`${field.name} 정보 입력이 필요합니다.`);
+          setIsModalOpen(true);
+          return;
+        }
+      } else if(!field.value) {
+        setModalContent(`${field.name} 정보 입력이 필요합니다.`);
+        setIsModalOpen(true);
+        return;
+        }
+    }
 
-    
-
+    const formattedDate = inputDate.replace('T', ' '); // 공연일시 입력값에서 T를 공백으로 변경
     const performanceData = await AxiosApi.setPerformance( // 공연정보 입력값 BE로 전송
       {
         performer: inputPerformer, // 참여자
@@ -175,7 +187,8 @@ const clearAll = () => {
         description: inputDescription // 공연소개
       }
     )
-    console.log(performanceData); // 입력값 확인용 콘솔
+    console.log(performanceData); // 결과값 출력
+    setModalContent('공연 등록이 완료되었습니다.')
     setIsModalOpen(true); // 공연 등록 완료 후 모달 열기
     // navigate('/Performance');
   // setTimeout(() => {
@@ -184,7 +197,13 @@ const clearAll = () => {
   // }, 1000); // 1초 후에 모달을 닫고 페이지를 이동합니다. 시간은 필요에 따라 조정할 수 있습니다.
   }
   const closeModalAndNavigate = () => {
-    setIsModalOpen(false);
+    for (let field of requiredFields) {
+      if (!field.value) {
+        setIsModalOpen(false);
+        return;
+      }
+    }
+    
     navigate('/Performance');
   }
   
@@ -275,7 +294,7 @@ const clearAll = () => {
       <NoneBtnModalComponent 
       isOpen={isModalOpen}
       setIsOpen={setIsModalOpen}
-      content="공연 등록이 완료되었습니다."
+      content={modalContent}
       close={{ func: closeModalAndNavigate, text: "닫기"}} 
     />
     </>

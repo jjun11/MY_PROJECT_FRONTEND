@@ -27,6 +27,7 @@ const Image = styled.img`
     margin-right: 5rem;
     box-shadow: 0rem 3rem 5rem -3rem rgba(0, 0, 0, 0.5);
     margin-bottom: 2rem;
+    object-fit: cover;
 `;
 
 const Information = styled.div`
