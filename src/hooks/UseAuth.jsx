@@ -13,12 +13,13 @@ const UseAuth = () => {
       try {
         // 로그인 체크
         const res = await SignUpAxios.isLogin(); 
-        // console.log("로그인 상태 체크 :", res.data);
+        console.log("로그인 상태 체크 :", res.data);
 
         if (res.data) { 
           // 로그인 상태
           const email = res.data; 
           setIsLoggedIn(email);
+          console.log("로그인 상태 : ", email);
         } else {
           // alert("로그인 상태가 아닙니다.");
           // navigator("/login"); // 로그인 페이지

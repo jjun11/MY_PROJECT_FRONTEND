@@ -149,6 +149,7 @@ const TextBox = styled.div`
 
 const Header = () => {
   const email = UseAuth(); // 로그인 시 로컬 스토리지의 토큰에서 이메일 정보를 가져옵니다.
+  console.log("헤더이메일조회 : ", email)
   const [isLogIn, setIsLogIn] = useState(!!email); 
   const [isOpen, setIsOpen] = useState(false); // 사이드바의 상태를 관리합니다.
   const [userInfo, setUserInfo] = useState(null); // 유저 정보를 관리합니다.
@@ -182,6 +183,7 @@ const Header = () => {
     // localStorage.removeItem('accessToken'); // 로그아웃 시 로컬 스토리지의 액세스토큰 정보를 제거합니다.
     // localStorage.removeItem('refreshToken'); // 로그아웃 시 로컬 스토리지의 리프레쉬토큰 정보를 제거합니다.
     setIsLogIn(false);
+    window.location.reload();
   };
 
   const toggleSidebar = () => {
@@ -201,7 +203,7 @@ const Header = () => {
         <div className="leftinleft">
           {isLogIn ? (
             <>
-              <TextBox onClick={handleLogout}>로그아웃</TextBox>
+              <TextBox onClick={handleLogout} >로그아웃</TextBox>
               <Link to="/mypage"><TextBox>마이페이지</TextBox></Link>
             </>
           ) : (

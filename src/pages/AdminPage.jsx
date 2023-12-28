@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SignUpAxios from "../axios/SignUpAxios";
 import UserList from "../component/admin/UserList";
 import PerformanceAxios from "../axios/PerformanceAxios";
+import Category from "../component/category/Category";
 
 const AdminPage = () => {
   const useanvigate = useNavigate();
@@ -161,6 +162,7 @@ const AdminPage = () => {
               userList={userList}
               userAgeList={userAgeList}
             ></UserList>
+            {selectedButton === "Category" && <Category />}
           </div>
         </InfoBox>
       </Container>
