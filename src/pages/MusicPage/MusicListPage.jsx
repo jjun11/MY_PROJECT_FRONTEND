@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import SearchBox from "../../component/musicList/SearchBox";
@@ -827,7 +827,7 @@ const RegistButton = styled.button`
   font-weight: 700;
   border-radius: 4px;
   color: #ffffff;
-  box-shadow: 1px 1px 5px #000, -1px -1px 5px #117bff;, inset 1px 1px 5px #126bff;,
+  box-shadow: 1px 1px 5px #000, -1px -1px 5px #117bff, inset 1px 1px 5px #126bff,
     inset -1px -1px 5px #008bff;
   transition: all 0.1s;
 overflow: hidden;
