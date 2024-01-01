@@ -14,13 +14,20 @@ const CardView = styled.div`
   border-radius: 3rem;
   background-color: white;
   box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.25);
-  line-height: 1.1;
+  line-height: 1.1; 
   margin-bottom: 2rem;
   &:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
     cursor: pointer;
   }
+  @media screen and (max-width: 767px) {
+    width: 40.8vw;
+    height: 74.4vw;
+    padding: 2.5vw;
+    margin-bottom: 2vw;
+    border-radius: 4vw;
+      }
 `;
 
 const Poster = styled.img`
@@ -29,6 +36,11 @@ const Poster = styled.img`
   align-self: center;
   object-fit: cover;
   border-radius: 2rem;
+  @media screen and (max-width: 767px) {
+   width: 35.8vw;
+   height: 47.7vw;
+   border-radius: 2.5vw;
+  }
 `;
 
 const Title = styled.h3`
@@ -39,6 +51,10 @@ const Title = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 40rem; /* adjust this value to your liking */
+  @media screen and (max-width: 767px) {
+    font-size: 2.5vw;
+    margin: 1.5vw 0 0.5vw 0;
+      }
 `;
 
 const Venue = styled.div`
@@ -46,6 +62,10 @@ const Venue = styled.div`
   font-size: 1.6rem;
   font-weight: 200;
   color: black;
+  @media screen and (max-width: 767px) {
+    font-size: 2vw;
+    margin-bottom: 1vw;
+  }
 `;
 
 const Performer = styled.div`
@@ -53,6 +73,11 @@ const Performer = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--maindarkgreen);
+  @media screen and (max-width: 767px) {
+    font-size: 2vw;
+    margin-bottom: 1vw;
+  }
+
 `;
 
 const PerformanceDate = styled.div`
@@ -60,6 +85,10 @@ const PerformanceDate = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--mainolive);
+  @media screen and (max-width: 767px) {
+    font-size: 2vw;
+    margin-bottom: 1vw;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -68,6 +97,9 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 1rem; /* 버튼 사이의 간격 */
+  @media screen and (max-width: 767px) {
+    gap: 1.5vw;
+  }
 `;
 
 const Button = styled.button`
@@ -89,6 +121,11 @@ const Button = styled.button`
     // 클릭 효과
     background-color: blue;
   }
+  @media screen and (max-width: 767px) {
+  width: 13vw;
+  height: 6vw;
+  font-size: 2.5vw;
+}
 `;
 
 const Status = styled.div`
@@ -104,6 +141,11 @@ const Status = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;
+  @media screen and (max-width: 767px) {
+    width: 13vw;
+    height: 6vw;
+    font-size: 2.5vw;
+}
 `;
 
 const PerformanceCardView = ({

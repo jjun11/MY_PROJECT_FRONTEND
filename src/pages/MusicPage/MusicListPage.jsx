@@ -828,9 +828,9 @@ const RegistButton = styled.button`
   border-radius: 4px;
   color: #ffffff;
   box-shadow: 1px 1px 5px #000, -1px -1px 5px #117bff, inset 1px 1px 5px #126bff,
-    inset -1px -1px 5px #008bff;
+  inset -1px -1px 5px #008bff;
   transition: all 0.1s;
-overflow: hidden;
+  overflow: hidden;
 
   &:hover {
     box-shadow: 1px 1px 15px #117bff, -1px -1px 15px #117bff, inset 1px 1px 5px #126bff,

@@ -90,7 +90,7 @@ return (
           <div className="Cnt">등록한 곡 <cnt>{allMusic.length}</cnt></div>
         </div>
         <div className="pointerZone">
-          <div className="pointer"/>
+          <div className="pointer" style={{ left : gage }}/>
         </div>
         <div className="mid">
           <div className="authGage">

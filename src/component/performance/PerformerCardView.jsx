@@ -7,6 +7,11 @@ const CardView = styled.div`
   display: flex;
   align-items: center;
   margin-top: 3rem;
+  @media screen and (max-width: 767px) {
+        width: 80vw;
+        height: 30vw;
+        margin-top: 5vw;          
+    }
 `
 
 const ProfileImage = styled.img`
@@ -14,11 +19,17 @@ const ProfileImage = styled.img`
   height: 12.3rem;
   border-radius: 50%;
   background-color: lightgray;
+  @media screen and (max-width: 767px) {
+        width: 20vw;
+        height: 20vw;
+        margin-top: 5vw;
+              }
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
     transition: transform 0.05s ease-in-out;
             }
+
 `
 
 const Nickname = styled.div`
@@ -26,9 +37,14 @@ const Nickname = styled.div`
   font-weight: 500;
   margin-left: 2rem;
   color: black;
+  @media screen and (max-width: 767px) {
+    font-size: 4vw;
+    margin-left: 4vw; 
+            }
   &:hover {
     cursor: pointer;
   }
+  
 `
 
 const PerformerCardView = ({

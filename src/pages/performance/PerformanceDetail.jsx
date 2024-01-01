@@ -17,6 +17,9 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    @media screen and (max-width: 767px) {
+     margin: 5vw;   
+    }
 `;
 
 const Image = styled.img`
@@ -28,6 +31,12 @@ const Image = styled.img`
     box-shadow: 0rem 3rem 5rem -3rem rgba(0, 0, 0, 0.5);
     margin-bottom: 2rem;
     object-fit: cover;
+    @media screen and (max-width: 767px) {
+        width:66vw;
+        height: 88vw;
+        margin: auto;
+        margin-bottom: 5vw;
+      }
 `;
 
 const Information = styled.div`
@@ -37,6 +46,12 @@ const Information = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     font-size: 2rem;
+    @media screen and (max-width: 767px) {
+     width: 90vw;
+        margin: auto;
+        justify-content: center;
+        font-size: 3.5vw;
+    }
     .title{
         width: 100%;
         height: 5rem;
@@ -45,14 +60,33 @@ const Information = styled.div`
         border-bottom: 0.1rem solid lightgray;
         padding-bottom: 8rem;
         margin-bottom: 2rem;
+        @media screen and (max-width: 767px) {
+            width: 80vw;
+            font-size: 6vw;
+            padding-bottom: 10vw;
+            margin-bottom: 2vw;
+          
+    }
     }
     .info{
         width: 50rem;
-        height: 39rem;
+        height: auto;
         margin-top: 1rem;
+        @media screen and (max-width: 767px) {
+            margin-top: 2vw;
+    }
         .desc{
             margin-top: 3rem;
+            @media screen and (max-width: 767px) {
+                margin-top: 5vw;
+    }
         }
+        @media screen and (max-width: 767px) {
+            width: 80vw;
+            margin: auto;
+            margin-top: 5vw;
+        
+    }
     }
     .map{
         margin-top: 2rem;
@@ -62,9 +96,18 @@ const Information = styled.div`
         border-radius: 1.5rem;
         overflow: hidden;
         box-shadow: 0rem 3rem 3rem -3rem rgba(0, 0, 0, 0.4);
+        @media screen and (max-width: 767px) {
+            width: 85vw;
+            height: 60vw;
+            margin: auto;
+            margin-top: 5vw;
+    }
     }
     .delete{
         margin-top: 2rem;
+        @media screen and (max-width: 767px) {
+            margin-top: 4vw;
+    }
         button{
             width: 10rem;
             height: 4rem;
@@ -74,6 +117,11 @@ const Information = styled.div`
             color: white;
             font-weight: 700;
             font-size: 1.5rem;
+            @media screen and (max-width: 767px) {
+                width: 20vw;
+                height: 9vw;
+                font-size: 3.5vw;
+    }
             &:hover {
                 cursor: pointer;
                 background-color: black;
@@ -94,6 +142,7 @@ const Bottom = styled.div`
     height: auto;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .lineup{
         flex: 1;
         font-size: 4rem;
@@ -101,8 +150,15 @@ const Bottom = styled.div`
         color: var(--mainolive);
         display: flex;
         flex-wrap: wrap;
+        @media screen and (max-width: 767px) {
+             font-size: 6vw;   
+            }
         .lineupTitle{
+            margin-top: 2rem;
             width: 100%;
+            @media screen and (max-width: 767px) {
+                margin-top: 5vw;
+            }
         }
     }
     .ticket{
@@ -116,6 +172,9 @@ const Bottom = styled.div`
         flex-direction: column;
         align-items: flex-end;
         padding: 2rem;
+        @media screen and (max-width: 979px) {
+            display: none;
+        }
         .price{
             font-size: 4rem;
             font-weight: 900;
@@ -131,6 +190,66 @@ const Bottom = styled.div`
             background-color: white;
             border-radius: 5rem;
             box-shadow: 0rem 0.5rem 2rem -0.5rem rgba(43, 36, 36, 0.4);
+            &:hover {
+            // 마우스 호버링 효과
+            cursor: pointer;
+            background-color: var(--mainsky);
+            transform: scale(1.05);
+            transition: transform 0.05s ease-in-out; // transform 속성에 대한 전환 효과 설정
+            }
+            &:active {
+                // 클릭 효과
+                background-color: var(--mainblue);
+            }
+            .icon{
+                width: 30%;
+                height: 100%;
+                background: url(${ basket }) no-repeat center center;
+                background-size: contain;
+                margin: auto;
+            }
+        }
+    }
+    .ticket-mobile{
+        width: 100%;
+        height: auto;
+        /* background-color: lightgreen; */
+        border-radius: 1.5rem;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 3vw;
+        @media screen and (min-width: 980px) {
+            display: none;
+        }
+        .price{
+            font-size: 4rem;
+            font-weight: 900;
+            @media screen and (max-width: 767px) {
+              font-size: 7vw;
+            }
+        }   
+        .ticketing{
+            
+            font-size: 2rem;
+            @media screen and (max-width: 767px) {
+             font-size : 4vw;
+            }
+        }
+        .button{
+            margin-top: 2rem;
+            width: 15rem;
+            height: 6rem;
+            background-color: white;
+            border-radius: 10vw;
+            box-shadow: 0vw 1vw 4vw -1vw rgba(43, 36, 36, 0.4);
+            @media screen and (max-width: 767px) {
+             margin-top: 3vw;
+             width: 25vw;
+             height: 10vw; 
+            }
             &:hover {
             // 마우스 호버링 효과
             cursor: pointer;
@@ -276,7 +395,21 @@ const PerformanceDetail = () => {
                     </div>
                 </Information>
                 <Bottom>
+                <div className="ticket-mobile">
+                        {!isEnded ? (
+                            <>
+                            <div className="ticketing">티켓 구매</div>
+                            <div className="price">{performance.price} P</div>
+                            <div className="button" onClick={checkLogin}>
+                                <div className="icon"></div>
+                            </div>
+                            </>
+                        ) : (
+                            <div className="ticketing" style = {{fontSize: "2.2rem", fontWeight: "700"}}>판매가 종료된 공연입니다.</div>
+                        )}
+                    </div>
                     <div className="lineup">
+                        
                         <div className="lineupTitle">라인업</div>
                         {memberInfo && memberInfo.map(user => (
                         <PerformerCardView

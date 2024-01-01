@@ -97,7 +97,6 @@ const Performance = () => {
   return (
     <>
       <GlobalStyle />
-      <MediaStyle />
       <Container>
         <SearchBanner>
           <Box>

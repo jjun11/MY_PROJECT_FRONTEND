@@ -8,15 +8,26 @@ export const Container = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 767px) {
+             width: 70vw; 
+            }
   .title {
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 1rem;
+    @media screen and (max-width: 767px) {
+             font-size: 6vw;
+             margin-bottom: 2vw;
+            }
   }
   .price {
     font-size: 1.8rem;
     font-weight: 400;
     margin-bottom: 1rem;
+    @media screen and (max-width: 767px) {
+             font-size: 3vw;
+              margin-bottom: 2vw; 
+            }
   }
   .count {
     margin-top: 2rem;
@@ -26,6 +37,12 @@ export const Container = styled.div`
     height: 4rem;
     font-size: 2rem;
     font-weight: 500;
+    @media screen and (max-width: 767px) {
+      margin-top: 4vw;
+      width: 24vw;
+      height: 8vw;
+      font-size: 4vw; 
+            }
     button {
       width: 4rem;
       border: none;
@@ -35,6 +52,10 @@ export const Container = styled.div`
       justify-content: center;
       align-items: center;
       box-shadow: 0 0.5rem 2rem 0rem rgba(0, 0, 0, 0.35);
+      @media screen and (max-width: 767px) {
+             width: 8vw;
+              font-size: 6vw; 
+            }
       &:hover {
         cursor: pointer;
         transform: scale(1.1);
@@ -53,6 +74,10 @@ export const Container = styled.div`
     font-size: 3rem;
     font-weight: 700;
     display: flex;
+    @media screen and (max-width: 767px) {
+             height: 6vw;
+              font-size: 6vw; 
+            }
     div.button {
       margin-left: 2rem;
       display: flex;
@@ -65,6 +90,13 @@ export const Container = styled.div`
       background-color: var(--mainblue);
       color: white;
       border-radius: 1rem;
+      @media screen and (max-width: 767px) {
+             margin-left: 4vw;
+              width: 12vw;
+              height: 8vw;
+              font-size: 4vw;
+              border-radius: 2vw; 
+            }
       &:hover {
         cursor: pointer;
         transform: scale(1.1);
@@ -105,7 +137,7 @@ const Ticket = ({ title, seatCount, price, performanceId, email, closePaymentMod
   const handleIncreaseMouseDown = () => { // 마우스 누르고 있을 때
     increaseInterval.current = setInterval(() => {
       setCount(prevCount => Math.min(prevCount + 1, seatCount - getseatCount));
-    }, 150); // 150ms마다 카운터 증가
+    }, 100); // 150ms마다 카운터 증가
   };
 
   const handleIncreaseMouseUp = () => { // 마우스 뗐을 때
@@ -115,7 +147,7 @@ const Ticket = ({ title, seatCount, price, performanceId, email, closePaymentMod
   const handleDecreaseMouseDown = () => { //// 마우스 누르고 있을 때
     decreaseInterval.current = setInterval(() => {
       setCount(prevCount => Math.max(prevCount - 1, 0));
-    }, 150); // 150ms마다 카운터 감소
+    }, 100); // 150ms마다 카운터 감소
   };
 
   const handleDecreaseMouseUp = () => { // 마우스 뗐을 때

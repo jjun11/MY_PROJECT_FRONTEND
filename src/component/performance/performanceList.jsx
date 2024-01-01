@@ -10,7 +10,10 @@ const CardContainer = styled.div`
   gap: 2rem;
   margin: 2rem 0;
   justify-content: center;
-  /* margin: 20px; */
+  @media screen and (max-width: 767px) {
+   margin: 2vw 0;
+   gap: 2vw;
+  }
 `;
 
 const PaginationContainer = styled.div`
@@ -46,7 +49,8 @@ const PageButton = styled.button`
 const PerformanceList = ({ performanceList, onCardMouseOver }) => {
   // const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
-  const itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
+  const itemsPerPage = 8; // 한 페이지에 보여줄 아이템 수
+  
   const [totalPage, setTotalPage] = useState(0); // 전체 페이지
 
   // 총 페이지 수 계산
