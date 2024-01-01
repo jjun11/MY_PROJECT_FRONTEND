@@ -37,11 +37,6 @@ const UpdateBox = ({ userList }) => {
   // 모달 오픈 관련
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(''); // 모달 내용 저장
-
-    
-  // 아래 두 줄은 내가 post를 하기 위해 작성한 거라서, 두 줄은 상황에 맞춰 변경하면 되고 참고하지 않아도 된다.
-  // const [calendarlocation, setCalendarLocation] = useState("")
-  // const locations = { calendarLocation: calendarlocation }
   
   useEffect(() => {
     if (inputValue) {
@@ -69,25 +64,6 @@ const UpdateBox = ({ userList }) => {
 const clearAll = () => {
   setInputPerformer([]);
 };
-
-  // // 참여자 입력값이 변경될 때마다 회원 정보 조회
-  // useEffect(() => {
-  //   if (inputPerformer) {
-  //     const filtered = (userList || []).filter(nickname => 
-  //       nickname.userNickname.includes(inputPerformer)
-  //     );
-  //     console.log(filtered);
-  //     setSearchResults(filtered);
-  //   }
-  // }, [inputPerformer, userList]);
-     
-
-  // // 조회된 닉네임을 클릭하면 inputPerformer 배열에 추가
-  // const addPerformer = (nickname) => {
-  //   if (!inputPerformer.includes(nickname)) {
-  //     setInputPerformer([...inputPerformer, nickname]);
-  //   }
-  // };
 
   // 주소검색 API 관련
   const handleComplete = (data) => {
@@ -134,19 +110,6 @@ const clearAll = () => {
     }
   };
 
-  // const handleUploadClick = () => {
-  //   setIsLoading(true); // 파일 업로드가 시작될 때 로딩 상태를 true로 설정
-  //   const storageRef = storage.ref();
-  //   const fileRef = storageRef.child(file.name);
-  //   fileRef.put(file).then(() => {
-  //     console.log("File uploaded successfully!");
-  //     fileRef.getDownloadURL().then((url) => {
-  //       console.log("저장경로 확인 : " + url);
-  //       setUrl(url);
-  //       setIsLoading(false); // 파일 업로드가 끝났을 때 로딩 상태를 false로 설정
-  //     });
-  //   });
-  // };
 
   // 공연 등록 시 필수 입력값 유효성 검사
   const requiredFields = [
@@ -190,11 +153,6 @@ const clearAll = () => {
     console.log(performanceData); // 결과값 출력
     setModalContent('공연 등록이 완료되었습니다.')
     setIsModalOpen(true); // 공연 등록 완료 후 모달 열기
-    // navigate('/Performance');
-  // setTimeout(() => {
-  //   setIsModalOpen(false); // 일정 시간 후 모달 닫기
-  //   navigate('/Performance'); // /Performance 페이지로 이동
-  // }, 1000); // 1초 후에 모달을 닫고 페이지를 이동합니다. 시간은 필요에 따라 조정할 수 있습니다.
   }
   const closeModalAndNavigate = () => {
     for (let field of requiredFields) {
@@ -202,12 +160,9 @@ const clearAll = () => {
         setIsModalOpen(false);
         return;
       }
-    }
-    
+    }   
     navigate('/Performance');
   }
-  
-  
   
   return (
     <>

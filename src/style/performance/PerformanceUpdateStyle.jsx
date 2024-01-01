@@ -13,26 +13,40 @@ export const Container = styled.div`
 // UpdateUserInfo.jsx 스타일 부분
 export const UserInfo = styled.div`
   width: 80%;
-  height: 21.5rem;
+  height: auto;
+  min-height: 22.5rem;
   margin-top: 5rem;
   border-radius: 1rem;
   background: linear-gradient(to right, var(--maingreen), var(--mainblue));
   display: flex;
   align-items: center;
   overflow: hidden;
+  @media screen and (max-width: 767px) {
+    height: auto;
+    flex-wrap: wrap;
+    margin-top: 0rem;
+    justify-content: space-around;
+    padding: 2rem;
+  }
   .image{
     /* flex: 1; */
+    flex-shrink: 0;
     width: 13.5rem;
     height: 13.5rem;
     border-radius: 50%;
     background-color: lightgray; // 사진이 들어갈 부분
     border: 0.8rem solid white;
-    box-sizing: content-box;
-    margin-left: 5rem;
+    box-sizing: content-box; 
+    margin-left: 2vw;
+    @media screen and (max-width: 1100px) {
+      width: 10rem;
+      height: 10rem;
+      margin: auto 2rem;
+    }
   }
   .leftInfo {
     /* flex: 1; */
-    width: 20%;
+    width: 25%;
     height: 100%;
     margin-left: 4%;
     /* background-color: skyblue; */
@@ -40,13 +54,24 @@ export const UserInfo = styled.div`
     justify-content: center;
     flex-direction: column;
     color: white;
+    @media screen and (max-width: 1100px) {
+      width: auto;
+      height: auto;
+    }
+    
     .authtitle {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 400;
+      @media screen and (max-width: 1100px) {
+        font-size: 1.5rem;
+      }
     }
     .nick{
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 700;
+      @media screen and (max-width: 1100px) {
+        font-size: 2rem;
+      }
     }
     .heart{
       margin-top: 0.5rem;
@@ -59,12 +84,20 @@ export const UserInfo = styled.div`
       align-items: center;
       color: black;
       overflow: hidden;
+      @media screen and (max-width: 1100px) {
+        width: 8rem;
+        height: 3rem;
+      }
       .heartimg {
         width: 25%;
         margin: 0rem 10%;
         height: 100%;
         background: url(${heartImg}) no-repeat center center;
         background-size: contain;
+        @media screen and (max-width: 1100px) {
+            height: 70%;
+        }
+
       }
       .count {
         width: 50%;
@@ -72,13 +105,16 @@ export const UserInfo = styled.div`
         font-size: 2rem;
         font-weight: 600;
         line-height: 1.5;
+        @media screen and (max-width: 1100px) {
+          font-size: 1.5rem;
+        } 
       }
     }
-    .signdate{
+    /* .signdate{
       margin-top: 1rem;
       font-size: 2rem;
       font-weight: 400;
-    }
+    } */
   }
 
   .rightInfo {
@@ -89,6 +125,11 @@ export const UserInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (max-width: 1100px) {
+      width: 40%;
+      min-width: 20rem;
+      height: 18rem;
+    }
     .top{
       width: 100%;
       height: 40%;
@@ -96,6 +137,7 @@ export const UserInfo = styled.div`
       display: flex;
       align-items: center;
       color: white;
+      
       .Cnt {
         width:50%;
         height: 100%;
@@ -103,10 +145,17 @@ export const UserInfo = styled.div`
         justify-content: center;
         align-items: flex-end;
         font-size: 2rem;
+        @media screen and (max-width: 1100px) {
+        font-size: 1.5rem;
+        }
+
         cnt {
           margin-left: 1rem;
           font-size: 2.5rem;
           font-weight: 700;
+          @media screen and (max-width: 1100px) {
+            font-size: 2rem;
+          }
         }
       }
     }
@@ -168,7 +217,9 @@ export const UserInfo = styled.div`
         /* background-color: pink; */
         font-size: 1.6rem;
         font-weight: 400;
-        
+        @media screen and (max-width: 1100px) {
+          font-size: 1.1rem;
+        }
         .aut{
         }
       
@@ -185,25 +236,46 @@ export const UserInfo = styled.div`
     height: 100%;
     /* background-color: lightgray; */
     color: white;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      align-items: center;
+      height: auto;
+    }
     .title{
       font-size: 2rem;
       font-weight: 400;
+      @media screen and (max-width: 1100px) {
+         font-size: 1.5rem;
+        }
     }
     .point{
       font-size: 3rem;
       font-weight: 700;
+      @media screen and (max-width: 1100px) {
+       font-size: 2rem;  
+      }
     }
     .buttonZone{
       display: flex;
       justify-content: flex-end;
       gap: 2rem;
       margin-top: 2rem;
+      @media screen and (max-width: 1100px) {
+         flex-wrap: wrap;
+         gap: 1vw;
+         margin-top: 1rem;
+      }
     }
     Button {
       color: white;
       background-color: rgba(0, 0, 0, 0);
       border: 0.2rem solid white;
       margin: 0;
+      @media screen and (max-width: 1100px) {
+        width: 8rem;
+        height: 3rem;
+        font-size: 1.5rem;
+  }
       &:active{
         background-color: var(--mainsky);
     }
@@ -224,21 +296,30 @@ export const UpdateZone = styled.div`
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  @media screen and (max-width: 1200px) {
+  }
+  
   .inputContainer {
     width: 95%;
     height: 20rem;
     display: flex;
     flex-direction: column;
-    /* background-color: skyblue; */
     flex-wrap: wrap;
+    @media screen and (max-width: 1200px) {
+      flex-direction: row;
+      height: auto;
+  }
+  
     div{
       margin-left: 3%;
       width: 30%;
-      /* background-color: pink; */
       font-weight: 200;
       font-size: 1.6rem;
       display: flex;
       justify-content: space-between;
+      @media screen and (max-width: 1200px) {
+      width: 30rem
+  }
     }
     div.discription {
       Input {
@@ -285,13 +366,15 @@ export const UpdateZone = styled.div`
       font-weight: 700;
       color: var(--mainolive);
     }
-  }
+    
+    
   .uploading{
     margin-left: 15rem !important;
     width: auto !important;
     height: auto;
     align-items: center;
   }
+}
 `;
 
 export const InputBox = styled.input`
