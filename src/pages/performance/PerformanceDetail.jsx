@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
 import MainAxios from "../../axios/MainAxios";
 import PerformerCardView from "../../component/performance/PerformerCardView";
-import basket from "../../images/Basket.png";
+import basket from "../../images/Basket.svg";
 import NoneBtnModalComponent from "../../utils/NoneBtnModalComponent";
 import Ticket from "../../component/performance/Ticket";
 import FooterContext from "../../context/FooterContext";
@@ -190,6 +190,9 @@ const Bottom = styled.div`
             background-color: white;
             border-radius: 5rem;
             box-shadow: 0rem 0.5rem 2rem -0.5rem rgba(43, 36, 36, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:hover {
             // 마우스 호버링 효과
             cursor: pointer;
@@ -203,7 +206,7 @@ const Bottom = styled.div`
             }
             .icon{
                 width: 30%;
-                height: 100%;
+                height: 70%;
                 background: url(${ basket }) no-repeat center center;
                 background-size: contain;
                 margin: auto;
@@ -290,8 +293,7 @@ const PerformanceDetail = () => {
     
 
     useEffect(() => {
-        setFooterData([<a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 아이콘  제작자: Pixel perfect - Flaticon </a>
-        , <br/>, <a href="https://www.flaticon.com/kr/free-icons/" title="연필 아이콘">연필 zz아이콘  제작자: Pixel perfect - Flaticon</a>]);
+        setFooterData("");
     }, []);
 
      // 현재 시간과 공연 시간을 비교합니다.
@@ -324,7 +326,7 @@ const PerformanceDetail = () => {
     useEffect(() => {
         const getMemberInfo = async () => {
           try {
-            const userRes = await PerformanceAxios.getUserList();
+            const userRes = await PerformanceAxios.getUserListNoToken();
             console.log("userRes", userRes);
             const matchingUser = userRes.data.filter(user => performance.nicknames.some(nickname => nickname === user.userNickname));
             // matchingUser 에 userRes.data 중에서 userNickname이 performance.nicknames에 포함되어 있는 요소만 필터링
@@ -343,7 +345,7 @@ const PerformanceDetail = () => {
 
       // 로그인 확인, 및 이메일 추출
       const email = UseAuth();
-      const checkLogin = () => { // 로컬스토리지상에서 이메일, accessToken, refreshToken이 있는지 확인
+      const checkLogin = () => { 
         if (!email) { 
             setShowLoginModal(true); // email 이 없으면 로그인 필요 모달 호출
             } else {
@@ -416,6 +418,8 @@ const PerformanceDetail = () => {
                             key={user.id}
                             profileImage={user.profileImg}
                             nickname={user.userNickname}
+                            email={user.userEmail}
+                            loginEmail={email}
                             />
                         ))}
                         </div>

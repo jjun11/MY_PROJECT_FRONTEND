@@ -267,12 +267,13 @@ export const UserInfo = styled.div`
       }
     }
     Button {
+      width: 12rem;
       color: white;
       background-color: rgba(0, 0, 0, 0);
       border: 0.2rem solid white;
       margin: 0;
       @media screen and (max-width: 1100px) {
-        width: 8rem;
+        width: 10rem;
         height: 3rem;
         font-size: 1.5rem;
   }
@@ -318,7 +319,9 @@ export const UpdateZone = styled.div`
       display: flex;
       justify-content: space-between;
       @media screen and (max-width: 1200px) {
-      width: 30rem
+      width: 30rem;
+      font-size: max( 1.2rem, min( 1.3vw ,1.6rem ));
+      
   }
     }
     div.discription {
@@ -336,6 +339,9 @@ export const UpdateZone = styled.div`
     height: 5rem;
     /* background-color: blue; */
     color: var(--mainolive);
+    @media screen and (max-width: 1200px){
+      font-size: 3rem;
+    }
   }
 
   div.buttonContainer {
@@ -367,12 +373,14 @@ export const UpdateZone = styled.div`
       color: var(--mainolive);
     }
     
-    
   .uploading{
     margin-left: 15rem !important;
     width: auto !important;
     height: auto;
     align-items: center;
+  }
+   .outinput {
+    /* margin-left: 10rem; */
   }
 }
 `;
@@ -384,13 +392,20 @@ export const InputBox = styled.input`
   height: 3.5rem;
   border: 0.03rem solid var(--mainolive);
   resize: none; // 사용자가 크기를 변경하지 못하게 함
+  @media screen and (max-width: 1200px) {
+      width: 70%;
+      height: max( 2.5rem, min( 2.9vw ,3.5rem ));
+      
+  }
   
   
   &::placeholder {
     color: var(--mainolive);
-  
+    @media screen and (max-width: 1200px) {
+      width: 30rem;
+      font-size: max( 1.2rem, min( 1.3vw ,1.6rem ));
   }
-
+  }
 `;
 
 export const ImageInput = styled.input.attrs({ type: 'file', id: 'file'})`
@@ -403,6 +418,7 @@ export const ImageInput = styled.input.attrs({ type: 'file', id: 'file'})`
   display: flex;
   justify-content: center;
   align-items: center;
+  align
   
   &::placeholder {
     color: var(--mainolive);

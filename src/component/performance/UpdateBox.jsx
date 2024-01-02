@@ -169,7 +169,7 @@ const clearAll = () => {
       <UpdateZone>
         <h1>공연 등록하기</h1>
         <div className="performer">
-          <ModalComponent 
+          <ModalComponent
           open="참여자 입력" 
           content={
             <div style={{ width: '100%', height: '100%' }}> {/* 크기를 최대로 설정 */}
@@ -193,8 +193,9 @@ const clearAll = () => {
           } 
           close="닫기" 
           customButton={null}
+          openButtonStyle={{ width: '10rem', height: '4rem' }}
         />
-        <InputBox placeholder="선택된 닉네임" value={inputPerformer.join(', ')} readOnly />
+        <InputBox className="outinput" placeholder="선택된 닉네임" value={inputPerformer.join(', ')} readOnly />
           </div>
         <div className="inputContainer">
           

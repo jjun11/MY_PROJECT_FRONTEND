@@ -34,6 +34,12 @@ setPerformance: async (performance) => {
     }
   });
 },
+ // 전체유저조회, 토큰없이
+ getUserListNoToken: async () => {
+  console.log("전체유저조회 AxiosApi 작동")
+  return await axios.get(
+    CHORD8_DOMAIN + `/performance/userListNoToken`);
+},
 
     // 전체유저조회
     getUserList: async () => {

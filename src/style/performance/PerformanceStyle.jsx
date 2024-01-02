@@ -41,6 +41,7 @@ export const SearchBanner = styled.div`
   }
   @media screen and (max-width: 767px) {
     height: 45vw;
+    min-height: 25rem;
   } 
   
 
@@ -55,6 +56,7 @@ export const SearchBanner = styled.div`
         width: 90%;
         margin-bottom: 1rem;
         height: 8vw;
+        min-height: 3rem;
         padding-left: 3vw;
         font-size: 3vw;
       }
@@ -81,9 +83,10 @@ export const SearchBanner = styled.div`
       }
       @media screen and (max-width: 767px) {
         width: 17vw;
-        min-width: 17vw;
+        min-width: 12rem;
         height: 8vw;
-        font-size: 3vw;
+        min-height: 5rem;
+        font-size: max(2rem, min(4vw, 2.4rem));
         margin: 1.2vw;
         border: 0.3vw solid white;
         margin-left: 4vw;
@@ -110,7 +113,7 @@ export const Box = styled.div`
       font-size: 5rem;
       font-weight: 600;
       @media screen and (max-width: 767px) {
-        font-size: 5vw;
+        font-size: max(3rem, min(6vw, 5rem));
         margin-top: 2vw;
         margin-bottom: 0;
 

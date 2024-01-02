@@ -22,8 +22,8 @@ const CardView = styled.div`
     cursor: pointer;
   }
   @media screen and (max-width: 767px) {
-    width: 40.8vw;
-    height: 74.4vw;
+    width: 45vw;
+    height: 82vw;
     padding: 2.5vw;
     margin-bottom: 2vw;
     border-radius: 4vw;
@@ -37,8 +37,8 @@ const Poster = styled.img`
   object-fit: cover;
   border-radius: 2rem;
   @media screen and (max-width: 767px) {
-   width: 35.8vw;
-   height: 47.7vw;
+   width: 39.4vw;
+   height: 52.5vw;
    border-radius: 2.5vw;
   }
 `;
@@ -123,8 +123,8 @@ const Button = styled.button`
   }
   @media screen and (max-width: 767px) {
   width: 13vw;
-  height: 6vw;
-  font-size: 2.5vw;
+  height: 5vw;
+  font-size: 2vw;
 }
 `;
 

@@ -50,15 +50,24 @@ const Nickname = styled.div`
 const PerformerCardView = ({
   profileImage,
   nickname,
+  email,
+  loginEmail
 }) => {
   console.log("퍼포머 카드뷰 : ", "profileImage : ", profileImage, "nickname : ", nickname)
   const navigate = useNavigate();
 
+  const handlePerformerClick = () => {
+    if (loginEmail === email) {navigate("/mypage");
+  } else {
+    navigate(`/otherpage/${email}`);
+  }
+};
+
 return (
   <>
     <CardView>
-      <ProfileImage src={profileImage} alt={`${nickname} 프로필`}/>
-      <Nickname>{nickname}</Nickname>
+      <ProfileImage onClick={handlePerformerClick} src={profileImage} alt={`${nickname} 프로필`}/>
+      <Nickname onClick={handlePerformerClick}>{nickname}</Nickname>
 
     </CardView>
   </>  
